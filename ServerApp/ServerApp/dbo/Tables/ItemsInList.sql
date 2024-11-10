@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[ItemsInList]
 (
-
     [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
 
     [List] INT NOT NULL,

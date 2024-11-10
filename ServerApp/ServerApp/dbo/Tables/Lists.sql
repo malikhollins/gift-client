@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[Lists]
 (
-
     [Id] INT NOT NULL PRIMARY KEY IDENTITY,
 
     [House] INT NOT NULL,
