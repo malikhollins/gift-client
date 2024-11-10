@@ -10,4 +10,6 @@ GO
 
 CREATE INDEX [IX_UserToHouse_UserHouse] ON [dbo].[UserToHouse] ([User], [House])
 
+GO
 
+CREATE INDEX [IX_UserToHouse_HouseUser] ON [dbo].[UserToHouse] ([House], [User])
