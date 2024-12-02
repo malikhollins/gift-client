@@ -1,51 +1,48 @@
 ﻿@page "/"
-@using System.Runtime.CompilerServices
+@using System.Runtime.CompilerServices;
 ﻿@using System.ComponentModel.DataAnnotations;
+@using ClientApp.Models;
 
-<header>
-    <h1>Gifting App</h1>
-    <h2>Lets Gift the Families!</h2>
-</header> <!-- maybe put in MainLayout?-->
+<div class="giftHouseCreation">
+    <div class="createButton1">
+        <button id="clickHouseButton"> Click to Create a GiftHouse! </button>
 
+    <div class="createHouseForm">
+        <EditForm Model="@GiftHouseData" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="houseButtons1">
+                <label>
+                    Enter A GiftHouse Name
+                    <InputText @bind-Value="GiftHouseData!.HouseName" />
+                </label>
+            </div> <!-- end houseButtons1 -->
+            <div class="houseButtons2">
+                <label>
+                    Enter a Name/Psyudeonym
+                    <InputText @bind-Value="GiftHouseData!.CreatorName" />
+                </label>
+            </div><!-- end houseButtons2 -->
+            <div class="submitHouse">
+                <button id="submit" class="btn btn-primary" type="submit"> Create A GiftHouse </button>
+            </div><!-- end submitHouse -->
+            <p class="messageStore">@MessageStore</p>
+        </EditForm>
+        </div> <!-- end createHouseForm -->
+        </div> <!-- end createButton1 -->
+</div> <!-- end GiftHouseCreation -->
 
-<button>Click to Create a GiftHouse!</button>
 <br />
 
-<div class="createHouse" style="border:1px solid black;">
-
-    <EditForm Model="@GiftHouseData" OnValidSubmit="@Submit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <div style="margin-bottom: 10px;">
-            <label style="width: 200px">
-                Enter A GiftHouse Name
-            <InputText @bind-Value="GiftHouseData!.HouseName" />
-            </label>
-        </div> 
-
-        <div style="margin-bottom: 10px;">
-            <label style="width: 200px">
-                Enter a Name/Psyudeonym
-            <InputText @bind-Value="GiftHouseData!.CreatorName" />
-            </label>
-        </div>
-
-        <div style="margin-top: 10px;">
-            <button class="btn btn-primary" type="submit"> Create A GiftHouse </button>
-        </div>
-
-        <p style="margin-top: 20px;">@MessageStore</p>
-    </EditForm>
-
-</div> <!-- end createHouse -->
-<br />
-
-<button>Click to Join a GiftHouse!</button>
+<div class="createButton2">
+<button id="joinHouseButton">Click to Join a GiftHouse!</button>
+</div> <!-- end createButton2 -->
 
 @code {
     public GiftHouse? GiftHouseData { get; set; } 
     public EditContext? EditContext { get; set; }
     public string MessageStore { get; set; } = "";
+
 
     protected override void OnInitialized()
     {
@@ -56,21 +53,9 @@
 
     public void Submit()
     {
-        MessageStore = $"Is House {GiftHouseData?.HouseName} + Name/Alias {GiftHouseData?.CreatorName} Correct?";
+        MessageStore = $"{GiftHouseData?.CreatorName} created House {GiftHouseData?.HouseName}!?";
         GiftHouseData = new GiftHouse();
     }
-
-    public class GiftHouse 
-    {
-        [Required]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "The Gifthouse name must be between 2 and 50 characters.")]
-        public string? HouseName { get; set; }  
-
-        [Required]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Your name/alias must be between 2 and 50 characters.")]
-        public string? CreatorName { get; set; } 
-
-        }
 
 }
 
