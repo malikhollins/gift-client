@@ -1,0 +1,70 @@
+﻿.giftHouseCreation {
+    width: 100%;
+}
+#clickHouseButton, #joinHouseButton {
+    background-color: pink;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+    /*button id*/
+    #clickHouseButton:hover, #joinHouseButton:hover {
+        background-color: black;
+        color: pink;
+    }
+.giftHouseCreation {
+    position: relative;
+    width: 45.4%;
+}
+
+.createButton1 {
+    transition: all 90s ease-in-out;
+    opacity: 1;
+    cursor: pointer;
+}
+    .createButton1:hover {
+        opacity: .3;
+    }
+.createButton1:hover .createHouseForm{
+    display: block;
+}
+/* dropdownHouseContent */
+.createHouseForm {
+    background-color: #f1f1f1;
+    height: auto;
+    overflow: auto;
+    padding: 25px 15px 15px 15px;
+    text-align: center;
+    display: none;
+}
+
+.houseButtons1, .houseButtons2 {
+    margin-bottom: 10px;
+}
+
+.houseButtons2 {
+    margin-bottom: 10px;
+}
+
+label {
+    width: 200px;
+}
+
+#submit {
+    border: 1px solid black;
+    background: black;
+    color: pink;
+}
+
+submitHouse {
+    margin-top: 10px;
+    text-align: center;
+}
+
+p.messageStore {
+    margin-top: 20px;
+    text-align: center;
+    border: 1px black dotted;
+}

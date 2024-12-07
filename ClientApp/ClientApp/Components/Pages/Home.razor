@@ -1,5 +1,61 @@
 ﻿@page "/"
+@using System.Runtime.CompilerServices;
+﻿@using System.ComponentModel.DataAnnotations;
+@using ClientApp.Models;
 
-<h1>Hello, world!</h1>
+<div class="giftHouseCreation">
+    <div class="createButton1">
+        <button id="clickHouseButton"> Click to Create a GiftHouse! </button>
 
-Welcome to your new app.
+    <div class="createHouseForm">
+        <EditForm Model="@GiftHouseData" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="houseButtons1">
+                <label>
+                    Enter A GiftHouse Name
+                    <InputText @bind-Value="GiftHouseData!.HouseName" />
+                </label>
+            </div> <!-- end houseButtons1 -->
+            <div class="houseButtons2">
+                <label>
+                    Enter a Name/Psyudeonym
+                    <InputText @bind-Value="GiftHouseData!.CreatorName" />
+                </label>
+            </div><!-- end houseButtons2 -->
+            <div class="submitHouse">
+                <button id="submit" class="btn btn-primary" type="submit"> Create A GiftHouse </button>
+            </div><!-- end submitHouse -->
+            <p class="messageStore">@MessageStore</p>
+        </EditForm>
+        </div> <!-- end createHouseForm -->
+        </div> <!-- end createButton1 -->
+</div> <!-- end GiftHouseCreation -->
+
+<br />
+
+<div class="createButton2">
+<button id="joinHouseButton">Click to Join a GiftHouse!</button>
+</div> <!-- end createButton2 -->
+
+@code {
+    public GiftHouse? GiftHouseData { get; set; } 
+    public EditContext? EditContext { get; set; }
+    public string MessageStore { get; set; } = "";
+
+
+    protected override void OnInitialized()
+    {
+        GiftHouseData = new GiftHouse(); 
+        EditContext = new EditContext(GiftHouseData);
+
+    }
+
+    public void Submit()
+    {
+        MessageStore = $"{GiftHouseData?.CreatorName} created House {GiftHouseData?.HouseName}!?";
+        GiftHouseData = new GiftHouse();
+    }
+
+}
+
