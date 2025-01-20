@@ -3,6 +3,7 @@
 ﻿@using System.ComponentModel.DataAnnotations;
 @using ClientApp.Models;
 
+
 <div class="giftHouseCreation">
     <div class="createButton1">
         <button id="clickHouseButton"> Click to Create a GiftHouse! </button>
@@ -34,9 +35,22 @@
 
 <br />
 
-<div class="createButton2">
-<button id="joinHouseButton">Click to Join a GiftHouse!</button>
-</div> <!-- end createButton2 -->
+<div class= "giftHouseJoin">
+    <div class="createButton2">
+        <button id="joinHouseButton">Click to Join a GiftHouse!</button>
+
+        <div class="joinHouseForm">
+            <h1> Join A GiftHouse!</h1>
+            <div class="joinTable">
+            <ul>
+                    <li><img src="/Images/gift.png" asp-append-version="true" width="16px" height: "16px" /> {GiftHouseData?.HouseName} mini-details </li>
+                    <li> <img src="/Images/gift.png" asp-append-version="true" width="16px" height: "16px" /> {GiftHouseData?.HouseName} mini-details </li>
+                    <li> <img src="/Images/gift.png" asp-append-version="true" width="16px" height: "16px" /> {GiftHouseData?.HouseName.} mini-details</li>
+                </ul> </div> <!-- end joinTable -->
+
+        </div> <!-- end joinHouseForm -->
+    </div> <!-- end createButton2 -->
+</div> <!-- end giftHouseJoin -->
 
 @code {
     public GiftHouse? GiftHouseData { get; set; } 
@@ -53,7 +67,7 @@
 
     public void Submit()
     {
-        MessageStore = $"{GiftHouseData?.CreatorName} created House {GiftHouseData?.HouseName}!?";
+        MessageStore = $"{GiftHouseData?.CreatorName} created House {GiftHouseData?.HouseName}";
         GiftHouseData = new GiftHouse();
     }
 
