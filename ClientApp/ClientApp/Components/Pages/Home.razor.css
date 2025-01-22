@@ -1,4 +1,4 @@
-﻿.giftHouseCreation {
+﻿.giftHouseCreation, .giftHouseJoin {
     width: 100%;
 }
 #clickHouseButton, #joinHouseButton {
@@ -14,24 +14,24 @@
         background-color: black;
         color: pink;
     }
-.giftHouseCreation {
+.giftHouseCreation, .giftHouseJoin {
     position: relative;
     width: 45.4%;
 }
 
-.createButton1 {
+.createButton1, .createButton2 {
     transition: all 90s ease-in-out;
     opacity: 1;
     cursor: pointer;
 }
-    .createButton1:hover {
+    .createButton1:hover, .createButton2:hover {
         opacity: .3;
     }
-.createButton1:hover .createHouseForm{
-    display: block;
-}
+        .createButton1:hover .createHouseForm, .createButton2:hover .joinHouseForm {
+            display: block;
+        }
 /* dropdownHouseContent */
-.createHouseForm {
+.createHouseForm, .joinHouseForm {
     background-color: #f1f1f1;
     height: auto;
     overflow: auto;
@@ -67,4 +67,18 @@ p.messageStore {
     margin-top: 20px;
     text-align: center;
     border: 1px black dotted;
+}
+
+/* joinTable */
+
+.joinTable ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid pink;
+}
+
+.joinTable li {
+    border-bottom: 1px solid pink;
+    margin: 20px 0 10px 0;
 }
