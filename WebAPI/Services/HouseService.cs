@@ -13,16 +13,16 @@ namespace WebAPI.Services
             _connectionService = connectionService;
         }
 
-        public IReadOnlyList<House> GetUserHouses( int userId )
+        public async Task<IReadOnlyList<House>> GetUserHousesAsync( int userId )
         {
             using var connection = _connectionService.EstablishConnection();
 
-            var response = connection.QueryAsync<House>(
+            var response = await connection.QueryAsync<House>(
                 sql: "GetHouses",
                 param: userId,
                 commandType: CommandType.StoredProcedure);
 
-            return response.Result.ToList();
+            return response.ToList();
         }
     }
 }
