@@ -15,11 +15,14 @@ namespace WebAPI.Services
 
         public IReadOnlyList<House> GetUserHouses( int userId )
         {
-            var connection = _connectionService.EstablishConnection();
-            return connection.Query<House>( 
+            using var connection = _connectionService.EstablishConnection();
+
+            var response = connection.QueryAsync<House>(
                 sql: "GetHouses",
-                param: userId, 
-                commandType: CommandType.StoredProcedure ).ToList();
+                param: userId,
+                commandType: CommandType.StoredProcedure);
+
+            return response.Result.ToList();
         }
     }
 }
