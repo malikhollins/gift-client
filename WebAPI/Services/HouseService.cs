@@ -13,7 +13,7 @@ namespace WebAPI.Services
             _connectionService = connectionService;
         }
 
-        public async Task<IReadOnlyList<House>> GetUserHousesAsync( int userId )
+        public async Task<IReadOnlyList<House>> GetHousesAsync( int userId )
         {
             using var connection = _connectionService.EstablishConnection();
 
