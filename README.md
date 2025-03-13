@@ -18,7 +18,7 @@ Uses ASP.NET MAUI Blazor Hybrid
 Download dependecies:
 
 ```
-https://dotnet.microsoft.com/en-us/download/dotnet/8.0/runtime?cid=getdotnetcore&os=windows&arch=x64
+https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 ```
 
 Clone Project:
