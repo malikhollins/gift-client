@@ -1,6 +1,19 @@
-﻿.giftHouseCreation, .giftHouseJoin {
-    width: 100%;
+﻿* {
+    margin: 0 auto;
 }
+
+.GiftHouseIncoporated {
+    width: 960px;
+}
+
+.giftHouseCreation, .giftHouseJoin {
+    margin: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
 #clickHouseButton, #joinHouseButton {
     background-color: pink;
     color: black;
@@ -8,47 +21,52 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-radius: 12px;
+    margin-bottom: 8px;
 }
+    /* #joinHouseButton {
+    margin-left: 60px;
+} */
+
     /*button id*/
     #clickHouseButton:hover, #joinHouseButton:hover {
         background-color: black;
         color: pink;
     }
-.giftHouseCreation, .giftHouseJoin {
-    position: relative;
-    width: 45.4%;
-}
 
 .createButton1, .createButton2 {
-    transition: all 90s ease-in-out;
+    transition: all 90s ease-in;
     opacity: 1;
     cursor: pointer;
 }
+
     .createButton1:hover, .createButton2:hover {
         opacity: .3;
     }
+
         .createButton1:hover .createHouseForm, .createButton2:hover .joinHouseForm {
             display: block;
         }
 /* dropdownHouseContent */
 .createHouseForm, .joinHouseForm {
     background-color: #f1f1f1;
-    height: auto;
+    border-radius: 12px;
     overflow: auto;
     padding: 25px 15px 15px 15px;
     text-align: center;
     display: none;
+    align-content: center;
 }
+
+    .joinHouseForm li:last-child {
+        margin-bottom: 20px;
+    }
 
 .houseButtons1, .houseButtons2 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.houseButtons2 {
-    margin-bottom: 10px;
-}
-
-label {
+.label {
     width: 200px;
 }
 
@@ -56,11 +74,8 @@ label {
     border: 1px solid black;
     background: black;
     color: pink;
-}
-
-submitHouse {
-    margin-top: 10px;
-    text-align: center;
+    padding: 4%;
+    border-radius: 12px;
 }
 
 p.messageStore {
@@ -81,4 +96,25 @@ p.messageStore {
 .joinTable li {
     border-bottom: 1px solid pink;
     margin: 20px 0 10px 0;
+}
+
+/* responsive */
+
+@media only screen and (max-width: 700px) {
+    .GiftHouseIncoporated {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .giftHouseCreation, .giftHouseJoin {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .giftHouseCreation, .giftHouseJoin {
+        flex: 100%;
+        max-width: 100%;
+    }
 }
