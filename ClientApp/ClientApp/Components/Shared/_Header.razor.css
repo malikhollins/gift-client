@@ -1,0 +1,27 @@
+﻿* {
+    margin: 0 auto;
+}
+
+#mainNav h1, ul {
+    margin-top: 1%;
+    text-align: center;
+    border: 5px solid black;
+    border-radius: 20px;
+    width: 25%;
+    padding: 0;
+}
+
+#mainNav h1 {
+    color: black;
+    width: 44%;
+}
+
+#mainNav ul li {
+    list-style: none;
+}
+
+    #mainNav ul li a {
+        text-decoration: none;
+        font-style: italic;
+        color: black;
+    }
