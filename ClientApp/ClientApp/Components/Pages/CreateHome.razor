@@ -1,10 +1,11 @@
-﻿@page "/"
+﻿@page "/create"
 @using System.Runtime.CompilerServices;
 ﻿@using System.ComponentModel.DataAnnotations;
 @using ClientApp.Models;
+@using System.ComponentModel
 
-<div class="GiftHouseIncoporated"> 
-<button onclick="@Login">Login</button>
+<div class="GiftHouseIncoporated">
+    <button onclick="@Login" class="giftLogin"> Login </button>
 <div class="giftHouseCreation">
     <div class="createButton1">
         <button id="clickHouseButton"> Click to Create a GiftHouse! </button>
@@ -35,20 +36,4 @@
 
 <br />
 
-<div class= "giftHouseJoin">
-    <div class="createButton2">
-        <button id="joinHouseButton">Click to Join a GiftHouse!</button>
-
-        <div class="joinHouseForm">
-            <h1> Join A GiftHouse!</h1>
-            <div class="joinTable">
-            <ul>
-                    <li><img src="/Images/gift.png" asp-append-version="true" width="16" height="16" /> {GiftHouseData?.HouseName} mini-details </li>
-                    <li> <img src="/Images/gift.png" asp-append-version="true" width="16" height="16" /> {GiftHouseData?.HouseName} mini-details </li>
-                    <li> <img src="/Images/gift.png" asp-append-version="true" width="16" height="16" /> {GiftHouseData?.HouseName.} mini-details</li>
-                </ul> </div> <!-- end joinTable -->
-
-        </div> <!-- end joinHouseForm -->
-    </div> <!-- end createButton2 -->
-</div> <!-- end giftHouseJoin -->
 </div> <!-- end GiftHouseIncoporated -->
