@@ -1,6 +1,6 @@
 ﻿﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href=""> Gifting & Co</a>
+        <a class="navbar-brand" href="/" Match="NavLinkMatch.All"> GiftAll </a>
     </div>
 </div>
 
@@ -9,18 +9,23 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-gift-nav-menu" aria-hidden="true"></span> GiftHome
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                <span class="bi bi-gift-nav-menu" aria-hidden="true"></span> Login Page
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="content">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Empty
+            <NavLink class="nav-link" href="/homepage" Match="NavLinkMatch.All">
+                <span class="bi bi-gift-nav-menu" aria-hidden="true"></span> Homepage
+            </NavLink>
+        </div>
+        <div class="nav-item px-3"> 
+            <NavLink class="nav-link" href="/invite" Match="NavLinkMatch.All">
+                <span class="bi bi-gift-nav-menu" aria-hidden="true"></span> InviteHome
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Empty
+            <NavLink class="nav-link" href="/create" Match="NavLinkMatch.All">
+                <span class="bi bi-gift-nav-menu" aria-hidden="true"></span> CreateHome
             </NavLink>
         </div>
     </nav>

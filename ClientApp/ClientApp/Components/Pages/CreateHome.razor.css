@@ -1,0 +1,106 @@
+﻿* {
+    margin: 0 auto;
+}
+
+.GiftHouseIncoporated {
+    max-width: 960px;
+}
+
+button {
+    background-color: pink;
+    border-radius: 12px;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+}
+
+.giftLogin {
+    margin-top: 5px;
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    padding: 7px;
+}
+
+.giftHouseCreation {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+    .giftHouseCreation {
+    margin-top: 5%;
+    }
+
+#clickHouseButton {
+    padding: 16px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+/*button id*/
+#clickHouseButton:hover {
+    background-color: black;
+    color: pink;
+        
+}
+
+.createButton1 {
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+        .createButton1:hover .createHouseForm {
+            display: block;
+        }
+/* dropdownHouseContent */
+.createHouseForm {
+    background-color: #f1f1f1;
+    border-radius: 12px;
+    overflow: auto;
+    padding: 25px 15px 15px 15px;
+    text-align: center;
+}
+
+    .houseButtons1, .houseButtons2 {
+        margin-bottom: 20px;
+    }
+
+.label {
+    width: 200px;
+}
+
+#submit {
+    border: 1px solid black;
+    background: black;
+    color: pink;
+    padding: 4%;
+    border-radius: 12px;
+}
+
+p.messageStore {
+    margin-top: 20px;
+    text-align: center;
+    border: 1px black dotted;
+}
+
+/* responsive */
+
+@media only screen and (max-width: 700px) {
+    .GiftHouseIncoporated {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .giftHouseCreation {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .giftHouseCreation {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
