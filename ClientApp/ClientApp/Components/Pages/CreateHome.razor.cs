@@ -23,13 +23,13 @@ namespace ClientApp.Components.Pages
 
         public void Submit()
         {
-            MessageStore = $"{GiftHouseData?.CreatorName} created House {GiftHouseData?.HouseName}";
+            MessageStore = $"{GiftHouseData?.Email} joined House {GiftHouseData?.HouseName}";
             GiftHouseData = new GiftHouse();
         }
 
         public async void Login()
         {
-            if (_isLoggingIn) 
+            if (_isLoggingIn)
             {
                 return;
             }

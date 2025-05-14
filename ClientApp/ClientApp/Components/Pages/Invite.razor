@@ -3,21 +3,24 @@
 <div class="GiftInvite">
 
     <div class="inviteBubble">
-        <h1> Invite to ~GiftHouseName</h1>
+        <a class="bi-x-square-fill" id="CloseInviteBubble" href="/homepage"> </a>
+    <h1> Invite User </h1>
+
         <form>
-            <label for="email"> Enter Recipient's Email: </label>
-            <input type="text" id="recipientsEmail" name="email" required><br>
-            <br>
+            <label for="email" class="emailLabel"> Enter recipients email </label>
+            <input type="email" id="recipientsEmail" name="email" placeholder="name@email.com" required>
 
-            <div class="emailList"> 
-                <p> email@email.com </p>
-                <p> email@email.com </p>
-            </div> <!-- end emailList -->
+            <div class="InviteEmailList"> 
+                <ul class="AddEmail"> 
+                    <li>  email@email.com <span class="addBtn"> Add </span> </li>
+                    <li>  email@email.com <span class="addBtn"> Add </span> </li>
+                    <li> email@email.com <span  class="addBtn">Add</span> </li>
+                </ul>
+            </div> <!-- end InviteEmailList -->
 
-            <input type="submit" value="Click to Invite!">
+            <input type="submit" value="Invite!">
         </form>
 
-        <!-- <button onclick="Invite" class="inviteRecipient"> Click to Invite! </button> -->
         <div class="confirmationStatus">
             <p class="inviteStatus"> ~PendingInvite </p>
         </div> <!-- end confirmationStatus -->

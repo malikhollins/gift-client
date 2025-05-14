@@ -58,6 +58,7 @@
     </ItemGroup>
 
     <ItemGroup>
+		<PackageReference Include="Blazor.Bootstrap" Version="3.3.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.0" />
         <PackageReference Include="Auth0.OidcClient.MAUI" Version="1.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.2" />

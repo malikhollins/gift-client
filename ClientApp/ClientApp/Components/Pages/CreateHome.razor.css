@@ -1,105 +1,133 @@
 ﻿* {
     margin: 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 12px;
+    color: black;
+    height: 100%;
 }
 
-.GiftHouseIncoporated {
-    max-width: 960px;
+.HomeCreate {
+    margin-top: 2%;
+    width: 100%;
+    line-height: 1.8;
+}
+
+h1 {
+    margin: 20px;
+}
+
+.CreateBubble {
+    padding-top: 1%;
+    width: 80%;
+    border-radius: 50px 15px 50px 50px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bi-x-square-fill {
+    /* x-square-fill */
+    position: absolute;
+    right: 2%;
+    top: -1%;
+    color: #AB5A5A;
+    font-size: 40px;
+}
+
+.CreateEmailList {
+    width: 80%;
+    padding: 5px;
+    background-color: #848484;
+    position: relative;
+}
+
+    .CreateEmailList ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .CreateEmailList ul li {
+            text-decoration: none;
+            text-align: left;
+            margin-left: 10px;
+            padding: 5px;
+        }
+
+            .CreateEmailList ul li .InviteButton {
+                float: right;
+                margin-right: 10px;
+                background-color: #AB5A5A;
+                width: 25%;
+            }
+
+label, p.messageStore, #submit, input {
+    font-size: 22px;
+}
+
+label {
+    width: 85%;
+}
+
+.NameButton, .EmailButton {
+    margin: 10px;
 }
 
 button {
-    background-color: pink;
-    border-radius: 12px;
+    background-color: #AB5A5A;
     border: none;
-    text-align: center;
-    font-size: 16px;
+    padding: 5px;
 }
 
-.giftLogin {
-    margin-top: 5px;
+#submit, #submit:hover, #submit:active {
+    width: 55%;
+    background-color: #AB5A5A;
+    color: black;
+    padding: 10px;
+    margin: 20px;
+}
+
+.Invite {
+    padding: 3px;
     position: absolute;
-    right: 10px;
-    top: 60px;
-    padding: 7px;
+    right: 2%;
+    margin-top: -3px;
+    height: auto;
 }
 
-.giftHouseCreation {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-}
-    .giftHouseCreation {
-    margin-top: 5%;
-    }
-
-#clickHouseButton {
-    padding: 16px;
-    cursor: pointer;
-    margin-bottom: 8px;
-}
-
-/*button id*/
-#clickHouseButton:hover {
-    background-color: black;
-    color: pink;
-        
-}
-
-.createButton1 {
-    margin-top: 10px;
-    cursor: pointer;
-    text-align: center;
-}
-        .createButton1:hover .createHouseForm {
-            display: block;
-        }
-/* dropdownHouseContent */
-.createHouseForm {
-    background-color: #f1f1f1;
-    border-radius: 12px;
-    overflow: auto;
-    padding: 25px 15px 15px 15px;
-    text-align: center;
-}
-
-    .houseButtons1, .houseButtons2 {
-        margin-bottom: 20px;
-    }
-
-.label {
-    width: 200px;
-}
-
-#submit {
-    border: 1px solid black;
-    background: black;
-    color: pink;
-    padding: 4%;
-    border-radius: 12px;
-}
-
-p.messageStore {
-    margin-top: 20px;
-    text-align: center;
-    border: 1px black dotted;
-}
 
 /* responsive */
 
 @media only screen and (max-width: 700px) {
-    .GiftHouseIncoporated {
+    .HomeCreate {
         flex-direction: column;
         align-items: center;
     }
 
-    .giftHouseCreation {
+    .CreateBubble {
         flex: 50%;
         max-width: 50%;
+    }
+
+    #submit, .Invite {
+        width: 75%;
+        margin-top: 5px;
+    }
+
+    .Invite {
+        height: auto;
+        width: 25%;
+        padding: 0;
+        margin-top: -1px;
     }
 }
 
 @media only screen and (max-width: 500px) {
-    .giftHouseCreation {
+    .HomeCreate {
         flex: 100%;
         max-width: 100%;
     }

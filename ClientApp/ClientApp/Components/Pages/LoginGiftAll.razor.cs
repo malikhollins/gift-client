@@ -7,7 +7,7 @@ namespace ClientApp.Components.Pages
 {
     public partial class LoginGiftAll
     {
-        [Inject] LoginService LoginService { get; set; } = null!; 
+        [Inject] LoginService LoginService { get; set; } = null!;
 
         private bool _isLoggingIn = false;
         public async void Login()
