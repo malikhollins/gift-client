@@ -9,7 +9,7 @@ namespace ClientApp.Models
         public string? HouseName { get; set; }
 
         [Required]
-        [StringLength(30, MinimumLength = 2, ErrorMessage = "Your name/alias must be between 2 and 30 characters.")]
-        public string? CreatorName { get; set; }
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "This email must be between 2 and 30 characters.")]
+        public string? Email { get; set; }
     }
 }

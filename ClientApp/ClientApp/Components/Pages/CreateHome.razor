@@ -1,39 +1,46 @@
-﻿@page "/create"
+﻿@page "/create" 
 @using System.Runtime.CompilerServices;
 ﻿@using System.ComponentModel.DataAnnotations;
-@using ClientApp.Models;
-@using System.ComponentModel
 
-<div class="GiftHouseIncoporated">
-    <button onclick="@Login" class="giftLogin"> Login </button>
-<div class="giftHouseCreation">
-    <div class="createButton1">
-        <button id="clickHouseButton"> Click to Create a GiftHouse! </button>
-    <div class="createHouseForm">
-        <EditForm Model="@GiftHouseData" OnValidSubmit="@Submit">
+<div class="HomeCreate">
+    <div class="CreateBubble">
+        <a class="bi-x-square-fill" id="CloseCreateBubble" href="/homepage"></a>
+    <h1> Create Home </h1>
+
+        <EditForm FormName="CreateGiftHome" Model="@GiftHouseData" OnValidSubmit="@Submit">
             <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="houseButtons1">
-                <label>
-                    Enter A GiftHouse Name
-                    <InputText @bind-Value="GiftHouseData!.HouseName" />
-                </label>
-            </div> <!-- end houseButtons1 -->
-            <div class="houseButtons2">
-                <label>
-                    Enter a Name/Psyudeonym
-                    <InputText @bind-Value="GiftHouseData!.CreatorName" />
-                </label>
-            </div><!-- end houseButtons2 -->
-            <div class="submitHouse">
-                <button id="submit" class="btn btn-primary" type="submit"> Create A GiftHouse </button>
-            </div><!-- end submitHouse -->
+
+            <div class="NameButton">
+                <label for="HouseNameLabel" style="text-align:left;">
+                    Enter a Gifthouse name
+                    </label>
+                <InputText id="HouseNameLabel" @bind-Value="@GiftHouseData!.HouseName" placeholder="Name here" />
+                <ValidationMessage For="() => GiftHouseData.HouseName" />
+
+            </div> <!-- end NameButton -->
+
+            <div class="EmailButton">
+                <label for="EmailLabel" style="text-align:left;">
+                    Add others
+                    </label> <br />
+                <InputText id="EmailLabel" @bind-Value="@GiftHouseData!.Email" placeholder="Enter the recipient email" AutoComplete=true />
+                <ValidationMessage For="() => GiftHouseData.Email" />
+            </div><!-- end EmailButton -->
+
+            <div class="CreateEmailList">
+                <ul class="AddToHouse">
+                    <li> email@email.com <span class="InviteButton" >Add</span> </li>
+                    <li> email@email.com <span class="InviteButton">Add</span> </li>
+                    <li> email@email.com <span class="InviteButton">Add</span> </li>
+                </ul>
+            </div> <!-- end CreateEmailList -->
+
+            <div class="submitButton">
+                <button id="submit" class="btn btn-primary" type="submit"> Create Gifthouse </button>
+            </div><!-- end submitButton -->
+
             <p class="messageStore">@MessageStore</p>
         </EditForm>
-        </div> <!-- end createHouseForm -->
-        </div> <!-- end createButton1 -->
-</div> <!-- end GiftHouseCreation -->
 
-<br />
-
-</div> <!-- end GiftHouseIncoporated -->
+        </div> <!-- end CreateBubble -->
+ </div> <!-- end GiftHouseCreation --> 
