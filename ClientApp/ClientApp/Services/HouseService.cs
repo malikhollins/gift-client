@@ -1,23 +1,24 @@
 ﻿
-
 namespace ClientApp.Services
 {
-    public class HouseService : IDisposable
+    public class HouseService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public HouseService( HttpClient httpClient ) 
+        public HouseService( IHttpClientFactory httpClientFactory ) 
         {
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task GetUserHouseAsync(int userId)
         {
-            // Make HTTP GET request
-            // Parse JSON response deserialize into house type
-            var response = await _httpClient.GetAsync($"api/House/{userId}");
-        }
+            HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
 
-        public void Dispose() => _httpClient?.Dispose();
+            using HttpResponseMessage response = await httpClient.GetAsync($"api/House/get/{userId}");
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(jsonResponse);
+        }
     }
 }
