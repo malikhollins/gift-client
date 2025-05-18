@@ -1,5 +1,4 @@
 ﻿using Auth0.OidcClient;
-using ClientApp.Models;
 using System.Diagnostics;
 
 namespace ClientApp.Services
@@ -7,16 +6,18 @@ namespace ClientApp.Services
     public class LoginService
     {
         private readonly Auth0Client _authClient;
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public LoginService(Auth0Client client, HttpClient httpClient)
+        public LoginService(Auth0Client client, IHttpClientFactory httpClientFactory )
         {
             _authClient = client;
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<bool> LoginAsync()
         {
+            HttpClient httpClient = _httpClientFactory.CreateClient( "base-url" );
+
             try
             {
                 var loginResult = await _authClient.LoginAsync();
@@ -33,13 +34,13 @@ namespace ClientApp.Services
                 if (wasCreated != null && (bool.TryParse(wasCreated.Value, out var result) && result))
                 {
                     var email = loginResult.User.Claims.FirstOrDefault(claim => claim.Type == "email");
-                    var response = await _httpClient.GetAsync($"api/User/create/{userId}/{email}");
+                    var response = await httpClient.GetAsync($"api/User/create/{userId}/{email}");
                     Debug.WriteLine(response);
                 }
                 else
                 {
                     // fetch db
-                    var response = await _httpClient.GetAsync($"api/User/get/{userId}");
+                    var response = await httpClient.GetAsync($"api/User/get/{userId}");
                     Debug.WriteLine(response);
                 }
 

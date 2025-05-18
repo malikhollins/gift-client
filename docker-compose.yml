@@ -1,0 +1,49 @@
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+       - 1433:1433
+    environment:
+        - ACCEPT_EULA=Y
+        - MSSQL_SA_PASSWORD=!Hello12345678
+        - MSSQL_USER=SA
+        - MSSQL_PID=Developer 
+    volumes: 
+        - ./DatabaseApp/dbo:/scripts/
+    command:
+      - /bin/bash
+      - -c 
+      - |
+        # Launch MSSQL and send to background
+        /opt/mssql/bin/sqlservr &
+        # Wait 30 seconds for it to be available
+        sleep 30
+        # Run every script in /scripts
+        for table in /scripts/Tables/*.sql
+          do /opt/mssql-tools18/bin/sqlcmd -U sa -P $$MSSQL_SA_PASSWORD -C -e -i $$table
+        done
+        
+        for procedure in /scripts/Procedures/*.sql
+          do /opt/mssql-tools18/bin/sqlcmd -U sa -P $$MSSQL_SA_PASSWORD -C -e -i $$procedure
+        done
+
+        # run in the background
+        sleep infinity
+  serverapp:
+    image: ${DOCKER_REGISTRY-}serverapp
+    build:
+      context: .
+      dockerfile: ServerApp/Dockerfile
+    volumes:
+      - ./.aspnet/https:/https:ro
+    environment:
+        - ASPNETCORE_URLS=https://+:443
+        - DOTNET_URLS=https://+:443
+        - ASPNETCORE_HTTPS_PORT=443
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_Kestrel__Certificates__Default__Password=somepassword
+        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports: 
+        - 443:443 
+    depends_on:
+        - database
