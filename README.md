@@ -29,17 +29,16 @@ git clone https://github.com/malikhollins/GiftingApp.git
 
 ### Testing locally
 
-Feel free to check out the commands if you are worried about safety. Do not run commands blindly.
-
-Open the project and run the `RunCommands` project. You will see this output
+Download docker desktop
 
 ```
-Choose an option from the following list:
-        install - Install Dependecies
-        local - Create local database
-Your option?
+https://www.docker.com/products/docker-desktop/
 ```
 
-First, install the dependecies by typing `install`. It will download and install `SqpPackage` and `dotnet-scripts`.
+In the project repro run
 
-Second, to publish local db to `(localdb)\\MSSQLLocalDB`, type `local`. The database will deploy to localhost.
+```
+docker-compose up --build
+```
+
+Running the client app will now connect you to a local server with the API
