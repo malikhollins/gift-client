@@ -4,67 +4,57 @@
     border-radius: 12px;
 }
 
-.homepageGiftAll {
-    border: 1px solid black;
-    position: relative;
+#HomepageGiftAll {
+    min-height: 100%;
+}
+
+#GiftAppHome {
     width: 100%;
-    min-height: 630px;
-}
-
-.bottomNav {
-    background-color: #AB5A5A;
-    height: 75px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    opacity: 75%;
-    border-radius: 0px 0px 12px 12px;
-}
-
-.profileButton {
-    background-color: aquamarine;
-    clip-path: 50%;
-    width: 50px;
-    height: 50px;
-    float: right;
-    margin-top: 15px;
-    margin-right: 2%;
-}
-
-.plusCreateHouse {
-    position: relative;
-    background-color: aquamarine;
-    clip-path: 50%;
-    width: 50px;
-    height: 50px;
-    margin-top: 15px;
-}
-
-.create {
-    background-image: url(/Images/gift.png);
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .createTooltip {
-    padding: 10px;
     text-align: center;
+    font-weight: 900;
 }
 
-.Home {
-    margin: 20px;
+.bottomNav {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    height: 75px;
+    background-color: rgb(171, 90, 90);
+    width: 100%;
+    z-index: 1;
+    border-radius: 15px 15px 0 0;
+    display: flex inline !important;
+    flex-direction: row !important;
 }
 
-.HomeTitle {
-    color: plum;
+.profileButton, a.create {
+    background-color: aquamarine;
+    display: block;
+    margin: 12px;
+    width: 50px;
+    height: 50px;
+}
+
+    .profileButton a {
+        display: block;
+        width: 50px;
+        height: 50px;
+    }
+
+a.create {
+    background-image: url(/Images/gift.png);
 }
 
 .webCreate {
-    /* Create House */
-    position: absolute;
-    right: -175px;
-    top: -10px;
-    height: 83.66px;
     font-family: 'Inter';
     font-weight: 900;
-    font-size: 48px;
-    color: black;
+    font-size: 46px;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
 }

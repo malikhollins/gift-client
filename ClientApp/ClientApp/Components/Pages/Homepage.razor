@@ -1,48 +1,23 @@
 @page "/homepage"
 
-<div class="homepageGiftAll"> 
+<div id="HomepageGiftAll"> 
 
     <h1 class="createTooltip"> GIFT ALL </h1> <!-- hidden after #houses>1 | Change to: "Click the plus button below to create a house!" for new users -->
-
-<CardGroup Id="GiftAppHomepage" >
-    <div class="Home">
-        <Card Color="CardColor.Secondary" Id="Home0" >
-            <CardBody Style="text-align:left;">
-              <div class="HomeTitle">
-                        <CardTitle Size="HeadingSize.H3">Kylee's Home</CardTitle>
-                    </div> <!-- end HomeTitle-->
-        <CardText>Description... Last updated...</CardText>
-    </CardBody>
-        </Card> 
-        </div> <!-- end Home0 -->
-
-        <div class="Home">
-        <Card Color="CardColor.Secondary" Id="Home1">
-        <CardBody>
-            <div class="HomeTitle"> 
-                <CardTitle Size="HeadingSize.H3">Kylee's Home</CardTitle> </div> <!-- end HomeTitle-->
-        <CardText>Last updated... Malik wants sour candy...</CardText>
-    </CardBody>
-</Card>
-        </div> <!-- end Home1 -->
-
-        <div class="Home">
-        <Card Color="CardColor.Secondary">
-            <CardBody>
-                <div class="HomeTitle">
-                    <CardTitle Size="HeadingSize.H3">Kylee's Home</CardTitle>
-                    </div> <!-- end HomeTitle-->
-                <CardText>Last updated... Item recently bought...</CardText>
-            </CardBody>
-        </Card> 
-            </div>
-
-    </CardGroup>
-
+    <div id="GiftAppHome">
+    <ClientApp.Components.Extra.HouseCard />
+    <ClientApp.Components.Extra.HouseCard />
+    <ClientApp.Components.Extra.HouseCard />
+    <ClientApp.Components.Extra.HouseCard />
+    <ClientApp.Components.Extra.HouseCard />
+    <ClientApp.Components.Extra.HouseCard />
+    </div> <!-- end GiftAppHome-->
     <div class="bottomNav">
-        <div class="profileButton"> <a class="profile"> </a> </div>
+        <div class="plusCreateHouse">
+            <a class="create" href="/create"> <img src="/Images/gift.png" asp-append-version="true" width="50" height="50" /> <span class="webCreate"> Create </span> </a>
+        </div>
 
-        <div class="plusCreateHouse"><span class="webCreate"> Create </span> <a class="create"> <img src="/Images/gift.png" asp-append-version="true" width="50" height="50" /> </a> </div>
+        <div class="profileButton"> <a class="profile" href="/invite"> </a> </div> <!-- end profileButton-->
+
     </div> <!-- end bottom nav-->
 
 </div> <!-- end homepageGiftAll -->

@@ -11,5 +11,11 @@ namespace ClientApp.Models
         [Required]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "This email must be between 2 and 30 characters.")]
         public string? Email { get; set; }
+
+        public User? Owner { get; set; }
+
+        public string?  Description { get; set; }
+
+        public string? LastUpdated { get; set; }
     }
 }

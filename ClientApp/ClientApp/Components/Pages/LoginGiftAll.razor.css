@@ -33,3 +33,6 @@ button {
     margin-top: 5px;
     padding: 7px;
 }
+    .giftLogin a {
+        text-decoration: none;
+    }
