@@ -16,29 +16,30 @@ namespace ServerApp.Controllers
         }
 
         [HttpGet("create/{authId}/{email}")]
-        public async Task<User?> CreateUser(string authId, string email)
+        public async Task<ActionResult<User>> CreateUser(string authId, string email)
         {
-            return await _userService.CreateUser(authId, email);
+            var user = await _userService.CreateUser(authId, email);
+            return user == null ? NotFound() : Ok(user);
         }
 
         [HttpGet("get/{authId}")]
-        public async Task<User?> GetUser(string authId)
+        public async Task<ActionResult<User>> GetUser(string authId)
         {
-            return await _userService.GetUser(authId);
-        }
+            var user = await _userService.GetUser(authId);
+            return user == null ? NotFound() : Ok(user);        }
 
-        [HttpGet("get/bulk/{searchTerm}/{usingName}")]
-        public async Task<IReadOnlyList<User?>> BulkGetUser(string searchTerm, bool usingName )
+        [HttpGet("get/bulk/{searchTerm}")]
+        public async Task<ActionResult<IReadOnlyList<User?>>> BulkGetUser(string searchTerm )
         {
-            return usingName
-                ? await _userService.BulkGetUser(string.Empty, searchTerm)
-                : await _userService.BulkGetUser(searchTerm, string.Empty);
+            var bulkList = await _userService.BulkGetUser(searchTerm, string.Empty);
+            return Ok(bulkList);
         }
 
         [HttpGet("get/invites/{userId}")]
-        public async Task<IReadOnlyList<Invite>> GetInvites(int userId)
+        public async Task<ActionResult<IReadOnlyList<Invite>>> GetInvites(int userId)
         {
-            return await _userService.GetUserInvites(userId);
+            var invite = await _userService.GetUserInvites(userId);
+            return Ok(invite);
         }
     }
 }

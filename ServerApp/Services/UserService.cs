@@ -30,6 +30,7 @@ namespace ServerApp.Services
             return new User
             {
                 Id = identity,
+                AuthId = authId,
                 Email = email,
             };
         }
@@ -50,7 +51,8 @@ namespace ServerApp.Services
                 ? throw new Exception( "Error finding user" )
                 : new User
             {
-                Name = user.Name,
+                Id = user.Id,
+                AuthId = user.AuthId,
                 Email = user.Email,
             };
         }
