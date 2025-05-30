@@ -17,31 +17,31 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get/{userId}")]
-        public async Task<ActionResult<IEnumerable<House>>> GetHouses( int userId )
+        public async Task<ActionResult<IEnumerable<House>>> GetHousesAsync( int userId )
         {
             var result = await _houseService.GetHousesAsync(userId);
             return Ok(result);
         }
 
         [HttpGet("create/{userId}/{name}")]
-        public async Task<ActionResult<House>> CreateHouse(int userId, string name)
+        public async Task<ActionResult<House>> CreateHouseAsync(int userId, string name)
         {
             var createdHouse = await _houseService.CreateHouseAsync(userId, name);
             return Ok(createdHouse);
         }
 
         [HttpGet("create/invite/{houseId}/{userIdToInvite}")]
-        public async Task<ActionResult> CreateHouseInvite(int houseId, int userIdToInvite)
+        public async Task<ActionResult> CreateHouseInviteAsync(int houseId, int userIdToInvite)
         {
-            await _houseService.CreateHouseInvite(houseId, userIdToInvite);
+            await _houseService.CreateHouseInviteAsync(houseId, userIdToInvite);
             return Ok();
         }
 
 
         [HttpGet("set/invite/{userId}/{houseId}/{status}")]
-        public async Task<ActionResult> UpdateHouseInviteStatus(int userId, int houseId, InviteStatus status)
+        public async Task<ActionResult> UpdateHouseInviteStatusAsync(int userId, int houseId, InviteStatus status)
         {
-            await _houseService.UpdateHouseInviteStatus(userId, houseId, status);
+            await _houseService.UpdateHouseInviteStatusAsync(userId, houseId, status);
             return Ok();
         }
     }

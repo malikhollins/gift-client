@@ -45,7 +45,7 @@ namespace WebAPI.Services
             return new House { Id = houseId };
         }
 
-        public async Task CreateHouseInvite(int houseId, int inviteId)
+        public async Task CreateHouseInviteAsync(int houseId, int inviteId)
         {
             using var connection = _connectionService.EstablishConnection();
 
@@ -64,7 +64,7 @@ namespace WebAPI.Services
             }
         }
 
-        public async Task UpdateHouseInviteStatus(int userId, int houseId, InviteStatus status)
+        public async Task UpdateHouseInviteStatusAsync(int userId, int houseId, InviteStatus status)
         {
             using var connection = _connectionService.EstablishConnection();
 

@@ -14,7 +14,7 @@ namespace ServerApp.Services
             this._connectionService = connectionService;
         }
 
-        public async Task<User?> CreateUser( string authId, string email )
+        public async Task<User?> CreateUserAsync( string authId, string email )
         {
             using var connection = _connectionService.EstablishConnection();
 
@@ -35,29 +35,22 @@ namespace ServerApp.Services
             };
         }
 
-        public async Task<User?> GetUser(string authId)
+        public async Task<User?> GetUserAsync(string authId)
         {
             using var connection = _connectionService.EstablishConnection();
 
             DynamicParameters parameters = new();
             parameters.Add("user_id", authId);
 
-            var user = await connection.QueryFirstAsync<User>(
+            var user = await connection.QueryFirstOrDefaultAsync<User>(
                  sql: "[dbo].[GetUser]",
                  param: parameters,
                  commandType: CommandType.StoredProcedure);
 
-            return user is null
-                ? throw new Exception( "Error finding user" )
-                : new User
-            {
-                Id = user.Id,
-                AuthId = user.AuthId,
-                Email = user.Email,
-            };
+            return user;
         }
 
-        public async Task<IReadOnlyList<User?>> BulkGetUser(string email, string name)
+        public async Task<IReadOnlyList<User?>> BulkGetUserAsync(string email, string name)
         {
             using var connection = _connectionService.EstablishConnection();
 
@@ -73,7 +66,7 @@ namespace ServerApp.Services
             return [.. users];
         }
 
-        public async Task<IReadOnlyList<Invite>> GetUserInvites(int userId)
+        public async Task<IReadOnlyList<Invite>> GetUserInvitesAsync(int userId)
         {
             using var connection = _connectionService.EstablishConnection();
 
