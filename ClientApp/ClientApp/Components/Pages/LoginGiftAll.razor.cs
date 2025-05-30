@@ -1,13 +1,12 @@
-﻿using ClientApp.Models;
-using ClientApp.Services;
+﻿using ClientApp.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace ClientApp.Components.Pages
 {
     public partial class LoginGiftAll
     {
         [Inject] LoginService LoginService { get; set; } = null!;
+        [Inject] NavigationManager NavigationManager { get; set; } = null!;
 
         private bool _isLoggingIn = false;
         public async void Login()
@@ -20,8 +19,11 @@ namespace ClientApp.Components.Pages
             try
             {
                 _isLoggingIn = true;
-
-                await LoginService.LoginAsync();
+                bool loggedIn = await LoginService.LoginAsync();
+                if (loggedIn)
+                {
+                    NavigationManager.NavigateTo("/homepage");
+                }
             }
             catch (Exception e)
             {
