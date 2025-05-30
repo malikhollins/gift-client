@@ -1,0 +1,10 @@
+#Home {
+    width: 46.6%;
+    margin: 1%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+#HomeTitle {
+    color: plum !important;
+}

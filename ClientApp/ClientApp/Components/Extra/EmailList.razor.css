@@ -1,0 +1,38 @@
+* {
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-radius: 12px;
+    color: black;
+}
+input {
+    width: 50%;
+    margin-left: 10px;
+}
+
+#EmailList {
+    height:max-content;
+    overflow: auto;
+    padding: 10px;
+    font-size: 22px;
+}
+
+#EmailList {
+    background-color: #848484;
+}
+#EmailList ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#EmailList li {
+    text-decoration: none;
+}
+
+#EmailList .addBtn {
+        float: right;
+        margin: 3px 5px 0 0;
+        background-color: #AB5A5A;
+        width: 25%;
+        text-align: center;
+}
