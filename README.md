@@ -35,10 +35,20 @@ Download docker desktop
 https://www.docker.com/products/docker-desktop/
 ```
 
-In the project repro run
+In the project folder GiftingApp run in the command line
 
 ```
-docker-compose up --build
+docker compose --profile prod up && docker compose --profile prod build
 ```
 
 Running the client app will now connect you to a local server with the API
+
+
+### Developing server
+
+If you need to run integration tests you can use the command below in the project folder GiftingApp run in the command line
+
+```
+docker compose --profile test up && docker compose --profile test build
+```
+
