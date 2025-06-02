@@ -15,6 +15,14 @@ COPY --from=solution . .
 WORKDIR "/src/ServerApp"
 RUN dotnet build "./ServerApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+# create dev-certificate
+FROM build AS dev-certs
+WORKDIR /app
+RUN mkdir -p /.aspnet/https
+RUN dotnet dev-certs https -v -ep /.aspnet/https/aspnetapp.pfx -p somepassword
+RUN dotnet dev-certs https --trust -v
+RUN chmod -R 444 /.aspnet
+
 # test-build builds the xUnit integration test project
 FROM build AS test-build
 WORKDIR /src
@@ -30,6 +38,7 @@ ENTRYPOINT ["dotnet", "test", "--no-build", "--logger:trx"]
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
+WORKDIR "/src/ServerApp"
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./ServerApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
@@ -37,5 +46,6 @@ RUN dotnet publish "./ServerApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=dev-certs /.aspnet/https /app/.aspnet/https
 
 ENTRYPOINT ["dotnet", "ServerApp.dll"]
