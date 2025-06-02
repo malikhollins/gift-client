@@ -58,8 +58,21 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiImage Remove="Resources\Images\backhome.png" />
+      <MauiImage Remove="Resources\Images\emptycitizen.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Resources\Images\backhome.png">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Include="Resources\Images\emptycitizen.png">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
       <Content Include="Resources\Images\gift.png" />
-      <Content Include="Resources\Images\giftAll.png.ico" />
+      <Content Include="Resources\Images\giftall.png.ico" />
     </ItemGroup>
 
     <ItemGroup>

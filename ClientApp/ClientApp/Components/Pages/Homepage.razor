@@ -4,20 +4,20 @@
 
     <h1 class="createTooltip"> GIFT ALL </h1> <!-- hidden after #houses>1 | Change to: "Click the plus button below to create a house!" for new users -->
     <div id="GiftAppHome">
-    <ClientApp.Components.Extra.HouseCard />
-    <ClientApp.Components.Extra.HouseCard />
-    <ClientApp.Components.Extra.HouseCard />
-    <ClientApp.Components.Extra.HouseCard />
-    <ClientApp.Components.Extra.HouseCard />
-    <ClientApp.Components.Extra.HouseCard />
+        <HouseCard />
+        <HouseCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <HouseCard />
     </div> <!-- end GiftAppHome-->
-    <div class="bottomNav">
-        <div class="plusCreateHouse">
-            <a class="create" href="/create"> <img src="/Images/gift.png" asp-append-version="true" width="50" height="50" /> <span class="webCreate"> Create </span> </a>
-        </div>
 
-        <div class="profileButton"> <a class="profile" href="/invite"> </a> </div> <!-- end profileButton-->
-
-    </div> <!-- end bottom nav-->
+    <div class="footer">
+        <BottomNav />
+    </div> <!-- end footer-->
 
 </div> <!-- end homepageGiftAll -->
+
+@code {
+    
+}

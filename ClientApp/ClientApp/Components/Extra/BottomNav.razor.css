@@ -1,0 +1,47 @@
+* {
+    margin: 0 auto;
+    font-family: 'Courier New';
+    border-radius: 12px;
+}
+
+.bottomNav {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    height: 75px;
+    background-color: rgb(171, 90, 90);
+    width: 100%;
+    z-index: 1;
+    border-radius: 15px 15px 0 0;
+    display: flex inline !important;
+    flex-direction: row !important;
+}
+
+.plusCreateHouse, .profileButton, .backToHomepage {
+    background-color: aquamarine;
+    display: block;
+    margin-top: 13px;
+    width: 50px;
+    height: 50px;
+}
+.backToHomepage img {
+    margin-top: 8px;
+}
+    .profileButton a {
+        display: block;
+        width: 50px;
+        height: 50px;
+    }
+
+a.create {
+    background-image: url(/Images/gift.png);
+}
+
+.webCreate {
+    font-family: 'Inter';
+    font-weight: 900;
+    font-size: 46px;
+    position: absolute;
+    margin-left: 1%;
+    bottom: 0;
+}
