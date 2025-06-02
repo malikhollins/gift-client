@@ -1,0 +1,18 @@
+<div id="homeUserCard">
+    <Card Color="CardColor.Secondary" Id="@User">
+        <CardBody Style="min-height: 8em;">
+            <div id="UserTitle">
+                <CardTitle Size="HeadingSize.H3">@User</CardTitle>
+            </div> <!-- end UserTitle-->
+
+            <div class="userProfileImage">
+                <img class="@User" src="/Images/emptycitizen.png" alt="placeholder" asp-append-version="true" min-height="8em" width="40" />
+            </div> <!-- end userProfileImage -->
+        </CardBody>
+    </Card>
+
+</div> <!-- end homeUserCard -->
+
+@code {
+    string? User = "Kylee~";
+}

@@ -1,0 +1,10 @@
+#homeUserCard {
+    width: 100%;
+    margin: 1%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+#UserTitle {
+    color: plum !important;
+}

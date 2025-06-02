@@ -25,7 +25,7 @@ namespace ClientApp.Services
             try
             {
                 var loginResult = await _authClient.LoginAsync();
-                if (loginResult.IsError)
+                 if (loginResult.IsError)
                 {
                     // auth0 doesn't throw exceptions, throw it for them
                     throw new Exception(loginResult.Error);

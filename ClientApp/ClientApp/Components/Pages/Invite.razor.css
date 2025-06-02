@@ -43,44 +43,18 @@ label {
 }
 
 input[type=email] {
-    width: 95%;
+    width: 96%;
     text-align: left;
     margin-left: 10px;
 }
 
-    .InviteEmailList, input[type=email]:focus, input[type=email]:hover, input[type=email]:active {
+    input[type=email]:focus, input[type=email]:hover, input[type=email]:active {
         background-color: #848484;
     }
 
 .InviteEmailList {
-    padding: 5px;
-    margin: 10px;
+    margin: 3%;
 }
-
-    .InviteEmailList ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .InviteEmailList li {
-        text-decoration: none;
-        margin-left: 10px;
-        padding: 5px;
-    }
-
-    .InviteEmailList ul li .addBtn {
-        float: right;
-        margin-right: 10px;
-        background-color: #AB5A5A;
-        width: 25%;
-        overflow: auto;
-        text-align: center;
-    }
-
-    .InviteEmailList ul li.checked {
-        text-decoration: line-through;
-    }
 
 input[type=submit] {
     text-align: center;
@@ -94,6 +68,7 @@ input[type=submit] {
 
 .confirmationStatus {
     visibility: hidden;
+    margin: 5px;
 }
 
 

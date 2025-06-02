@@ -15,7 +15,7 @@ a, .btn-link {
     border-radius: 12px;
     background-color: #848484;
     border: none;
-    width: 85%;
+    width: 99%;
     padding: 10px;
 }
 
@@ -63,11 +63,11 @@ a, .btn-link {
 /* Responsive */
 @media screen and (max-width: 700px) {
 
-    #Home {
+    #Home, #homeUserCard {
         width: 100% !important;
     }
 
-    .webCreate {
+    span.webCreate {
         display: none;
         opacity: 0;
     }
