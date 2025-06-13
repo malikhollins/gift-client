@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [UpdateHouseInvite]
+﻿CREATE PROCEDURE [UpdateInvite]
 	@user_id int,
 	@house_id int,
 	@status int
 AS
 BEGIN
-	UPDATE [dbo].[UserToHouse]
+	UPDATE [dbo].[Invites]
 	SET [Status] = @status
 	WHERE @user_id = [User] AND @house_id = [House]
 END;

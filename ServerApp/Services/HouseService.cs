@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using ServerApp.Models;
+using System.Collections;
 using System.Data;
 using WebAPI.Models;
 
@@ -14,11 +15,11 @@ namespace WebAPI.Services
             _connectionService = connectionService;
         }
 
-        public async Task<IReadOnlyList<House>> GetHousesAsync( int userId )
+        public async Task<IEnumerable<House>> GetHousesAsync( int userId )
         {
             using var connection = _connectionService.EstablishConnection();
 
-            DynamicParameters parameters = new DynamicParameters();
+            DynamicParameters parameters = new();
             parameters.Add("user_id", userId);
 
             var response = await connection.QueryAsync<House>(
@@ -26,7 +27,7 @@ namespace WebAPI.Services
                 param: parameters,
                 commandType: CommandType.StoredProcedure);
 
-            return response.ToList();
+            return response;
         }
 
         public async Task<House> CreateHouseAsync(int userId, string name)
@@ -37,51 +38,12 @@ namespace WebAPI.Services
             parameters.Add("user_id", userId);
             parameters.Add("name", name);
 
-            var houseId = await connection.QueryFirstAsync<int>(
+            var house = await connection.QueryFirstAsync<House>(
                 sql: "[dbo].[CreateHouse]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure);
 
-            return new House { Id = houseId };
-        }
-
-        public async Task CreateHouseInviteAsync(int houseId, int inviteId)
-        {
-            using var connection = _connectionService.EstablishConnection();
-
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("house_id", houseId);
-            parameters.Add("invite_id", inviteId);
-
-            var rowsAffected = await connection.ExecuteAsync(
-                sql: "[dbo].[CreateHouseInvite]",
-                param: parameters,
-                commandType: CommandType.StoredProcedure);
-
-            if (rowsAffected <= 0)
-            {
-                throw new Exception( "Failed to create house invite" );
-            }
-        }
-
-        public async Task UpdateHouseInviteStatusAsync(int userId, int houseId, InviteStatus status)
-        {
-            using var connection = _connectionService.EstablishConnection();
-
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("user_id", userId);
-            parameters.Add("house_id", userId);
-            parameters.Add("status", (int)status);
-
-            var rowsAffected = await connection.ExecuteAsync(
-                sql: "[dbo].[UpdateHouseInvite]",
-                param: parameters,
-                commandType: CommandType.StoredProcedure);
-
-            if (rowsAffected <= 0)
-            {
-                throw new Exception("Failed to update house invite");
-            }
+            return house;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[UserToHouse]
+﻿CREATE TABLE [dbo].[Invites]
 (
-    [Id] INT NOT NULL PRIMARY KEY,
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY,
 
     [User] INT NOT NULL,
 
@@ -11,15 +11,15 @@
 
     [Status] INT NOT NULL,
 
-    CONSTRAINT [FK_UserToHouse_Users] FOREIGN KEY ([User]) REFERENCES [Users]([Id]),
+    CONSTRAINT [FK_Invites_Users] FOREIGN KEY ([User]) REFERENCES [Users]([Id]),
 
-    CONSTRAINT [FK_UserToHouse_House] FOREIGN KEY ([House]) REFERENCES [Houses]([Id])
+    CONSTRAINT [FK_Invites_House] FOREIGN KEY ([House]) REFERENCES [Houses]([Id])
 )
 
 GO
 
-CREATE INDEX [IX_UserToHouse_UserHouse] ON [dbo].[UserToHouse] ([User], [House])
+CREATE INDEX [IX_Invites_UserHouse] ON [dbo].[Invites] ([User], [House])
 
 GO
 
-CREATE INDEX [IX_UserToHouse_HouseUser] ON [dbo].[UserToHouse] ([House], [User])
+CREATE INDEX [IX_Invites_HouseUser] ON [dbo].[Invites] ([House], [User])
