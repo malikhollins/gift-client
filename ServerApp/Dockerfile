@@ -16,7 +16,7 @@ WORKDIR "/src/ServerApp"
 RUN dotnet build "./ServerApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # test-build builds the xUnit integration test project
-FROM dev-certs AS test-build
+FROM build AS test-build
 WORKDIR /src
 COPY --from=tests --link . tests/
 COPY /appsettings.json tests/
