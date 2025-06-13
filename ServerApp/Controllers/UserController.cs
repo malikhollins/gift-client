@@ -32,12 +32,5 @@ namespace ServerApp.Controllers
             var bulkList = await _userService.BulkGetUserAsync(searchTerm, string.Empty);
             return Ok(bulkList);
         }
-
-        [HttpGet("get/invites/{userId}")]
-        public async Task<ActionResult<IReadOnlyList<Invite>>> GetInvitesAsync(int userId)
-        {
-            var invite = await _userService.GetUserInvitesAsync(userId);
-            return Ok(invite);
-        }
     }
 }

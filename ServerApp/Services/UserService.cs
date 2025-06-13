@@ -30,7 +30,6 @@ namespace ServerApp.Services
             return new User
             {
                 Id = identity,
-                AuthId = authId,
                 Email = email,
             };
         }
@@ -64,21 +63,6 @@ namespace ServerApp.Services
                  commandType: CommandType.StoredProcedure);
 
             return [.. users];
-        }
-
-        public async Task<IReadOnlyList<Invite>> GetUserInvitesAsync(int userId)
-        {
-            using var connection = _connectionService.EstablishConnection();
-
-            DynamicParameters parameters = new();
-            parameters.Add("user_id", userId);
-
-            var invites = await connection.QueryAsync<Invite>(
-                 sql: "[dbo].[GetUserinvites]",
-                 param: parameters,
-                 commandType: CommandType.StoredProcedure);
-
-            return [.. invites];
         }
     }
 }

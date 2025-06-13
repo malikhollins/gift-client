@@ -24,7 +24,7 @@ RUN dotnet dev-certs https --trust -v
 RUN chmod -R 444 /.aspnet
 
 # test-build builds the xUnit integration test project
-FROM build AS test-build
+FROM dev-certs AS test-build
 WORKDIR /src
 COPY --from=tests --link . tests/
 COPY /appsettings.json tests/

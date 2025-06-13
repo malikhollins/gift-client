@@ -2,8 +2,12 @@
 	@user_id int
 AS
 BEGIN
-	SELECT [dbo].[UserToHouse].[House], [dbo].[Houses].[Owner], [dbo].[UserToHouse].[Status]
-	FROM [dbo].[UserToHouse]
-	JOIN [dbo].[Houses] ON [dbo].[Houses].[Id] = [dbo].[UserToHouse].[House]
-	WHERE [User] = @user_id 
-END;
+	SELECT 
+	[dbo].[Houses].[Id], 
+	[dbo].[Houses].[Owner], 
+	[dbo].[Houses].[Name], 
+	[dbo].[Invites].[Status]
+	FROM [dbo].[Invites]
+	JOIN [dbo].[Houses] ON [dbo].[Houses].[Id] = [dbo].[Invites].[House]
+	WHERE @user_id = [dbo].[Invites].[User]
+END

@@ -6,7 +6,7 @@ namespace ServerApp.IntegrationTests
     {
         private const string TestEmail = "testemail@gmail.com";
 
-        private static UserService SetupUserService()
+        public static UserService SetupUserService()
         {
             var connectionService = ConnectionTests.SetUpConnection();
             return new UserService(connectionService);

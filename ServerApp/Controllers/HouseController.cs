@@ -29,20 +29,5 @@ namespace WebAPI.Controllers
             var createdHouse = await _houseService.CreateHouseAsync(userId, name);
             return Ok(createdHouse);
         }
-
-        [HttpGet("create/invite/{houseId}/{userIdToInvite}")]
-        public async Task<ActionResult> CreateHouseInviteAsync(int houseId, int userIdToInvite)
-        {
-            await _houseService.CreateHouseInviteAsync(houseId, userIdToInvite);
-            return Ok();
-        }
-
-
-        [HttpGet("set/invite/{userId}/{houseId}/{status}")]
-        public async Task<ActionResult> UpdateHouseInviteStatusAsync(int userId, int houseId, InviteStatus status)
-        {
-            await _houseService.UpdateHouseInviteStatusAsync(userId, houseId, status);
-            return Ok();
-        }
     }
 }
