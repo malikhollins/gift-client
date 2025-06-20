@@ -29,10 +29,19 @@ git clone https://github.com/malikhollins/GiftingApp.git
 
 ### Testing locally
 
-Download docker desktop
+#### Download docker desktop
 
 ```
 https://www.docker.com/products/docker-desktop/
+```
+
+#### Create local dev-certs
+
+In your local `GiftingApp` folder, run these commands in a terminal to generate the https certifications to communicate to the app.
+
+```
+dotnet dev-certs https -ep .\.aspnet\https\aspnetapp.pfx -p somepassword
+dotnet dev-certs https --trust
 ```
 
 In the project folder GiftingApp run in the command line
