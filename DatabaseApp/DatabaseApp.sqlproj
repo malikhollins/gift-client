@@ -73,7 +73,7 @@
     <Build Include="dbo\Procedures\UpdateInvite.up.sql" />
     <Build Include="dbo\Tables\03_Invites.sql" />
     <Build Include="dbo\Procedures\GetHouseInvites.sql" />
-    <Build Include="dbo\Procedures\BulkGetUsers.sql" />
+    <Build Include="dbo\Procedures\BulkGetUsers.up.sql" />
     <Build Include="dbo\Procedures\GetUserInvites.up.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
