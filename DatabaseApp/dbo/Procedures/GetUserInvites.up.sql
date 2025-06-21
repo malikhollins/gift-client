@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetUserInvites]
+﻿CREATE OR ALTER  PROCEDURE [dbo].[GetUserInvites]
 	@user_id int
 AS
 BEGIN

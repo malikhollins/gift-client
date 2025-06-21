@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [CreateInvite]
+﻿CREATE OR ALTER PROCEDURE [CreateInvite]
 	@house_id int,
 	@user_id int
 AS
