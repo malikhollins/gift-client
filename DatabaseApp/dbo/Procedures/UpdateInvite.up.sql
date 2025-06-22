@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [UpdateInvite]
+﻿CREATE OR ALTER  PROCEDURE [UpdateInvite]
 	@user_id int,
 	@house_id int,
 	@status int
