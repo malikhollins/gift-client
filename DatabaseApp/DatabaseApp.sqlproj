@@ -75,6 +75,13 @@
     <Build Include="dbo\Procedures\GetHouseInvites.sql" />
     <Build Include="dbo\Procedures\BulkGetUsers.up.sql" />
     <Build Include="dbo\Procedures\GetUserInvites.up.sql" />
+    <Build Include="dbo\Procedures\BulkGetLists.up.sql" />
+    <Build Include="dbo\Procedures\BulkGetItemsFromList.up.sql" />
+    <Build Include="dbo\Procedures\UpdateBuyerInItem.up.sql" />
+    <Build Include="dbo\Procedures\UpdateItemInList.up.sql" />
+    <Build Include="dbo\Procedures\CreateItemInList.up.sql" />
+    <Build Include="dbo\Procedures\UpdateFavoriteItem.sql" />
+    <Build Include="dbo\Procedures\CreateList.up.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
