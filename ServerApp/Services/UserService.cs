@@ -23,7 +23,7 @@ namespace ServerApp.Services
             parameters.Add("email", email);
 
            var identity = await connection.QueryFirstAsync<int>(
-                sql: "[dbo].[CreateUser]",
+                sql: "[GiftingApp].[dbo].[CreateUser]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure);
 
@@ -42,7 +42,7 @@ namespace ServerApp.Services
             parameters.Add("user_id", authId);
 
             var user = await connection.QueryFirstOrDefaultAsync<User>(
-                 sql: "[dbo].[GetUser]",
+                 sql: "[GiftingApp].[dbo].[GetUser]",
                  param: parameters,
                  commandType: CommandType.StoredProcedure);
 
@@ -58,7 +58,7 @@ namespace ServerApp.Services
             parameters.Add("name", name);
 
             var users = await connection.QueryAsync<User>(
-                 sql: "[dbo].[BulkGetUsers]",
+                 sql: "[GiftingApp].[dbo].[BulkGetUsers]",
                  param: parameters,
                  commandType: CommandType.StoredProcedure);
 

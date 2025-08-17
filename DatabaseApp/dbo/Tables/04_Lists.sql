@@ -1,4 +1,7 @@
-﻿CREATE TABLE [dbo].[Lists]
+﻿USE GiftingApp;
+GO
+
+CREATE TABLE [dbo].[Lists]
 (
     [Id] INT NOT NULL PRIMARY KEY IDENTITY,
 

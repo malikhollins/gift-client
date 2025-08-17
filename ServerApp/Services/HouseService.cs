@@ -23,7 +23,7 @@ namespace WebAPI.Services
             parameters.Add("user_id", userId);
 
             var response = await connection.QueryAsync<House>(
-                sql: "[dbo].[GetHouses]",
+                sql: "[GiftingApp].[dbo].[GetHouses]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure);
 
@@ -39,7 +39,7 @@ namespace WebAPI.Services
             parameters.Add("name", name);
 
             var house = await connection.QueryFirstAsync<House>(
-                sql: "[dbo].[CreateHouse]",
+                sql: "[GiftingApp].[dbo].[CreateHouse]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure);
 

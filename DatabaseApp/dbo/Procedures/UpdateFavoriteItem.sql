@@ -1,4 +1,7 @@
-﻿CREATE OR ALTER PROCEDURE [dbo].[UpdateFavoriteItem]
+﻿USE GiftingApp;
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[UpdateFavoriteItem]
 	@item_id AS INT,
 	@favorited AS BIT
 AS
