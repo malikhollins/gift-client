@@ -12,7 +12,7 @@ namespace ServerApp.IntegrationTests
             return new HouseService(connectionService);
         }
 
-        private static Task<User> CreateDummyUserAsync()
+        public static Task<User> CreateDummyUserAsync()
         {
             var connectionService = ConnectionTests.SetUpConnection();
             var userService = new UserService(connectionService);
