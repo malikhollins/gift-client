@@ -1,12 +1,21 @@
-﻿CREATE TABLE [dbo].[ItemsInList]
+﻿USE GiftingApp;
+GO
+
+CREATE TABLE [dbo].[ItemsInList]
 (
     [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
 
     [List] INT NOT NULL,
 
+    [Name] VARCHAR(250) NOT NULL, 
+
     [Description] VARCHAR(250) NULL, 
 
+    [Price] DECIMAL(10, 2) NULL, 
+
     [Link] VARCHAR(2048) NULL, 
+
+    [Favorite] BIT NULL,
 
     [Buyer] INT NULL, 
 

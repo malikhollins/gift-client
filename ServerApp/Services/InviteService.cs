@@ -26,7 +26,7 @@ namespace ServerApp.Services
                 {
                     return new HouseInvites { User = user, InviteStatus = status };
                 },
-                sql: "[dbo].[GetHouseInvites]",
+                sql: "[GiftingApp].[dbo].[GetHouseInvites]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure,
                 splitOn: "Status");
@@ -45,7 +45,7 @@ namespace ServerApp.Services
                 {
                     return new UserInvites { House = house, InviteStatus = status }; 
                 },
-                sql: "[dbo].[GetUserInvites]",
+                sql: "[GiftingApp].[dbo].[GetUserInvites]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure,
                 splitOn: "Status");
@@ -61,7 +61,7 @@ namespace ServerApp.Services
             parameters.Add("user_id", userId);
 
             await connection.ExecuteAsync(
-                sql: "[dbo].[CreateInvite]",
+                sql: "[GiftingApp].[dbo].[CreateInvite]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure);
         }
@@ -75,7 +75,7 @@ namespace ServerApp.Services
             parameters.Add("status", status);
 
             await connection.ExecuteAsync(
-                sql: "[dbo].[UpdateInvite]",
+                sql: "[GiftingApp].[dbo].[UpdateInvite]",
                 param: parameters,
                 commandType: CommandType.StoredProcedure);
 
