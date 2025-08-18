@@ -21,7 +21,7 @@ namespace ServerApp.Services
             paremeters.Add("house_id", houseId);
 
             var result = await connection.QueryAsync<List>( 
-                sql: "[dbo].[BulkGetLists]",
+                sql: "[GiftingApp].[dbo].[BulkGetLists]",
                 param: paremeters,
                 commandType: System.Data.CommandType.StoredProcedure );
 
@@ -38,7 +38,7 @@ namespace ServerApp.Services
             paremeters.Add("name", name);
 
             var result = await connection.QueryFirstAsync<List>(
-                sql: "[dbo].[CreateList]",
+                sql: "[GiftingApp].[dbo].[CreateList]",
                 param: paremeters,
                 commandType: System.Data.CommandType.StoredProcedure);
 
@@ -63,7 +63,7 @@ namespace ServerApp.Services
             paremeters.Add("link", link);
 
             var result = await connection.QueryFirstAsync<Item>(
-                sql: "[dbo].[CreateItemInList]",
+                sql: "[GiftingApp].[dbo].[CreateItemInList]",
                 param: paremeters,
                 commandType: System.Data.CommandType.StoredProcedure
                 );
@@ -79,7 +79,7 @@ namespace ServerApp.Services
             paremeters.Add("list_id", listId);
 
             var result = await connection.QueryAsync<Item>(
-                sql: "[dbo].[BulkGetItemsFromList]",
+                sql: "[GiftingApp].[dbo].[BulkGetItemsFromList]",
                 param: paremeters,
                 commandType: System.Data.CommandType.StoredProcedure
                 );
@@ -95,7 +95,7 @@ namespace ServerApp.Services
             paremeters.Add("buyer_id", buyerId);
 
             await connection.ExecuteAsync(
-                sql: "[dbo].[UpdateBuyerInItem]",
+                sql: "[GiftingApp].[dbo].[UpdateBuyerInItem]",
                 param: paremeters,
                 commandType: System.Data.CommandType.StoredProcedure
                 );
@@ -110,7 +110,7 @@ namespace ServerApp.Services
             paremeters.Add("favorited", favorited);
 
             await connection.ExecuteAsync(
-                sql: "[dbo].[UpdateFavoriteItem]",
+                sql: "[GiftingApp].[dbo].[UpdateFavoriteItem]",
                 param: paremeters,
                 commandType: System.Data.CommandType.StoredProcedure
                 );

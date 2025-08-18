@@ -1,4 +1,7 @@
-﻿CREATE OR ALTER  PROCEDURE [UpdateInvite]
+﻿USE GiftingApp;
+GO
+
+CREATE OR ALTER  PROCEDURE [UpdateInvite]
 	@user_id int,
 	@house_id int,
 	@status int

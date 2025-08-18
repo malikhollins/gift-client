@@ -1,4 +1,7 @@
-﻿CREATE OR ALTER PROCEDURE [dbo].[UpdateBuyerInItem]
+﻿USE GiftingApp;
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[UpdateBuyerInItem]
 	@item_id INT,
 	@buyer_id INT
 AS
