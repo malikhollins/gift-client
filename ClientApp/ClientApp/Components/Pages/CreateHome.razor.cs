@@ -21,7 +21,7 @@ namespace ClientApp.Components.Pages
 
         public async Task Submit()
         {
-            MessageStore = $"{HouseData.Email} joined House {HouseData.HouseName}";
+            MessageStore = $"{HouseData.Email} joined House {HouseData.Name}";
             var house = await HouseService.CreateHouseAsync(HouseData);
 
             Console.WriteLine(house.ToString());

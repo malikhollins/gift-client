@@ -14,8 +14,8 @@
                 <label for="HouseNameLabel" style="text-align:left;">
                     Enter a Gifthouse name
                     </label>
-                <InputText id="HouseNameLabel" @bind-Value="@HouseData!.HouseName" placeholder="Name here" />
-                <ValidationMessage For="() => HouseData.HouseName" />
+                <InputText id="HouseNameLabel" @bind-Value="@HouseData!.Name" placeholder="Name here" />
+                <ValidationMessage For="() => HouseData.Name" />
 
             </div> <!-- end NameButton -->
 
@@ -32,7 +32,7 @@
             </div> <!-- end CreateEmailList -->
 
             <div class="submitButton">
-                <button id="submit" class="btn btn-primary" type="submit" onclick=@(Submit)> Create Gifthouse </button>
+                <button id="submit" class="btn btn-primary" type="submit"> Create Gifthouse </button>
             </div><!-- end submitButton -->
 
             <p class="messageStore">@MessageStore</p>
