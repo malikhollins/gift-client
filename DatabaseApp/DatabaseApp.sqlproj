@@ -82,7 +82,7 @@
     <Build Include="dbo\Procedures\CreateItemInList.up.sql" />
     <Build Include="dbo\Procedures\UpdateFavoriteItem.sql" />
     <Build Include="dbo\Procedures\CreateList.up.sql" />
-    <Build Include="dbo\Tables\00_Database.sql" />
+    <None Include="dbo\Tables\00_Database.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />

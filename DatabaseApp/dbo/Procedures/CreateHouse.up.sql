@@ -1,7 +1,4 @@
-﻿USE GiftingApp;
-GO
-
-CREATE OR ALTER  PROCEDURE [dbo].[CreateHouse](@user_id int, @name varchar(30))
+﻿CREATE OR ALTER  PROCEDURE [dbo].[CreateHouse](@user_id int, @name varchar(30))
 AS
 DECLARE @house_id INT;
 BEGIN

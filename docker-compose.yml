@@ -19,17 +19,26 @@ services:
         /opt/mssql/bin/sqlservr &
         # Wait 30 seconds for it to be available
         sleep 30
+        
+        run_master = true
+
         # Run every script in /scripts
         for table in /scripts/Tables/*.sql; do
             file_name="$(basename "$$table")"
             if test -f "$$table" && test ! -f "/migrate/$$file_name"; then
-                /opt/mssql-tools18/bin/sqlcmd -U sa -P $$MSSQL_SA_PASSWORD -C -e -i "$$table"
+                if [ "$run_master" = true ]; then
+                    /opt/mssql-tools18/bin/sqlcmd -U sa -P $$MSSQL_SA_PASSWORD -C -e -i "$$table"
+                else
+                    /opt/mssql-tools18/bin/sqlcmd  -d GiftingApp -U sa -P $$MSSQL_SA_PASSWORD -C -e -i "$$table"
+                fi
                 cp "$$table" ./migrate
             fi
+            
+            run_master = false
         done
 
         for procedure in /scripts/Procedures/*.sql
-          do /opt/mssql-tools18/bin/sqlcmd -U sa -P $$MSSQL_SA_PASSWORD -C -e -i $$procedure
+          do /opt/mssql-tools18/bin/sqlcmd -d GiftingApp -U sa -P $$MSSQL_SA_PASSWORD -C -e -i $$procedure
         done
         
         wait
