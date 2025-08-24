@@ -6,5 +6,5 @@ BEGIN
 	VALUES (@user_id, @name, 0);
 	SET @house_id = SCOPE_IDENTITY();
 
-	SElECT @house_id AS Id, @name As Name, 0 As GiftType
+	SElECT @house_id AS Id, @name As Name, @user_id As Owner, 0 As GiftType
 END;
