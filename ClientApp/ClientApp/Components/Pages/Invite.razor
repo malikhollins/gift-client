@@ -5,13 +5,9 @@
     <div class="inviteBubble">
         <a class="bi-x-square-fill" id="CloseInviteBubble" href="/profile"> </a>
     <h1> Invite User </h1>
-
         <form>
-            <label for="email" class="emailLabel"> Enter recipients email </label>
-            <input type="email" id="recipientsEmail" name="email" placeholder="name@email.com" required>
-
             <div class="InviteEmailList"> 
-                <EmailList />
+                <EmailList OnUserInvited="OnUserInvited" />
             </div> <!-- end InviteEmailList -->
 
             <input type="submit" value="Invite!" >

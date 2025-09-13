@@ -4,15 +4,25 @@ namespace ClientApp.Utils
 {
     public static class DeserializeResponse
     {
-        private static readonly JsonSerializerOptions DeserializationOptions = new JsonSerializerOptions
+        public static async Task<TValue?> DeserializeAsync<TValue>(this HttpResponseMessage httpResponseMessage)
         {
-            PropertyNameCaseInsensitive = true
-        };
+            try
+            {
+                var deserializationOptions = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
 
-        public static async Task<T?> DeserializeAsync<T>(this HttpResponseMessage httpResponseMessage)
-        {
-            var json = await httpResponseMessage.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(json ?? string.Empty, DeserializationOptions);
+                var json = await httpResponseMessage.Content.ReadAsStringAsync();
+                var deserializedValue = JsonSerializer.Deserialize<TValue>(json ?? string.Empty, deserializationOptions);
+                return deserializedValue;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + " with type: " + typeof(TValue));
+            }
+
+            return default;
         }
     }
 }

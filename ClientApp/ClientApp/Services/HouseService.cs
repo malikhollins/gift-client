@@ -1,7 +1,12 @@
 ﻿
 using ClientApp.Models;
 using ClientApp.Utils;
+using Cysharp.Web;
+using Models;
+using Newtonsoft.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Web;
 
 namespace ClientApp.Services
 {
@@ -24,11 +29,11 @@ namespace ClientApp.Services
             return await response.DeserializeAsync<IEnumerable<House>>() ?? [];
         }
 
-        public async Task<House> CreateHouseAsync( House houseToCreate )
+        public async Task<House> CreateHouseAsync( CreateHouseRequest createHouseRequest )
         {
             HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
-            User? user = _userInfoService.GetUserInfo();
-            HttpResponseMessage response = await httpClient.GetAsync($"api/House/create/{user?.Id ?? -1}/{houseToCreate.Name}");
+            var uri = WebSerializer.ToQueryString("$/api/House/create/", createHouseRequest);
+            HttpResponseMessage response = await httpClient.GetAsync(uri);
             return await response.DeserializeAsync<House>() ?? new House();
         }
     }

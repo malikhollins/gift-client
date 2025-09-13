@@ -1,35 +1,12 @@
 <div id="EmailList">
     <ul class="AddEmail">
-
-        @foreach (var newEmail in emailRequests)
+        <input placeholder="Enter email" @bind="_inputString" @oninput="OnInputChanged"/>
+        @foreach (var user in _possibleUsers)
         {
             <li>
-                <input @bind="newEmail.Name" />
-                 <span class="addBtn" @onclick="AddEmail"> Add </span>
+                <p>@user.Email</P>
+                <span class="addBtn" @onclick="() => InviteUser(user)"> Add </span>
             </li>
         }
-
-        <input placeholder="Enter email" @bind="nextEmail" />
-        <span class="addBtn" @onclick="AddEmail"> Add </span>
-
     </ul>
 </div> <!-- end EmailList -->
-
-@code {
-    
-    public string? Name { get; set; }
-    public bool IsAdded { get; set; }
-
-    public List<EmailList> emailRequests = [];
-    private string? nextEmail;
-
-
-    public void AddEmail()
-    {
-        if (!string.IsNullOrWhiteSpace(nextEmail))
-        {
-            emailRequests.Add(new EmailList { Name = nextEmail });
-            nextEmail = string.Empty;
-        }
-    }
-}
