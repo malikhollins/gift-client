@@ -46,8 +46,28 @@ dotnet dev-certs https --trust
 
 In the project folder GiftingApp run in the command line
 
+build ASP.NET server image
+
 ```
-docker compose --profile prod up && docker compose --profile prod build
+docker build -f ./ServerApp/Dockerfile --tag svr .
+```
+
+build db image
+
+```
+docker build ./DatabaseApp/Dockerfile --tag db
+```
+
+run server image
+
+```
+docker run svr
+```
+
+run db image
+
+```
+docker run -e MSSQL_SA_PASSWORD='YourStrongPassword!' db
 ```
 
 Running the client app will now connect you to a local server with the API
