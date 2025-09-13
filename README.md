@@ -35,15 +35,6 @@ git clone https://github.com/malikhollins/GiftingApp.git
 https://www.docker.com/products/docker-desktop/
 ```
 
-#### Create local dev-certs
-
-In your local `GiftingApp` folder, run these commands in a terminal to generate the https certifications to communicate to the app.
-
-```
-dotnet dev-certs https -ep .\.aspnet\https\aspnetapp.pfx -p somepassword
-dotnet dev-certs https --trust
-```
-
 In the project folder GiftingApp run in the command line
 
 build ASP.NET server image
@@ -72,11 +63,3 @@ docker run -e MSSQL_SA_PASSWORD='YourStrongPassword!' db
 
 Running the client app will now connect you to a local server with the API
 :: Any issues regarding Virtulization: https://aka.ms/enablevirtualization
-
-### Developing server
-
-If you need to run integration tests you can use the command below in the project folder GiftingApp run in the command line
-
-```
-docker compose --profile test up && docker compose --profile test build
-```
