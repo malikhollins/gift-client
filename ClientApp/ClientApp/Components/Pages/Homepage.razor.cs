@@ -9,9 +9,7 @@ namespace ClientApp.Components.Pages
     {
         [Inject] HouseService HouseService { get; set; } = null!;
         public IEnumerable<House> Houses { get; set; } = null!;
-
-        public bool HasNoHouses => !Houses?.Any() ?? true;
-
+        public bool HasNoHouses => (Houses?.Count() ?? 0 ) == 0;
         protected override async Task OnInitializedAsync()
         {
             Houses = await HouseService.GetHousesAsync();

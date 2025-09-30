@@ -16,7 +16,7 @@ CREATE INDEX [IX_Users_AuthId] ON [dbo].[Users] ([AuthId])
 
 GO
 
-CREATE INDEX [IX_Email_FullText] ON [dbo].[Users] ([Email])
+CREATE UNIQUE INDEX [IX_Email_FullText] ON [dbo].[Users] ([Email])
 
 GO
 

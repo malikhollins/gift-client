@@ -34,8 +34,10 @@ namespace ClientApp
             // setup app specific services
             builder.Services.AddSingleton<HouseService>();
             builder.Services.AddSingleton<UserInfoService>();
+            builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<InviteService>();
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
 

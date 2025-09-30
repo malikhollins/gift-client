@@ -55,7 +55,6 @@ namespace ServerApp.Services
 
             DynamicParameters parameters = new();
             parameters.Add("email", email);
-            parameters.Add("name", name);
 
             var users = await connection.QueryAsync<User>(
                  sql: "[GiftingApp].[dbo].[BulkGetUsers]",
