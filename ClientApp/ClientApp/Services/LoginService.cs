@@ -11,12 +11,14 @@ namespace ClientApp.Services
         private readonly Auth0Client _authClient;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly UserInfoService _userInfoService;
+        private readonly AuthTokenStorage _authTokenStorage;
 
-        public LoginService(Auth0Client client, IHttpClientFactory httpClientFactory, UserInfoService userInfoService)
+        public LoginService(Auth0Client client, IHttpClientFactory httpClientFactory, UserInfoService userInfoService, AuthTokenStorage authTokenStorage)
         {
             _authClient = client;
             _httpClientFactory = httpClientFactory;
             _userInfoService = userInfoService;
+            _authTokenStorage = authTokenStorage;
         }
 
         /// <summary>
@@ -42,17 +44,34 @@ namespace ClientApp.Services
             var email = auth0LoginResult.User.Claims.FirstOrDefault(claim => claim.Type == "name");
             var uri = BuildUri(authId?.Value, email?.Value);
 
-            // verify the auth0 response
-            HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
-            return await response.DeserializeAsync<User>();
+            await _authTokenStorage.UpdateTokensAsync(auth0LoginResult.AccessToken, auth0LoginResult.RefreshToken);
+
+            try
+            {
+                // verify the auth0 response
+                HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+
+                return await response.DeserializeAsync<User>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         public async Task<bool> LoginAsync()
         {
             try
             {
-                var loginResult = await _authClient.LoginAsync();
+                var loginResult = await _authClient.LoginAsync(extraParameters: new Dictionary<string, string>
+                    {
+                        {
+                            "audience", "https://gift-application-service-garfg.ondigitalocean.app/"}
+                     });
                 if (loginResult.IsError)
                 {
                     // auth0 doesn't throw exceptions, throw it for them
@@ -61,7 +80,7 @@ namespace ClientApp.Services
 
                 var user = await VerifyAuth0LoginAsync(loginResult);
 
-                
+
                 _userInfoService.SetUserInfo(user);
                 return user != null;
             }

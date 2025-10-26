@@ -25,8 +25,8 @@ namespace ClientApp
             // setup default http client
             builder.Services.AddHttpClient( "base-url", ( client ) => 
             {
-                client.BaseAddress = new Uri( "https://localhost" );
-            } );
+                client.BaseAddress = new Uri("https://gift-application-service-garfg.ondigitalocean.app");
+            } ).AddHttpMessageHandler<AuthTokenHandler>();
 
             // setup auth0 login service
             builder.Services.SetupAuth0Authentication();

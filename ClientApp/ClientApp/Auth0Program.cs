@@ -1,6 +1,5 @@
 ﻿using Auth0.OidcClient;
 using ClientApp.Services;
-using Microsoft.AspNetCore.Components.Authorization;
 
 namespace ClientApp
 {
@@ -10,15 +9,19 @@ namespace ClientApp
         {
             services.AddSingleton(new Auth0Client(new Auth0ClientOptions
             {
-                Domain = "dev-2dnfqskv260fu3s8.us.auth0.com", // these strings are not confiedntial
-                ClientId = "2UZ9v1sdCCzDDGxpLRErbrwVornwwr3O",
-                Scope = "openid profile",
+                Domain = "dev-783iaokvar74ul5a.us.auth0.com", // these strings are not confiedntial
+                ClientId = "jmnIEMYDbuiLUUsKPgYIruQg4op2DHsZ",
+                Scope = "openid profile email offline_access",
                 RedirectUri = "myapp://callback/",
+                PostLogoutRedirectUri = "myapp://callback/",
             }));
 
             services.AddAuthorizationCore();
             //services.AddScoped<AuthenticationStateProvider, Auth0AuthenticationStateProvider>();
             services.AddSingleton<LoginService>();
+            services.AddSingleton<AuthTokenStorage>();
+            services.AddSingleton<AuthTokenService>();
+            services.AddSingleton<AuthTokenHandler>();
         }
     }
 }
