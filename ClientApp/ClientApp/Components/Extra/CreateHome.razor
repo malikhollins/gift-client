@@ -1,0 +1,50 @@
+﻿@using System.Runtime.CompilerServices;
+﻿@using System.ComponentModel.DataAnnotations;
+
+<div class="HomeCreate">
+    <div class="CreateBubble">
+        <EditForm FormName="CreateGiftHome" Model="@HouseData" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+
+            <div class="NameButton">
+                <label for="HouseNameLabel" style="text-align:left;">
+                    Enter a Gifthouse name
+                    </label>
+                <InputText id="HouseNameLabel" @bind-Value="@HouseData!.Name" placeholder="Name here" />
+                <ValidationMessage For="() => HouseData.Name" />
+
+            </div> <!-- end NameButton -->
+
+            <div class="EmailButton">
+                <label for="EmailLabel" style="text-align:left;">
+                    Add others
+                </label> <br />
+                <EmailList OnUserInvited="OnUserInvited" />
+            </div><!-- end EmailButton -->
+
+            <div>
+                @if ( _usersToInvite.Count > 0 )
+                {
+                    <label class="invited-users-header">Invited Users</label>
+                    <SortableList
+                        TItem="User"
+                        Data="_usersToInvite"
+                        Context="item"
+                        AllowSorting="false">
+                        <ItemTemplate>
+                            <div class="invited-users-container">
+                                @item.Email
+                            </div>
+                        </ItemTemplate>
+                    </SortableList>                    
+                }
+            </div>
+
+            <footer>            
+                <div class="submitButton">
+                    <button id="submit" class="btn btn-primary" type="submit"> Create Gifthouse </button>
+                </div><!-- end submitButton -->
+            </footer>
+        </EditForm>
+        </div> <!-- end CreateBubble -->
+ </div> <!-- end GiftHouseCreation --> 

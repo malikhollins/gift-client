@@ -1,12 +1,9 @@
 <div id="EmailList">
-    <ul class="AddEmail">
-        <input placeholder="Enter email" @bind="_inputString" @oninput="OnInputChanged"/>
-        @foreach (var user in _possibleUsers)
-        {
-            <li>
-                <p>@user.Email</P>
-                <span class="addBtn" @onclick="() => InviteUser(user)"> Add </span>
-            </li>
-        }
-    </ul>
+    <AutoComplete DataProvider="UsersDataProvider"
+                  Placeholder="Enter email"
+                  @bind-Value="_inputString"
+                  TItem="User"
+                  PropertyName="Email"
+                  OnChanged="(User user ) => OnAutoCompleteChanged( user )"
+                  StringComparison="StringComparison.Ordinal" />
 </div> <!-- end EmailList -->

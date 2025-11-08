@@ -1,7 +1,7 @@
 ﻿using ClientApp.Services;
 using Microsoft.AspNetCore.Components;
 using ClientApp.Models;
-using ClientApp.Utils;
+using BlazorBootstrap;
 
 namespace ClientApp.Components.Extra
 {
@@ -11,36 +11,35 @@ namespace ClientApp.Components.Extra
 
         private string _inputString { get; set; } = string.Empty;
 
-        private string _searchingString { get; set; } = string.Empty;
-
-        private CancellationTokenSource? _cts { get; set; }
-
-        private List<User> _possibleUsers { get; set; } = new List<User>();
+        private List<User> _invitedUsers = new List<User>();
 
         [Parameter]
         public EventCallback<User> OnUserInvited { get; set; }
 
-        public void OnInputChanged()
+
+        private void OnAutoCompleteChanged(User user)
         {
-            if (_inputString.Equals(_searchingString))
+            if (user == null)
             {
                 return;
             }
 
-            _cts?.Cancel();
-            GetPossibleUsersAsync( _inputString ).SafeFireAndForget();
+            _invitedUsers.Add(user);
+            OnUserInvited.InvokeAsync( user );
         }
 
-        public async Task GetPossibleUsersAsync( string input, CancellationToken ct = default )
+        public async Task<AutoCompleteDataProviderResult<User>> UsersDataProvider(AutoCompleteDataProviderRequest<User> request)
         {
-            var users = await UserService.BulkGetUsersAsync(input);
-            if ( ct.IsCancellationRequested)
+            var users = await GetPossibleUsersAsync( request.Filter.Value, request.CancellationToken );
+            users.RemoveAll(_invitedUsers.Contains);
+            return await Task.FromResult(new AutoCompleteDataProviderResult<User>
             {
-                return;
-            }
-            _possibleUsers = users;
+                Data = users,
+                TotalCount = users.Count,
+            });
         }
 
-        public Task InviteUser( User user ) =>  OnUserInvited.InvokeAsync(user);
+        public async Task<List<User>> GetPossibleUsersAsync(string input, CancellationToken cancellationToken)
+            => await UserService.BulkGetUsersAsync(input, cancellationToken );
     }
 }

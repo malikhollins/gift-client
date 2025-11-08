@@ -4,7 +4,18 @@
     color: black;
 }
 
+
+.modal-backdrop {
+    z-index: 0 !important;
+}
+
+.modal-backdrop.show {
+    z-index: 0 !important;
+}
+
+
 .HomeCreate {
+    z-index: 0;
     margin-top: 2%;
     width: 100%;
     line-height: 1.8;
@@ -54,6 +65,10 @@ button {
     background-color: #AB5A5A;
     border: none;
     padding: 5px;
+}
+
+.invited-users-container {
+    margin: 10px;
 }
 
 #submit, #submit:hover, #submit:active {

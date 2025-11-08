@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Models;
 
-namespace ClientApp.Components.Pages
+namespace ClientApp.Components.Extra
 {
     public partial class CreateHome
     {
@@ -14,7 +14,7 @@ namespace ClientApp.Components.Pages
         public EditContext? EditContext { get; set; }
         public string MessageStore { get; set; } = "";
 
-        private List<int> _usersToInvite = new();
+        private List<User> _usersToInvite =   [ new User { Email = "100" }, new User { Email = "105" }, new User { Email = "105" }, new User { Email = "105" }, new User { Email = "105" }];
 
         protected override void OnInitialized()
         {
@@ -24,9 +24,9 @@ namespace ClientApp.Components.Pages
 
         public void OnUserInvited(User user)
         {
-            if (!_usersToInvite.Contains(user.Id))
+            if (!_usersToInvite.Contains(user))
             {
-                _usersToInvite.Add(user.Id);
+                _usersToInvite.Add(user);
             }
         }
 
@@ -36,7 +36,7 @@ namespace ClientApp.Components.Pages
 
             var createHouseRequest = new CreateHouseRequest
             {
-                InvitedUsers = _usersToInvite,
+                InvitedUsers = _usersToInvite.Select( user => user.Id ).ToList(),
                 Name = HouseData.Name ?? string.Empty,
                 UserId = UserInfoService.GetUserInfo()?.Id ?? -1
             };

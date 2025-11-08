@@ -23,10 +23,18 @@ namespace ClientApp.Services
 
         public async Task<IEnumerable<House>> GetHousesAsync()
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
-            User? user = _userInfoService.GetUserInfo();
-            HttpResponseMessage response = await httpClient.GetAsync($"api/House/get/{user?.Id ?? -1}");
-            return await response.DeserializeAsync<IEnumerable<House>>() ?? [];
+            try
+            {
+                HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
+                User? user = _userInfoService.GetUserInfo();
+                HttpResponseMessage response = await httpClient.GetAsync($"api/House/get/{user?.Id ?? -1}");
+                return await response.DeserializeAsync<IEnumerable<House>>() ?? [];
+            }
+            catch ( Exception ex )
+            {
+                Console.WriteLine( ex.Message );
+                return [];
+            }
         }
 
         public async Task<House> CreateHouseAsync( CreateHouseRequest createHouseRequest )

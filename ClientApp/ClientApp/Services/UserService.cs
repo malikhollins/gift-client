@@ -9,12 +9,12 @@ namespace ClientApp.Services
         {
         }
 
-        public async Task<List<User>> BulkGetUsersAsync(string input)
+        public async Task<List<User>> BulkGetUsersAsync(string input, CancellationToken cancellationToken = default)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             var uri = $"api/User/get/bulk/{input}";
 
-            var response = await httpClient.GetAsync(uri);
+            var response = await httpClient.GetAsync(uri, cancellationToken );
             if (response == null)
             {
                 return new List<User>();
