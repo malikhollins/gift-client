@@ -21,7 +21,6 @@ namespace ClientApp
             services.AddSingleton<LoginService>();
             services.AddSingleton<AuthTokenStorage>();
             services.AddSingleton<AuthTokenService>();
-            services.AddSingleton<AuthTokenHandler>();
         }
     }
 }

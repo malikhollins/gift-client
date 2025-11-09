@@ -69,8 +69,16 @@ button {
 
 .invited-users-container {
     margin: 10px;
-    height: 10em;
     overflow-y: auto;
+    height: 10vh;
+}
+
+.invite-users-group {
+    margin: 10px
+}
+
+.sortable-list-wrapper {
+    display: block;
 }
 
 #submit, #submit:hover, #submit:active {

@@ -1,9 +1,8 @@
 ﻿@using System.Runtime.CompilerServices;
-﻿@using System.ComponentModel.DataAnnotations;
 
 <div class="HomeCreate">
     <div class="CreateBubble">
-        <EditForm FormName="CreateGiftHome" Model="@HouseData" OnValidSubmit="@Submit">
+        <EditForm Model="@HouseData" OnValidSubmit="@Submit">
             <DataAnnotationsValidator />
 
             <div class="NameButton">
@@ -22,29 +21,26 @@
                 <EmailList OnUserInvited="OnUserInvited" />
             </div><!-- end EmailButton -->
 
-            <div class="invited-users-container">
                 @if ( _usersToInvite.Count > 0 )
                 {
+                <div class="invite-users-group">
                     <label class="invited-users-header">Invited Users</label>
-                    <SortableList
-                        TItem="User"
-                        Data="_usersToInvite"
-                        Context="item"
-                        AllowSorting="false">
-                        <ItemTemplate>
-                            <div class="invited-users-container">
-                                @item.Email
-                            </div>
-                        </ItemTemplate>
-                    </SortableList>                    
+                    <div class="invited-users-container">
+                            <SortableList TItem="User"
+                                          Data="_usersToInvite"
+                                          Context="item"
+                                          AllowSorting="false">
+                                <ItemTemplate>
+                                    @item.Email
+                                </ItemTemplate>
+                            </SortableList>
+                    </div>
+                </div>     
                 }
-            </div>
 
-            <footer>            
                 <div class="submitButton">
                     <button id="submit" class="btn btn-primary" type="submit"> Create Gifthouse </button>
                 </div><!-- end submitButton -->
-            </footer>
         </EditForm>
         </div> <!-- end CreateBubble -->
  </div> <!-- end GiftHouseCreation --> 

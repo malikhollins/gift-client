@@ -1,4 +1,5 @@
 ﻿using ClientApp.Services;
+using Majorsoft.Blazor.Components.Common.JsInterop;
 using Microsoft.Extensions.Logging;
 
 namespace ClientApp
@@ -22,7 +23,7 @@ namespace ClientApp
             // setup web services
             builder.Services.AddMauiBlazorWebView();
 
-            // setup default http client
+            builder.Services.AddTransient<AuthTokenHandler>();
             builder.Services.AddHttpClient( "base-url", ( client ) => 
             {
                 client.BaseAddress = new Uri("https://gift-application-service-garfg.ondigitalocean.app");
@@ -36,6 +37,7 @@ namespace ClientApp
             builder.Services.AddSingleton<UserInfoService>();
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<InviteService>();
+            builder.Services.AddJsInteropExtensions();
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
