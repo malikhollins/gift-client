@@ -1,7 +1,7 @@
 ﻿using Auth0.OidcClient;
 using ClientApp.Models;
 using ClientApp.Utils;
-using IdentityModel.OidcClient;
+using Duende.IdentityModel.OidcClient;
 using System.Diagnostics;
 
 namespace ClientApp.Services

@@ -1,5 +1,4 @@
 ﻿using Auth0.OidcClient;
-using IdentityModel.OidcClient.Results;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace ClientApp.Services
@@ -23,7 +22,7 @@ namespace ClientApp.Services
             {
                 var refreshToken = await _authTokenStorage.GetRefreshTokenAsync();
 
-                RefreshTokenResult result = await _auth0Client.RefreshTokenAsync(refreshToken, extraParameters: new Dictionary<string, string>
+                var result = await _auth0Client.RefreshTokenAsync(refreshToken, extraParameters: new Dictionary<string, string>
                     {
                         {
                             "audience", "https://gift-application-service-garfg.ondigitalocean.app/"}
