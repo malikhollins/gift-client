@@ -23,11 +23,13 @@ namespace ClientApp.Services
                 var refreshToken = await _authTokenStorage.GetRefreshTokenAsync();
 
                 var result = await _auth0Client.RefreshTokenAsync(refreshToken, extraParameters: new Dictionary<string, string>
-                    {
+                {
                         {
-                            "audience", "https://gift-application-service-garfg.ondigitalocean.app/"}
-                     });
-                                if (!result.IsError)
+                            "audience", "https://gift-application-service-garfg.ondigitalocean.app/"
+                        }
+                });
+                
+                if (!result.IsError)
                 {
                     await _authTokenStorage.UpdateTokensAsync(result.AccessToken, result.RefreshToken);
                     var handler = new JwtSecurityTokenHandler();

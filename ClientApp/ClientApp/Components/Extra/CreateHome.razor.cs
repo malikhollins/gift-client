@@ -15,7 +15,7 @@ namespace ClientApp.Components.Extra
         public string MessageStore { get; set; } = "";
 
         private List<User> _usersToInvite =   [ new User { Email = "100" }, new User { Email = "105" }, new User { Email = "105" }, new User { Email = "105" }, new User { Email = "105" }];
-
+        
         protected override void OnInitialized()
         {
             HouseData = new House();
