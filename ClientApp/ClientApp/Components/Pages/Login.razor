@@ -2,6 +2,12 @@
 
 <div class="GiftAllLogin">
     <div class="titlePage"> <h1> GIFT ALL </h1>
-        <button class="giftLogin" onclick="@OnLoginClickedAsync"> LOGIN </button>
+        <Button 
+            Style="background-color: #CC7575;border: none;text-align: center;font-size: 25px;" 
+            Size="ButtonSize.Large" 
+            @ref="_loginButton" 
+            @onclick="OnLoginClickedAsync">
+                LOGIN
+        </Button>
     </div> <!-- end titlePage -->
 </div> <!-- end GiftAllLogin -->

@@ -1,4 +1,5 @@
-﻿using ClientApp.Services;
+﻿using BlazorBootstrap;
+using ClientApp.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace ClientApp.Components.Pages
@@ -8,18 +9,18 @@ namespace ClientApp.Components.Pages
         [Inject] LoginService LoginService { get; set; } = null!;
         [Inject] NavigationManager NavigationManager { get; set; } = null!;
 
-        private bool _isLoggingIn = false;
+        private BlazorBootstrap.Button _loginButton = null!;
 
         public async void OnLoginClickedAsync()
         {
-            if (_isLoggingIn)
+            if (_loginButton.Loading)
             {
                 return;
             }
 
             try
             {
-                _isLoggingIn = true;
+                _loginButton.ShowLoading();
                 bool loggedIn = await LoginService.LoginAsync();
                 if (loggedIn)
                 {
@@ -32,7 +33,7 @@ namespace ClientApp.Components.Pages
             }
             finally
             {
-                _isLoggingIn = false;
+                _loginButton.HideLoading();
             }
         }
     }
