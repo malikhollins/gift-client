@@ -1,0 +1,102 @@
+﻿* {
+    margin: var(--margin);
+    border-radius: var(--border-radius);
+    color: var(--color);
+}
+
+
+.modal-backdrop, .modal-backdrop.show, HomeCreate {
+z-index: 0 !important;
+}
+
+.HomeCreate {
+    margin-top: 2%;
+    width: 100%;
+    line-height: 1.8;
+}
+
+.CreateBubble {
+    padding-top: 1%;
+    border-radius: 50px 15px 50px 50px;
+    display: var(--display);
+    flex-direction: column;
+    align-items: var(--align-items);
+    position: relative;
+}
+
+h1 {
+    margin: 20px;
+}
+
+.bi-x-square-fill {
+    /* x-square-fill */
+    position: absolute;
+    right: 2%;
+    top: -1%;
+    font-size: 40px;
+}
+
+.CreateEmailList {
+    padding: 5px;
+    background-color: #848484;
+    position: relative;
+}
+
+label, p.messageStore, #submit, input {
+    font-size: 22px;
+}
+
+label {
+    width: 85%;
+}
+
+.NameButton, .EmailButton {
+    margin: 10px;
+}
+
+button {
+    border: none;
+    padding: 5px;
+}
+
+.invited-users-container {
+    margin: 10px;
+    overflow-y: auto;
+    height: 10vh;
+}
+
+.invite-users-group {
+    margin: 10px
+}
+
+.sortable-list-wrapper {
+    display: var(--display);
+}
+
+#submit, #submit:hover, #submit:active {
+    width: 55%;
+    padding: 10px;
+    margin: 5% 20% 5%;
+}
+    #submit, #submit:hover, #submit:active, button {
+        background-color: #AB5A5A;
+    }
+    /* responsive */
+    @media only screen and (max-width: 700px) {
+        .HomeCreate {
+        flex-direction: column;
+        align-items: var(--align-items);
+    }
+
+    .CreateBubble {
+        flex: 50%;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    .HomeCreate {
+        flex: 100%;
+        max-width: 100%;
+    }
+}

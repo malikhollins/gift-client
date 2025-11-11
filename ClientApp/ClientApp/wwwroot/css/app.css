@@ -10,6 +10,7 @@ html, body, #app {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
     height: 100%;
     width: 100%;
@@ -20,6 +21,16 @@ a, .btn-link {
 >>>>>>> Stashed changes
 }
 
+=======
+    height: 100%;
+    width: 100%;
+}
+
+a, .btn-link {
+    color: var(--color);
+}
+
+>>>>>>> Stashed changes
 =======
     height: 100%;
     width: 100%;
