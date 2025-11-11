@@ -1,8 +1,8 @@
 * {
-    margin: 0 auto;
+    margin: var(--margin);
     box-sizing: border-box;
-    border-radius: 12px;
-    color: black;
+    border-radius: var(--border-radius);
+    color: var(--color);
 }
 
 .GiftInvite {
@@ -30,10 +30,10 @@ h1 {
     width: 100%;
     border-radius: 50px 15px 50px 50px;
     border: 1px solid black;
-    display: flex;
+    display: var(--display);
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: var(--align-items);
 }
 
 label {
@@ -81,7 +81,7 @@ input[type=submit] {
 
     .GiftInvite {
         flex-direction: column;
-        align-items: center;
+        align-items: var(--align-items);
     }
 
     .InviteBubble {

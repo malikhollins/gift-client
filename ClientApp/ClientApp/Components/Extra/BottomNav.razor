@@ -1,5 +1,6 @@
 <div class="bottomNav">
 
+<<<<<<< Updated upstream
     <div class="backToHomepage">
         <a class="backbutton" href="/giftsFor">
             <img src="/Images/backhome.png" asp-append-version="true" width="50" />
@@ -11,5 +12,26 @@
     </div> <!-- end plusCreateHouse -->
 
     <div class="profileButton"> <a class="profile" href="/invite"> </a> </div> <!-- end profileButton -->
+=======
+    <div class="back">
+        @if (CanGoBack)
+        {
+                <a class="back" href="/giftsFor">
+                    <img src="/Images/arrow_back_64.png" asp-append-version="true" width="24" />
+                </a>
+        }
+    </div> 
 
-</div> <!-- end bottom nav -->
+    <div class="plusCreateHouse">
+        <ShowModal OnCloseCallback="OnCreateClosed">
+            <img src="/Images/add_64.png" asp-append-version="true" width="24" height="24" />
+        </ShowModal> 
+    </div> 
+
+    <div class="profile"> 
+         <img src="Images/account_circle_64.png" asp-append-version="true" width="24" height="24"/>     
+    </div> 
+
+>>>>>>> Stashed changes
+
+</div> 

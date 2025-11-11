@@ -1,10 +1,24 @@
 .page {
+<<<<<<< Updated upstream
     position: relative;
     display: flex;
     scrollbar-color: grey black;
+=======
+    display: var(--display);
+    height: 100%;
+    width: 100%;
+>>>>>>> Stashed changes
 }
 
 main {
     flex: 1;
+<<<<<<< Updated upstream
     min-width: 0;
+=======
+    display: var(--display);
+    height: 100%;
+    height: 100%;
+    flex-direction: column;
+    flex-flow: column nowrap;
+>>>>>>> Stashed changes
 }

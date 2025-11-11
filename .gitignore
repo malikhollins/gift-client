@@ -401,3 +401,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/ClientApp/ClientApp/Components/Pages/Homepage.razor.css

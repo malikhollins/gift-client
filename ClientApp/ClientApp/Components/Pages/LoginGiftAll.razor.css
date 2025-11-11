@@ -1,17 +1,28 @@
 ﻿* {
+<<<<<<< Updated upstream:ClientApp/ClientApp/Components/Pages/LoginGiftAll.razor.css
     margin: 0 auto;
     text-align: center;
     font-family: 'Courier New';
     border-radius: 12px;
+=======
+    text-align: var(--text-align);
+    font-family: var(--font-family);
+    border-radius: var(--border-radius);
+>>>>>>> Stashed changes:ClientApp/ClientApp/Components/Pages/Login.razor.css
 }
 
 .GiftAllLogin {
     border: 1px solid black;
     width: 100%;
+<<<<<<< Updated upstream:ClientApp/ClientApp/Components/Pages/LoginGiftAll.razor.css
     height: 630px;
     display: flex;
+=======
+    height: 100%;
+    display: var(--display);
+>>>>>>> Stashed changes:ClientApp/ClientApp/Components/Pages/Login.razor.css
     justify-content: center;
-    align-items: center;
+    align-items: var(--align-items);
 }
 
 .titlePage {

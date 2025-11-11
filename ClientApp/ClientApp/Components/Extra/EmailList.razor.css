@@ -1,8 +1,8 @@
 * {
-    margin: 0 auto;
+    margin: var(--margin);
     box-sizing: border-box;
-    border-radius: 12px;
-    color: black;
+    border-radius: var(--border-radius);
+    color: var(--color);
 }
 input {
     width: 50%;

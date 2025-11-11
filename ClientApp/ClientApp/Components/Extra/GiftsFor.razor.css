@@ -1,6 +1,6 @@
 #GiftsFor {
     width: 45%;
-    display: flex;
+    display: var(--display);
 }
 
 #GiftTitle {

@@ -1,8 +1,13 @@
 #Home {
+<<<<<<< Updated upstream
     width: 46.6%;
     margin: 1%;
     overflow-x: hidden !important;
     overflow-y: auto !important;
+=======
+    margin: 1vh 1vw 1vw 1vh;
+    font-family: var(--font-family);
+>>>>>>> Stashed changes
 }
 
 #HomeTitle {

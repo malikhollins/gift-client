@@ -1,9 +1,17 @@
 ﻿* {
-    margin: 0 auto;
-    border-radius: 12px;
-    color: black;
+    margin: var(--margin);
+    border-radius: var(--border-radius);
+    color: var(--color);
 }
 
+<<<<<<< Updated upstream:ClientApp/ClientApp/Components/Pages/CreateHome.razor.css
+=======
+
+.modal-backdrop, .modal-backdrop.show, HomeCreate {
+z-index: 0 !important;
+}
+
+>>>>>>> Stashed changes:ClientApp/ClientApp/Components/Extra/CreateHome.razor.css
 .HomeCreate {
     margin-top: 2%;
     width: 100%;
@@ -13,9 +21,9 @@
 .CreateBubble {
     padding-top: 1%;
     border-radius: 50px 15px 50px 50px;
-    display: flex;
+    display: var(--display);
     flex-direction: column;
-    align-items: center;
+    align-items: var(--align-items);
     position: relative;
 }
 
@@ -28,7 +36,6 @@ h1 {
     position: absolute;
     right: 2%;
     top: -1%;
-    color: #AB5A5A;
     font-size: 40px;
 }
 
@@ -51,26 +58,40 @@ label {
 }
 
 button {
-    background-color: #AB5A5A;
     border: none;
     padding: 5px;
 }
 
+<<<<<<< Updated upstream:ClientApp/ClientApp/Components/Pages/CreateHome.razor.css
+=======
+.invited-users-container {
+    margin: 10px;
+    overflow-y: auto;
+    height: 10vh;
+}
+
+.invite-users-group {
+    margin: 10px
+}
+
+.sortable-list-wrapper {
+    display: var(--display);
+}
+
+>>>>>>> Stashed changes:ClientApp/ClientApp/Components/Extra/CreateHome.razor.css
 #submit, #submit:hover, #submit:active {
     width: 55%;
-    background-color: #AB5A5A;
-    color: black;
     padding: 10px;
     margin: 5% 20% 5%;
 }
-
-
-/* responsive */
-
-@media only screen and (max-width: 700px) {
-    .HomeCreate {
+    #submit, #submit:hover, #submit:active, button {
+        background-color: #AB5A5A;
+    }
+    /* responsive */
+    @media only screen and (max-width: 700px) {
+        .HomeCreate {
         flex-direction: column;
-        align-items: center;
+        align-items: var(--align-items);
     }
 
     .CreateBubble {

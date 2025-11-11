@@ -1,10 +1,10 @@
 ﻿* {
-    margin: 0 auto;
+    margin: var(--margin);
 }
 
 #mainNav h1, ul {
     margin-top: 1%;
-    text-align: center;
+    text-align: var(--text-align);
     border: 5px solid black;
     border-radius: 20px;
     width: 25%;
@@ -12,7 +12,6 @@
 }
 
 #mainNav h1 {
-    color: black;
     width: 44%;
 }
 
@@ -23,5 +22,7 @@
     #mainNav ul li a {
         text-decoration: none;
         font-style: italic;
-        color: black;
+    }
+    #mainNav h1, #mainNav ul li a {
+        color: var(--color);
     }

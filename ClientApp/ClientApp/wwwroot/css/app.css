@@ -1,18 +1,33 @@
 ﻿* {
-    box-sizing: border-box;
+    --margin: 0 auto;
+    --box-sizing: border-box;
+    --border-radius: 12px;
+    --color: black;
 }
 
-html, body {
+html, body, #app {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+<<<<<<< Updated upstream
+=======
+    height: 100%;
+    width: 100%;
 }
 
 a, .btn-link {
-    color: black;
+    color: var(--color);
+>>>>>>> Stashed changes
+}
+
+:root {
+    --background-color: rgb(171, 90, 90);
+    --font-family: 'Courier New';
+    --text-align: center;
+    --display: flex;
+    --align-items: center;
 }
 
 /* EditForm input[type=text] */
 #EmailLabel, #HouseNameLabel, input[type=text], input[type=email] {
-    border-radius: 12px;
     background-color: #848484;
     border: none;
     width: 99%;

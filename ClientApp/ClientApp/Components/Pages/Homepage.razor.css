@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 * {
     margin: 0 auto;
     font-family: 'Courier New';
@@ -6,15 +7,32 @@
 
 #HomepageGiftAll {
     min-height: 100%;
+=======
+
+.textContainer {
+    margin: auto;
+}
+
+.text {
+    align-content: var(--align-content);
+}
+.text, .createTooltip {
+    text-align: var(--text-align);
+}
+#HomepageGiftAll {
+    height: 100%;
+>>>>>>> Stashed changes
 }
 
 #GiftAppHome {
     width: 100%;
-    display: flex;
     flex-flow: row wrap;
 }
 
+#HomepageGiftAll, #GiftAppHome {
+     display: var(--display);
+}
+
 .createTooltip {
-    text-align: center;
-    font-weight: 900;
+     font-weight: 900;
 }

@@ -1,6 +1,7 @@
 @page "/homepage"
 
 <div id="HomepageGiftAll"> 
+<<<<<<< Updated upstream
 
     <h1 class="createTooltip"> GIFT ALL </h1> <!-- hidden after #houses>1 | Change to: "Click the plus button below to create a house!" for new users -->
     <div id="GiftAppHome">
@@ -15,6 +16,24 @@
     <div class="footer">
         <BottomNav />
     </div> <!-- end footer-->
+=======
+    @if (HasNoHouses)
+    {
+        <div class="textContainer">
+            <p class="text">You have not been invited yet, or created any households </p>
+            <p class="text"> <ShowModal> Click here </ShowModal> to create a household! </p>
+        </div> <!-- can the ShowModal cover the whole bottom text? Users routinely will click and get mad if it doesnt work where they 'expect' it to-->
+    }
+    else
+    {
+        <div id="GiftAppHome">
+            @foreach (var house in Houses)
+            {
+                <HouseCard Model="@house"/>
+            }
+        </div> <!-- end GiftAppHome-->
+    }
+>>>>>>> Stashed changes
 
 </div> <!-- end homepageGiftAll -->
 
