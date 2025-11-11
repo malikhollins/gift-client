@@ -20,4 +20,4 @@
 
 </div> <!-- end homepageGiftAll -->
 
-<BottomNav />
+<BottomNav OnCreateClosed="@(async () => await RefreshHousesAsync())" />

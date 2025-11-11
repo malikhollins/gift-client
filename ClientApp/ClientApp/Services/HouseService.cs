@@ -4,9 +4,11 @@ using ClientApp.Utils;
 using Cysharp.Web;
 using Models;
 using Newtonsoft.Json;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Web;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ClientApp.Services
 {
@@ -40,8 +42,8 @@ namespace ClientApp.Services
         public async Task<House> CreateHouseAsync( CreateHouseRequest createHouseRequest )
         {
             HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
-            var uri = WebSerializer.ToQueryString("$/api/House/create/", createHouseRequest);
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
+            var uri = "api/House/create";
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync( uri, createHouseRequest);
             return await response.DeserializeAsync<House>() ?? new House();
         }
     }

@@ -12,8 +12,11 @@ namespace ClientApp.Components.Pages
         public bool HasNoHouses => (Houses?.Count() ?? 0 ) == 0;
         protected override async Task OnInitializedAsync()
         {
-            Houses = await HouseService.GetHousesAsync();
+            await RefreshHousesAsync();
             await base.OnInitializedAsync();
         }
+
+        private async Task RefreshHousesAsync() => 
+            Houses = await HouseService.GetHousesAsync();
     }
 }
