@@ -1,0 +1,34 @@
+﻿* {
+    text-align: var(--text-align);
+    font-family: var(--font-family);
+    border-radius: var(--border-radius);
+}
+
+body {
+    height: 100%;
+}
+
+.GiftAllLogin {
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    display: var(--display);
+    justify-content: center;
+    align-items: var(--align-items);
+}
+
+.titlePage {
+    width: 75%;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.giftLogin {
+    margin-top: 5px;
+    padding: 7px;
+}
+    .giftLogin a {
+        text-decoration: none;
+    }

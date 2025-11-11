@@ -8,6 +8,7 @@
 html, body, #app {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
     height: 100%;
     width: 100%;
@@ -18,6 +19,16 @@ a, .btn-link {
 >>>>>>> Stashed changes
 }
 
+=======
+    height: 100%;
+    width: 100%;
+}
+
+a, .btn-link {
+    color: var(--color);
+}
+
+>>>>>>> Stashed changes
 :root {
     --background-color: rgb(171, 90, 90);
     --font-family: 'Courier New';

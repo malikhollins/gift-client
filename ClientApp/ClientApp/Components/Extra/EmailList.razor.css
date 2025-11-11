@@ -3,10 +3,13 @@
     box-sizing: border-box;
     border-radius: var(--border-radius);
     color: var(--color);
+<<<<<<< Updated upstream
 }
 input {
     width: 50%;
     margin-left: 10px;
+=======
+>>>>>>> Stashed changes
 }
 
 #EmailList {
