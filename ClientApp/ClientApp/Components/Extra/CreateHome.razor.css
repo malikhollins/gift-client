@@ -4,7 +4,6 @@
     color: black;
 }
 
-
 .modal-backdrop {
     z-index: 0 !important;
 }
@@ -12,7 +11,6 @@
 .modal-backdrop.show {
     z-index: 0 !important;
 }
-
 
 .HomeCreate {
     z-index: 0;
@@ -88,7 +86,6 @@ button {
     padding: 10px;
     margin: 5% 20% 5%;
 }
-
 
 /* responsive */
 

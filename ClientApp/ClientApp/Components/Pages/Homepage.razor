@@ -17,7 +17,6 @@
             }
         </div> <!-- end GiftAppHome-->
     }
-
 </div> <!-- end homepageGiftAll -->
 
-<BottomNav OnCreateClosed="@(async () => await RefreshHousesAsync())" />
+<@BottomNav OnCreateClosed="@(async () => await RefreshHousesAsync())" />

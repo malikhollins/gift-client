@@ -8,6 +8,7 @@
 #EmailList {
     padding: 10px;
     font-size: 22px;
+    background-color: #848484;
 }
 
 .invited-users-header {
@@ -17,8 +18,4 @@
 
 .invited-users-container {
     background-color: #AB5A5A;
-}
-
-#EmailList {
-    background-color: #848484;
 }
