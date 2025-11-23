@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using ClientApp.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace ClientApp.Components.Extra
 {
     public partial class BottomNav
     {
-        [Parameter] public bool CanGoBack { get; set; } = false;
-
-        [Parameter] public EventCallback OnCreateClosed { get; set; }
+        [Parameter] public string? GoBackUrl { get; set; }
+        [Parameter] public CenterModalParameters CenterModalParameters { get; set; } = default!;
     }
 }

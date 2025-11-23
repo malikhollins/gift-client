@@ -5,7 +5,7 @@
     {
         <div class="textContainer">
             <p class="text">You have not been addded to or created any households </p>
-            <p class="text"> <ShowModal> click here </ShowModal> to create a household! </p>
+            <p class="text"> <UniversalModal ModalParameters="_centerModalParameters"> click here </UniversalModal> to create a household! </p>
         </div>
     }
     else
@@ -20,4 +20,4 @@
 
 </div> <!-- end homepageGiftAll -->
 
-<BottomNav OnCreateClosed="@(async () => await RefreshHousesAsync())" />
+<BottomNav CenterModalParameters="_centerModalParameters" />

@@ -1,0 +1,22 @@
+﻿@using System.Runtime.CompilerServices;
+
+<div class="ListCreate">
+    <div class="CreateBubble">
+        <EditForm Model="@ListData" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+
+            <div class="NameButton">
+                <label for="ListNameLabel" style="text-align:left;">
+                    Enter a list name
+                </label>
+                <InputText id="ListNameLabel" @bind-Value="@ListData.Name" placeholder="Name here" />
+                <ValidationMessage For="() => ListData.Name" />
+
+            </div> <!-- end NameButton -->
+
+            <div class="submitButton">
+                <button id="submit" class="btn btn-primary" type="submit"> Create List </button>
+            </div><!-- end submitButton -->
+        </EditForm>
+    </div> <!-- end CreateBubble -->
+</div> <!-- end GiftHouseCreation --> 
