@@ -1,11 +1,5 @@
-* {
-    margin: 0 auto;
-    font-family: 'Courier New';
-    border-radius: 12px;
-}
-
 .bottomNav {
-    height: 5em;
+    height: 10vh;
     background-color: rgb(171, 90, 90);
     width: 100%;
     border-radius: 15px 15px 0 0;
@@ -18,6 +12,7 @@
     display: block;
     width: 24px;
     height: 24px;
+    margin: auto;
 }
 
 a.create {

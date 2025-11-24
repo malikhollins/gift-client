@@ -10,6 +10,9 @@ namespace ClientApp.Components.Pages
         [Inject]
         public ListService ListService { get; set; } = null!;
 
+        [Inject]
+        public NavStateService NavStateService { get; set; } = null!;
+
         [Parameter]
         public int HouseId { get; set; }
 
@@ -24,6 +27,11 @@ namespace ClientApp.Components.Pages
                 typeof(CreateList),
                 "Create New List",
                 EventCallback.Factory.Create(this, RefreshListsAsync));
+            NavStateService.UpdateNavState(new NavState 
+            {
+                GoBackUrl = "/homepage",
+                CenterModalParameters = _centerModalParameters
+            });
         }
 
         private async Task RefreshListsAsync() =>
