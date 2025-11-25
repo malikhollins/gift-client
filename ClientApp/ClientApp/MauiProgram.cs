@@ -38,6 +38,7 @@ namespace ClientApp
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<InviteService>();
             builder.Services.AddSingleton<ListService>();
+            builder.Services.AddSingleton<NavStateService>();
             builder.Services.AddJsInteropExtensions();
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

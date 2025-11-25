@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@using ClientApp.Services
+@inherits LayoutComponentBase
+@implements IDisposable;
 
 <div class="page">
     <main>
@@ -6,10 +8,36 @@
      </main>
 </div>
 
+@if (LastNavState != null)
+{
+    <BottomNav />
+}
+
 <Modal IsServiceModal="true" />
 
 @code {
     [Inject] ModalService ModalService { get; set; } = default!;
+
+    [Inject] NavStateService NavStateService { get; set; } = default!;
+
+    public NavState? LastNavState { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        NavStateService.OnNavStateChanged += OnNavStateChanged;
+        return Task.CompletedTask;
+    }
+
+    public void OnNavStateChanged(object? _, NavState state)
+    {
+        LastNavState = state;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavStateService.OnNavStateChanged -= OnNavStateChanged;
+    }
 }
 
 <!-- note, Modals from BlazorBootstrap can only be used once a page(?)-->

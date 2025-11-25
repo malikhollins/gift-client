@@ -10,9 +10,11 @@
     </div> <!-- hide when not needed? -->
 
     <div class="plusCreateHouse">
-        <UniversalModal ModalParameters="CenterModalParameters">
-            <img src="/Images/add_64.png" asp-append-version="true" width="24" height="24" />
-        </UniversalModal>
+        <CascadingValue Value="@HouseId">
+            <UniversalModal ModalParameters="CenterModalParameters">
+                <img src="/Images/add_64.png" asp-append-version="true" width="24" height="24" />
+            </UniversalModal>
+        </CascadingValue>
     </div> <!-- end plusCreateHouse -->
 
     <div class="profileButton"> 
