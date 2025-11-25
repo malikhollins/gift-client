@@ -18,7 +18,7 @@ a, .btn-link {
 }
 
 /* EditForm input[type=text] */
-#EmailLabel, #HouseNameLabel, input[type=text], input[type=email] {
+    #EmailLabel, #HouseNameLabel, input[type=text], input[type=email] {
     border-radius: 12px;
     background-color: #848484;
     border: none;
