@@ -10,7 +10,9 @@ namespace ClientApp.Components.Extra
     {
         [Inject] private HouseService HouseService { get; set; } = null!;
         [Inject] private UserInfoService UserInfoService { get; set; } = null!;
-        [Parameter] public EventCallback OnSubmitCompleted { get; set; } = default!;
+        
+        [CascadingParameter] public EventCallback OnSubmitCompleted { get; set; } = default!;
+        
         public House HouseData { get; set; } = null!;
         public EditContext? EditContext { get; set; }
 

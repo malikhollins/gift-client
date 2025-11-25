@@ -1,18 +1,18 @@
 <div class="bottomNav">
 
     <div class="backToHomepage">
-        @if (CanGoBack)
+        @if (GoBackUrl != null && GoBackUrl.Any())
         {
-                <a class="backbutton" href="/giftsFor">
+                <a class="backbutton" href="@GoBackUrl">
                     <img src="/Images/arrow_back_64.png" asp-append-version="true" width="24" />
                 </a>
         }
     </div> <!-- hide when not needed? -->
 
     <div class="plusCreateHouse">
-        <ShowModal OnCloseCallback="OnCreateClosed">
+        <UniversalModal ModalParameters="CenterModalParameters">
             <img src="/Images/add_64.png" asp-append-version="true" width="24" height="24" />
-        </ShowModal> 
+        </UniversalModal>
     </div> <!-- end plusCreateHouse -->
 
     <div class="profileButton"> 

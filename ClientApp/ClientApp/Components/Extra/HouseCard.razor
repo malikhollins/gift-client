@@ -1,6 +1,6 @@
 <div id="Home">
     <Card Color="CardColor.Secondary" Id="@Model.Name">
-        <CardLink Style="text-decoration:none; color: white;" To="/homepage">
+        <CardLink Style="text-decoration:none; color: white;" To=@($"/house/{Model.Id}")>
             <CardBody onclick="" Style="min-height: 8em;">
                 <div id="HomeTitle">
                     <CardTitle Size="HeadingSize.H3">@Model.Name</CardTitle>
