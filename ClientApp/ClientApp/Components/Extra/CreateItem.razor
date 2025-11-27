@@ -1,0 +1,44 @@
+﻿@using System.Runtime.CompilerServices;
+
+<div class="ItemCreate">
+    <div class="CreateBubble">
+        <EditForm Model="@ItemData" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+
+            <div class="Button">
+                <label for="ItemNameLabel" style="text-align:left;">
+                    Enter the items name
+                    </label>
+                <InputText id="ItemNameLabel" @bind-Value="@ItemData!.Name" placeholder="Name here" />
+                <ValidationMessage For="() => ItemData.Name" />
+            </div><!-- end NameButton -->
+
+            <div class="Button">
+                <label for="ItemDescriptionLabel" style="text-align:left;">
+                    Enter the items description
+                </label>
+                <InputText id="ItemDescriptionLabel" @bind-Value="@ItemData!.Description" placeholder="Description here" />
+                <ValidationMessage For="() => ItemData.Description" />
+            </div><!-- end NameButton -->
+
+            <div class="Button">
+                <label for="ItemPriceLabel" style="text-align:left;">
+                    Enter the items price
+                </label>
+                <InputNumber id="ItemPriceLabel" @bind-Value="@ItemData!.Price" />
+            </div><!-- end NameButton -->
+
+            <div class="Button">
+                <label for="LinkLabel" style="text-align:left;">
+                    Enter a link for the item
+                </label>
+                <InputText id="LinkLabel" @bind-Value="@ItemData!.Link" placeholder="Link here" />
+                <ValidationMessage For="() => ItemData.Link" />
+            </div><!-- end NameButton -->
+
+            <div class="sub mitButton">
+                <button id="submit" class="btn btn-primary" type="submit"> Create item </button>
+            </div><!-- end submitButton -->
+        </EditForm>
+    </div> <!-- end CreateBubble -->
+ </div> <!-- end GiftHouseCreation --> 

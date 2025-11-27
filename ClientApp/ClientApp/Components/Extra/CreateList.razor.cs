@@ -12,7 +12,7 @@ namespace ClientApp.Components.Extra
         [Inject] ListService ListService { get; set; } = null!;
         [Inject] UserInfoService UserInfoService { get; set; } = null!;
         [CascadingParameter] public EventCallback OnSubmitCompleted { get; set; } = default!;
-        [CascadingParameter] public int HouseId { get; set; } = default!;
+        [CascadingParameter( Name = "HouseId")] public int HouseId { get; set; } = default!;
 
         public UserList ListData { get; set; } = null!;
         public EditContext? EditContext { get; set; }

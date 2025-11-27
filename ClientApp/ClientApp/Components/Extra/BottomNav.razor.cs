@@ -10,6 +10,7 @@ namespace ClientApp.Components.Extra
         [Parameter] public string? GoBackUrl { get; set; }
         [Parameter] public CenterModalParameters CenterModalParameters { get; set; } = default!;
         private int HouseId { get; set; }
+        private int ListId { get; set; }
 
         protected override Task OnInitializedAsync()
         {
@@ -31,6 +32,7 @@ namespace ClientApp.Components.Extra
             GoBackUrl = state.GoBackUrl;
             CenterModalParameters = state.CenterModalParameters;
             HouseId = state.HouseId;
+            ListId = state.ListId;
             StateHasChanged();
         }
 

@@ -9,10 +9,12 @@
     @foreach (var list in _userLists)
     {
         <Card>
-            <CardHeader>@list.Name</CardHeader>
-            <CardBody>
-                @list.Owner
-            </CardBody>
+            <CardLink To=@($"/house/{HouseId}/list/{list.Id}/owner/{list.Owner}")>
+                <CardHeader>@list.Name</CardHeader>
+                <CardBody>
+                    @list.Owner
+                </CardBody>
+            </CardLink>
          </Card>
     }
 </div>

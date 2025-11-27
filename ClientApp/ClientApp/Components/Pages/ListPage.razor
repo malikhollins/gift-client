@@ -1,0 +1,21 @@
+﻿@page "/house/{HouseId:int}/list/{ListId:int}/owner/{UserId:int}"
+
+<h3>ListPage</h3>
+
+@foreach (var item in _itemsInList)
+{
+    <Card>
+        <CardHeader>@item.Name</CardHeader>
+        <CardBody>
+            <p>@item.Description</p>
+        </CardBody>
+        <CardFooter>
+            <p>Price: @item.Price</p>
+            <p>Link: <a href="@item.Link" target="_blank">@item.Link</a></p>
+        </CardFooter>
+    </Card>
+}
+
+@code {
+
+}
