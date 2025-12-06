@@ -1,0 +1,11 @@
+﻿<div id="GiftItemEdits">
+    <div class="FavoriteItem"><Button @onclick="async () => await EditItemType(EditType.Favorite)" > Favorite </Button></div>
+    <div class="UpdateBuyer"> <Button @onclick="async () => await EditItemType(EditType.UpdateBuyer)"> Buyer </Button></div>
+    <CascadingValue Value="@ItemData.Id" Name="ItemId">
+        <CascadingValue Value="@ListId" Name="ListId">
+            <UniversalModal ModalParameters="ModalParameters">
+                <div class="Modify"><Button> Modify Button </Button></div>
+            </UniversalModal>
+        </CascadingValue>
+    </CascadingValue>
+</div>
