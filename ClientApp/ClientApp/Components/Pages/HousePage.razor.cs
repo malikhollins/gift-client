@@ -52,7 +52,7 @@ namespace ClientApp.Components.Pages
 
             _hubConnection.On("NotifyListAdded", (object o) => 
             {
-                if (o is UserList list)
+                if (o is UserList list && !_userLists.Any(otherList => list.Id == otherList.Id))
                 {
                     _userLists.Add(list);
                     StateHasChanged();
