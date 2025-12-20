@@ -1,22 +1,10 @@
 ﻿@page "/house/{HouseId:int}/list/{ListId:int}/owner/{UserId:int}"
 
-<h3>ListPage</h3>
-
-@foreach (var item in _itemsInList)
-{
-    <Card>
-        <CardHeader>@item.Name</CardHeader>
-        <CardBody>
-            <p>@item.Description</p>
-            <ItemButtons ItemData="item" ListId="@ListId" />
-        </CardBody>
-        <CardFooter>
-            <p>Price: @item.Price</p>
-            <p>Link: <a href="@item.Link" target="_blank">@item.Link</a></p>
-        </CardFooter>
-    </Card>
-}
-
-@code {
-
-}
+<LoadingIndicator IsLoading="@_isLoading">
+    <div class="wrapper">
+        @foreach (var item in _itemsInList)
+        {
+            <ItemCard Model="item" ListId="ListId" />
+        }
+    </div>
+</LoadingIndicator>

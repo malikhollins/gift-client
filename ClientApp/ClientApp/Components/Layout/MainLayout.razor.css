@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "Overused Grotesk";
+    src: url('https://raw.githubusercontent.com/RandomMaerks/Overused-Grotesk/master/fonts/variable/OverusedGroteskRoman-VF.ttf');
+    font-weight: 300 900;
+}
+
+* {
+    text-align: center;
+    font-family: 'Overused Grotesk';
+}
+
 .page {
     display: flex;
     height: 90vh;

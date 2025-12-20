@@ -1,20 +1,14 @@
 ﻿@page "/house/{HouseId:int}"
 
-<div id="HousePage">
-    @if (!_userLists.Any())
-    {
-       <p>No created lists</p>
-    }
-
-    @foreach (var list in _userLists)
-    {
-        <Card>
-            <CardLink To=@($"/house/{HouseId}/list/{list.Id}/owner/{list.Owner}")>
-                <CardHeader>@list.Name</CardHeader>
-                <CardBody>
-                    @list.Owner
-                </CardBody>
-            </CardLink>
-         </Card>
-    }
-</div>
+<LoadingIndicator IsLoading="@_isLoading">
+    <div id="HousePage">
+        @if (!_userLists.Any())
+        {
+            <p>No created lists</p>
+        }
+        @foreach (var list in _userLists)
+        {
+            <ListCard Model="list" HouseId="HouseId" />
+        }
+    </div>
+</LoadingIndicator>

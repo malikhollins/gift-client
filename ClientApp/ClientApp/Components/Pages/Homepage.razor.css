@@ -1,29 +1,8 @@
-* {
-    font-family: 'Courier New';
-    border-radius: 12px;
-}
-
-.textContainer {
-    margin: auto;
-}
-
-    .text {
-    align-content: center;
-    text-align: center;
-}
-
 #HomepageGiftAll {
     display: flex;
-    height: 100%;
 }
 
 #GiftAppHome {
-    width: 100%;
     display: flex;
-    flex-flow: row wrap;
-}
-
-.createTooltip {
-    text-align: center;
-    font-weight: 900;
+    flex-flow: wrap;
 }

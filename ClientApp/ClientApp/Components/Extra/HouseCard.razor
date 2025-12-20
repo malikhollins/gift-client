@@ -1,10 +1,9 @@
 <div id="Home">
-    <Card Color="CardColor.Secondary" Id="@Model.Name">
+    <Card Id="@Model.Name">
         <CardLink Style="text-decoration:none; color: white;" To=@($"/house/{Model.Id}")>
-            <CardBody onclick="" Style="min-height: 8em;">
-                <div id="HomeTitle">
-                    <CardTitle Size="HeadingSize.H3">@Model.Name</CardTitle>
-                </div> <!-- end HomeTitle-->
+            <CardBody>
+                <CardTitle Class="HomeTitle" Size="HeadingSize.H3">@Model.Name</CardTitle>
+                <CardSubTitle Class="footer-text">Last recently edited by XYZ</CardSubTitle>
             </CardBody>
         </CardLink>
     </Card>
