@@ -1,0 +1,13 @@
+﻿.card-wrapper {
+    width: var(--card-width);
+    margin: var(--card-margin);
+    text-align: left;
+}
+
+::deep .text-override {
+    color: var(--card-text-color);
+}
+
+::deep .link {
+    text-decoration: none;
+}

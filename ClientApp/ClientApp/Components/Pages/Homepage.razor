@@ -1,5 +1,6 @@
 @page "/homepage"
 
+<LoadingIndicator IsLoading="@_isLoading">
 <div id="HomepageGiftAll"> 
     @if (HasNoHouses)
     {
@@ -18,3 +19,4 @@
         </div> <!-- end GiftAppHome-->
     }
 </div> <!-- end homepageGiftAll -->
+</LoadingIndicator>

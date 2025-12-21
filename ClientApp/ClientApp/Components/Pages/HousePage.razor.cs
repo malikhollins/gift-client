@@ -26,8 +26,12 @@ namespace ClientApp.Components.Pages
 
         private HubConnection _hubConnection;
 
+        private bool _isLoading;
+
         protected override async Task OnInitializedAsync()
         {
+            _isLoading = true;
+
             _userLists = await ListService.GetListsAsync(HouseId);
             _centerModalParameters = new CenterModalParameters(
                 typeof(CreateList),
@@ -58,6 +62,8 @@ namespace ClientApp.Components.Pages
                     StateHasChanged();
                 }
             });
+
+            _isLoading = false;
         }
 
         private async Task RefreshListsAsync() =>

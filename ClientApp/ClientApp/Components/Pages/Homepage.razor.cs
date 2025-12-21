@@ -14,8 +14,12 @@ namespace ClientApp.Components.Pages
         public bool HasNoHouses => (Houses?.Count() ?? 0 ) == 0;
         private CenterModalParameters _centerModalParameters { get; set; }
 
+        private bool _isLoading { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
+            _isLoading = true;
+
             await RefreshHousesAsync();
             await base.OnInitializedAsync();
 
@@ -27,6 +31,8 @@ namespace ClientApp.Components.Pages
             {
                 CenterModalParameters = _centerModalParameters
             });
+
+            _isLoading = false;
         }
 
         private async Task RefreshHousesAsync() => 

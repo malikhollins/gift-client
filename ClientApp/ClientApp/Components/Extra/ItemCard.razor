@@ -1,0 +1,15 @@
+﻿<div class="card-wrapper"
+    <Card>
+        <CardBody>
+            <CardTitle Class="text-override">@Model.Name</CardTitle>
+            <CardText>
+                <p class="text-description">@Model.Description</p>
+                <p class="text-price">Price: @Model.Price</p>
+                <p class="text-link">Link: <a href="@Model.Link" target="_blank">@Model.Link</a> </p>
+            </CardText>
+        </CardBody>
+        <CardFooter>
+            <ItemButtons ItemData="@Model" ListId="@ListId" />
+        </CardFooter>
+    </Card>
+</div>

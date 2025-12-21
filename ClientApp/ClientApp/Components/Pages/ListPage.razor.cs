@@ -14,13 +14,16 @@ namespace ClientApp.Components.Pages
         [Parameter] public int HouseId { get; set; }
         [Parameter] public int UserId { get; set; }
 
-        private List<Item> _itemsInList = new();
+        private List<Item> _itemsInList = [];
+
+        private bool _isLoading;
 
         protected override async Task OnInitializedAsync()
         {
+            _isLoading = true;
+
             await base.OnInitializedAsync();
 
-            
             await RefreshItemsInList();
 
             CenterModalParameters? param = null;
@@ -33,14 +36,16 @@ namespace ClientApp.Components.Pages
                     OnCloseCallback: EventCallback.Factory.Create(this, RefreshItemsInList)
                 );
             }
-            
-            NavStateService.UpdateNavState(new NavState 
+
+            NavStateService.UpdateNavState(new NavState
             {
                 GoBackUrl = $"/house/{HouseId}",
                 CenterModalParameters = param,
                 HouseId = HouseId,
                 ListId = ListId,
             });
+
+            _isLoading = false;
         }
 
         private async Task RefreshItemsInList() => 

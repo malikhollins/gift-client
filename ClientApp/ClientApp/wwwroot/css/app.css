@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+/* custom variables */
+:root {
+    --card-width: 15vw;
+    --card-margin: 1vh 1vw 1vh 1vw;
+    --card-text-color: plum !important;
+}
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     height: 100%;

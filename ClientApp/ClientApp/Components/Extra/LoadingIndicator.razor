@@ -1,0 +1,17 @@
+﻿@if (IsLoading)
+{
+    if (CustomLoadingContent is null)
+    {
+        <div class="spinner-container">
+            <Spinner />
+        </div>
+    }
+    else
+    {
+        @CustomLoadingContent
+    }
+}
+else
+{
+    @ChildContent
+}

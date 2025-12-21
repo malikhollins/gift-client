@@ -1,7 +1,15 @@
 #Home {
-    margin: 1vh 1vw 1vw 1vh;
+    margin: var(--card-margin);
+    width: var(--card-width);
+    text-align: left;
 }
 
-#HomeTitle {
-    color: plum !important;
+::deep .HomeTitle {
+    color: var(--card-text-color);
+    text-wrap: pretty;
+    text-overflow: ellipsis;
+}
+
+::deep .footer-text {
+    color: var( --card-text-color);
 }
