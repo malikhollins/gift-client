@@ -9,6 +9,13 @@ namespace ClientApp.Services
         {
         }
 
+        public async Task UpdateUserInfo(string name)
+        {
+            var httpClient = _httpClientFactory.CreateClient("base-url");
+            var uri = $"api/User/update/name/{name}";
+            await httpClient.PutAsync(uri, null);
+        }
+
         public async Task<List<User>> BulkGetUsersAsync(string input, CancellationToken cancellationToken = default)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");

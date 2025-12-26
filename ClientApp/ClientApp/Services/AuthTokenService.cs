@@ -37,6 +37,11 @@ namespace ClientApp.Services
                     _tokenExpiry = jwtToken.ValidTo;
                     return result.AccessToken;
                 }
+                else
+                {
+                    await _authTokenStorage.UpdateTokensAsync(null, null);
+                    return null;
+                }
             }
 
             return await _authTokenStorage.GetAuthTokenAsync();
