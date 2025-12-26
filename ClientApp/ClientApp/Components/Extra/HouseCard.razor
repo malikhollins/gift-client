@@ -1,9 +1,8 @@
 <div id="Home">
     <Card Id="@Model.Name">
-        <CardLink Style="text-decoration:none; color: white;" To=@($"/house/{Model.Id}")>
+        <CardLink Class="HomeHouseCards" To=@($"/house/{Model.Id}")>
             <CardBody>
-                <CardTitle Class="HomeTitle" Size="HeadingSize.H3">@Model.Name</CardTitle>
-                <CardSubTitle Class="footer-text">Last recently edited by XYZ</CardSubTitle>
+                <CardTitle Class="HomeHouseTitle" Size="HeadingSize.H3">@Model.Name</CardTitle>
             </CardBody>
         </CardLink>
     </Card>
