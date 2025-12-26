@@ -11,5 +11,6 @@
         public string? Link { get; set; }
         public bool Favorited { get; set; }
         public int Buyer { get; set; }
+        public string? BuyerName { get; set; }
     }
 }
