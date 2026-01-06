@@ -1,5 +1,5 @@
-﻿using BlazorBootstrap;
-using ClientApp.Services;
+﻿using ClientApp.Services;
+using ClientApp.Utils;
 using Microsoft.AspNetCore.Components;
 
 namespace ClientApp.Components.Pages
@@ -8,6 +8,7 @@ namespace ClientApp.Components.Pages
     {
         [Inject] LoginService LoginService { get; set; } = null!;
         [Inject] NavigationManager NavigationManager { get; set; } = null!;
+        [Inject] UserInfoService UserInfoService { get; set; } = null!;
 
         private BlazorBootstrap.Button _loginButton = null!;
 
@@ -24,7 +25,15 @@ namespace ClientApp.Components.Pages
                 bool loggedIn = await LoginService.LoginAsync();
                 if (loggedIn)
                 {
-                    NavigationManager.NavigateTo("/homepage");
+                    var userInfo = UserInfoService.GetUserInfo();
+                    if (userInfo.Name.IsNullOrEmpty())
+                    {
+                        NavigationManager.NavigateTo("/profile");
+                    }
+                    else
+                    {
+                        NavigationManager.NavigateTo("/homepage");
+                    }
                 }
             }
             catch (Exception e)
