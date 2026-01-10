@@ -1,15 +1,17 @@
 #Home {
     margin: var(--card-margin);
-    width: var(--card-width);
-    text-align: left;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-evenly;
 }
 
-::deep .HomeTitle {
+::deep .HomeHouseTitle {
     color: var(--card-text-color);
     text-wrap: pretty;
     text-overflow: ellipsis;
 }
 
-::deep .footer-text {
-    color: var( --card-text-color);
+::deep .HomeHouseCards {
+    text-decoration: none;
 }

@@ -1,8 +1,14 @@
+* {
+    margin: 0 auto;
+}
 #HomepageGiftAll {
+    margin-top: 3%;
     display: flex;
 }
 
 #GiftAppHome {
     display: flex;
-    flex-flow: wrap;
+    width: 100%;
+    flex-flow: row wrap;
+    justify-content: center;
 }

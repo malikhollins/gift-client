@@ -1,5 +1,4 @@
 ﻿.card-wrapper {
-    width: var(--card-width);
     margin: var(--card-margin);
     text-align: left;
 }
