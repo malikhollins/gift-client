@@ -1,5 +1,6 @@
 ﻿using ClientApp.Models;
 using ClientApp.Utils;
+using System.Net.Http.Json;
 
 namespace ClientApp.Services
 {
@@ -9,11 +10,14 @@ namespace ClientApp.Services
         {
         }
 
+        private record NameUpdateRequest(string name);
+
         public async Task UpdateUserInfo(string name)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            var uri = $"api/User/update/name/{name}";
-            await httpClient.PutAsync(uri, null);
+            var uri = $"api/User/update/name?name={Uri.EscapeDataString(name)}";
+            var response = await httpClient.PostAsync(uri, null); 
+            Console.Write(response.ToString());
         }
 
         public async Task<List<User>> BulkGetUsersAsync(string input, CancellationToken cancellationToken = default)
