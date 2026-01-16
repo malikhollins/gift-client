@@ -85,12 +85,16 @@ namespace ClientApp.Services
                 {
                     var handler = new JwtSecurityTokenHandler();
                     var jwtToken = handler.ReadJwtToken( token );
-                    var claims = jwtToken.Claims;
-                    var userFromClaims = GetUserFromClaims( claims );
-                    if (userFromClaims != null )
+
+                    if (jwtToken.ValidTo > DateTime.UtcNow)
                     {
-                        _userInfoService.SetUserInfo(userFromClaims);
-                        return true;
+                        var claims = jwtToken.Claims;
+                        var userFromClaims = GetUserFromClaims(claims);
+                        if (userFromClaims != null && !userFromClaims.Name.IsNullOrEmpty())
+                        {
+                            _userInfoService.SetUserInfo(userFromClaims);
+                            return true;
+                        }
                     }
                 }
 
