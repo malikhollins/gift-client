@@ -1,11 +1,36 @@
 ﻿.card-wrapper {
     margin: var(--card-margin);
-    width: var(--card-width);
+    width: 100%;
     text-align: left;
+    display: flex;
+    flex-flow: column;
+}
+
+.card-body {
+    display: flex;
+}
+
+.text-wrapper {
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
 }
 
 ::deep .text-override {
     color: var(--card-text-color);
+}
+
+.init-icon {
+    display: flex;
+    flex-grow: 1;
+    max-height: 5vh;
+    flex-shrink: 0;
+}
+
+.dropdown {
+    display: flex;
+    flex-grow: 1;
+    max-height: 5vh;
+    flex-shrink: 0;
 }
 
 .text-link {
@@ -20,6 +45,14 @@
 
 }
 
-.text-description {
+.description {
+}
 
+.text-description {
+    word-break: break-word;
+    width: 90vw;
+}
+
+::deep .dropdown-toggle::after {
+    display: none;
 }

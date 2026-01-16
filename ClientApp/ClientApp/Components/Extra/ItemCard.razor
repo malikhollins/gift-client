@@ -1,15 +1,30 @@
-﻿<div class="card-wrapper"
-    <Card>
-        <CardBody>
-            <CardTitle Class="text-override">@Model.Name</CardTitle>
-            <CardText>
-                <p class="text-description">@Model.Description</p>
-                <p class="text-price">Price: @Model.Price</p>
-                <p class="text-link">Link: <a href="@Model.Link" target="_blank">@Model.Link</a> </p>
-            </CardText>
-        </CardBody>
-        <CardFooter>
-            <ItemButtons ItemData="@Model" ListId="@ListId" />
-        </CardFooter>
-    </Card>
+﻿<div class="card-wrapper">
+    <div class="card-body">
+        <div class="init-icon">
+            <Button><Image Src="/images/favorite_64.png"></Image></Button>
+        </div>
+        <div class="text-description">
+            <div class="text-wrapper">
+                <p>@Model.Name</p>
+            </div>
+            <div class="description">
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <div class="dropdown">
+        <Dropdown >
+            <DropdownToggleButton>
+                <Image Src="/images/more_vert_64.png"></Image>
+            </DropdownToggleButton>
+            <DropdownMenu>
+                <DropdownItem>
+                    Edit
+                </DropdownItem>
+                <DropdownItem>
+                    Delete
+                </DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
+        </div>
+    </div>
 </div>
