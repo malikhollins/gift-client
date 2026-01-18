@@ -1,6 +1,11 @@
 ﻿@page "/house/{HouseId:int}/list/{ListId:int}/owner/{UserId:int}"
 
 <LoadingIndicator IsLoading="@_isLoading">
+    <div class="header">
+        <div class="name">
+            <h2>List Name</h2>
+        </div>
+    </div>
     <div class="wrapper">
         @foreach (var item in _itemsInList)
         {
