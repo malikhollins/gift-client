@@ -10,6 +10,7 @@ namespace ClientApp.Components.Extra
         [Parameter] public Item Item { get; set; } = null!;
         [Parameter] public int ListId { get; set; }
         [Parameter] public bool CanToggle { get; set; } = true;
+        [Parameter] public Action<bool> OnFavoriteToggled { get; set; } = null!;
         [Inject] private ListService ListService { get; set; } = null!;
         [Inject] private UserInfoService UserInfoService { get; set; } = null!;
 
@@ -40,6 +41,7 @@ namespace ClientApp.Components.Extra
             if ( response.IsSuccessStatusCode )
             {
                 isFavorited = !isFavorited;
+                OnFavoriteToggled.Invoke(isFavorited);
                 StateHasChanged();
             }
         }

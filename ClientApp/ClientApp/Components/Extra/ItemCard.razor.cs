@@ -31,6 +31,7 @@ namespace ClientApp.Components.Extra
         private CenterModalParameters? editModalParameters;
         private CenterModalParameters? deleteModalParameters;
         private bool userOwnsItem;
+        private Action<bool> onItemfavorited;
 
         protected override void OnParametersSet()
         {
@@ -40,6 +41,12 @@ namespace ClientApp.Components.Extra
             OnItemEdited = item =>
             {
                 Model = item;
+                StateHasChanged();
+            };
+
+            onItemfavorited = isFavorited =>
+            {
+                Model.Favorite = isFavorited;
                 StateHasChanged();
             };
 

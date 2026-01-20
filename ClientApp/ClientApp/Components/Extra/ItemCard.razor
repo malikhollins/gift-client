@@ -3,7 +3,7 @@
         <div class="init-icon">
             @if (userOwnsItem)
             {
-                <Favorite ListId="@ListId" Item="@Model" />
+                <Favorite OnFavoriteToggled="@onItemfavorited" ListId="@ListId" Item="@Model" />
             }
             else
             {
