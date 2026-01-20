@@ -1,13 +1,15 @@
-﻿@if ( ModalParameters != null)
+﻿@if (ModalParameters != null)
 {
     <Modal @ref="modal" IsVerticallyCentered="true" Size="ModalSize.Large" Title="@ModalParameters.Title">
         <BodyTemplate>
             <CascadingValue Value="OnSubmitCompleted">
-                <DynamicComponent Type="@ModalParameters.TypeOfModal" />
+                <CascadingValue Value="OnClose" Name="OnClose">
+                    <DynamicComponent Type="@ModalParameters.TypeOfModal" />
+                </CascadingValue>
             </CascadingValue>
         </BodyTemplate>
     </Modal>
-    
+
     @if (ChildContent != null)
     {
         <span onclick="@ShowModalAsync"> @ChildContent</span>

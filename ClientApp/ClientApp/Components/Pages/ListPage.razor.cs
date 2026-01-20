@@ -48,6 +48,12 @@ namespace ClientApp.Components.Pages
             _isLoading = false;
         }
 
+        private void OnItemDeleted( int id )
+        {
+            _itemsInList.RemoveAll( item => item.Id == id );
+            StateHasChanged();
+        }
+
         private async Task RefreshItemsInList() => 
            _itemsInList = await ListService.GetItemsAsync(ListId);
     }

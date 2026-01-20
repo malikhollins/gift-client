@@ -46,10 +46,10 @@ namespace ClientApp.Components.Extra
                         ItemId = ItemData.Id,
                         ListId = ListId,
                         UserId = user.Id,
-                        Favorited = !ItemData.Favorited
+                        Favorited = !ItemData.Favorite
                     };
                     await ListService.UpdateFavoriteInList(request);
-                    ItemData.Favorited = !ItemData.Favorited;
+                    ItemData.Favorite = !ItemData.Favorite;
                     break;
                 case EditType.UpdateBuyer:
                     var updateBuyerRequest = new UpdateBuyerInListRequest

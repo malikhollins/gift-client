@@ -9,7 +9,11 @@
     <div class="wrapper">
         @foreach (var item in _itemsInList)
         {
-            <ItemCard Model="item" ListId="ListId" />
+            <ItemCard 
+                Model="item" 
+                OwnerId="UserId" 
+                ListId="ListId" 
+                OnItemDeleted="@this.OnItemDeleted" />
         }
     </div>
 </LoadingIndicator>

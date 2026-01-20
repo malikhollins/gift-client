@@ -1,0 +1,10 @@
+﻿@if (!CanToggle)
+{
+    <Image IsResponsive="false" Src="@(isFavorited ? "/images/favorite_64dp_filled.png" : "/images/favorite_64.png")" />
+    return;
+}
+
+<Button @onclick=@( async () => await ToggleFavoriteAsync() )>
+    <Image IsResponsive="false" Src="@(isFavorited ? "/images/favorite_64dp_filled.png" : "/Images/favorite_64.png")" />
+</Button>
+

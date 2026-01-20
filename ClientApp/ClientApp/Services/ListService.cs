@@ -35,22 +35,22 @@ namespace ClientApp.Services
             await httpClient.PostAsJsonAsync("/api/List/create/item", createItemRequest);
         }
 
-        public async Task UpdateBuyerAsync( UpdateBuyerInListRequest updateBuyerInListRequest )
+        public async Task<HttpResponseMessage> UpdateBuyerAsync( UpdateBuyerInListRequest updateBuyerInListRequest )
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            await httpClient.PutAsJsonAsync("/api/List/update/item/buyer", updateBuyerInListRequest);
+            return await httpClient.PostAsJsonAsync("/api/List/update/item/buyer", updateBuyerInListRequest);
         }
 
-        public async Task UpdateFavoriteInList( UpdateFavoriteItem updateFavoriteItem )
+        public async Task<HttpResponseMessage> UpdateFavoriteInList( UpdateFavoriteItem updateFavoriteItem )
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            await httpClient.PutAsJsonAsync("/api/List/update/item/favorite", updateFavoriteItem);
+            return await httpClient.PostAsJsonAsync("/api/List/update/item/favorite", updateFavoriteItem);
         }
 
-        public async Task UpdateItemAsync( UpdateItemRequest updateItemRequest)
+        public async Task<HttpResponseMessage> UpdateItemAsync( UpdateItemRequest updateItemRequest)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            await httpClient.PutAsJsonAsync("/api/List/update/item", updateItemRequest);
+            return await httpClient.PostAsJsonAsync("/api/List/update/item", updateItemRequest);
         }
         
         public async Task DeleteListAsync( int listId )
@@ -59,10 +59,10 @@ namespace ClientApp.Services
             await httpClient.DeleteAsync($"/api/List/delete/list/{listId}");
         }
 
-        public async Task DeleteItemAsync(int listId, int itemId)
+        public async Task<HttpResponseMessage> DeleteItemAsync(int listId, int itemId)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            await httpClient.DeleteAsync($"/api/List/delete/item/{listId}/{itemId}");
+            return await httpClient.DeleteAsync($"/api/List/delete/item/{listId}/{itemId}");
         }
 
         public async Task<List<Item>> GetItemsAsync(int listId)

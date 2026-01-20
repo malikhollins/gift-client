@@ -24,6 +24,8 @@
     flex-grow: 1;
     max-height: 5vh;
     flex-shrink: 0;
+    width: 5vw;
+    min-width: 86px;
 }
 
 .dropdown {
@@ -31,6 +33,8 @@
     flex-grow: 1;
     max-height: 5vh;
     flex-shrink: 0;
+    width: 5vw;
+    min-width: 64px;
 }
 
 .text-link {
