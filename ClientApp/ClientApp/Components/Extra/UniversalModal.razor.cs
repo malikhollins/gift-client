@@ -13,8 +13,9 @@ namespace ClientApp.Components.Extra
         [Parameter] public CenterModalParameters? ModalParameters { get; set; }
 
         public EventCallback OnSubmitCompleted { get; set; }
+        public EventCallback OnClose { get; set; }
 
-        private Task ShowModalAsync() => modal.ShowAsync();
+        public Task ShowModalAsync() => modal.ShowAsync();
 
         protected override Task OnParametersSetAsync()
         {
@@ -24,6 +25,11 @@ namespace ClientApp.Components.Extra
                 if ( ModalParameters is null)
                     return;
                 await ModalParameters.OnCloseCallback.InvokeAsync(null);
+            });
+
+            OnClose = EventCallback.Factory.Create(this, async () => 
+            {
+                await modal.HideAsync();
             });
 
             return base.OnParametersSetAsync();

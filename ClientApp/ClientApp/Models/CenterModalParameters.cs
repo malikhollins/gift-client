@@ -2,5 +2,5 @@
 
 namespace ClientApp.Models
 {
-    public record CenterModalParameters( Type TypeOfModal, string Title, EventCallback OnCloseCallback );
+    public record CenterModalParameters( Type TypeOfModal, string Title, EventCallback OnCloseCallback, EventCallback OnCancelCallback = default );
 }

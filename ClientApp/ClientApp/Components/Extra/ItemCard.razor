@@ -1,7 +1,14 @@
 ﻿<div class="card-wrapper">
     <div class="card-body">
         <div class="init-icon">
-            <Button><Image Src="/images/favorite_64.png"></Image></Button>
+            @if (userOwnsItem)
+            {
+                <Favorite OnFavoriteToggled="@onItemfavorited" ListId="@ListId" Item="@Model" />
+            }
+            else
+            {
+                <Buyer ListId="@ListId" Item="@Model" />
+            }
         </div>
         <div class="text-description">
             <div class="text-wrapper">
@@ -12,19 +19,37 @@
             </div>
         </div>
         <div class="dropdown">
-        <Dropdown >
-            <DropdownToggleButton>
-                <Image Src="/images/more_vert_64.png"></Image>
-            </DropdownToggleButton>
-            <DropdownMenu>
-                <DropdownItem>
-                    Edit
-                </DropdownItem>
-                <DropdownItem>
-                    Delete
-                </DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
+            @if (userOwnsItem)
+            {
+                <CascadingValue Value="@Model.Id" Name="ItemId">
+                    <CascadingValue Value="@ListId" Name="ListId">
+                        <CascadingValue Value="@Model">
+                            <CascadingValue Value="@OnItemEdited">
+                                <UniversalModal @ref="@editModal" ModalParameters="@editModalParameters" />
+                                <UniversalModal @ref="@deleteModal" ModalParameters="@deleteModalParameters" />
+                            </CascadingValue>
+                        </CascadingValue>
+                    </CascadingValue>
+                </CascadingValue>
+                <Dropdown>
+                    <DropdownToggleButton>
+                        <Image Src="/images/more_vert_64.png"></Image>
+                    </DropdownToggleButton>
+                    <DropdownMenu>
+                        <DropdownItem @onclick=@ShowEditModalAsync>
+                            Edit
+                        </DropdownItem>
+                        <DropdownItem @onclick="@ShowDeleteModalAsync">
+                            Delete
+                        </DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+
+            }
+            else
+            {
+                <Favorite ListId="@ListId" Item="@Model" CanToggle="false" />
+            }
         </div>
     </div>
 </div>
