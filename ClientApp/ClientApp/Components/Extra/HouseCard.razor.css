@@ -6,6 +6,24 @@
     align-content: space-evenly;
 }
 
+.HeaderContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+::deep .AddButtonSize {
+    height: 2em;
+    width: 2em;
+}
+
+::deep .HomeCard {
+    padding: 10px;
+}
+
+.HomeHouseText {
+    margin-right: 2vw;
+}
+
 ::deep .HomeHouseTitle {
     color: var(--card-text-color);
     text-wrap: pretty;

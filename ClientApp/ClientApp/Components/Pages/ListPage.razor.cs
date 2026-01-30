@@ -39,7 +39,7 @@ namespace ClientApp.Components.Pages
 
             NavStateService.UpdateNavState(new NavState
             {
-                GoBackUrl = $"/house/{HouseId}",
+                GoBackUrl = $"/homepage",
                 CenterModalParameters = param,
                 HouseId = HouseId,
                 ListId = ListId,
