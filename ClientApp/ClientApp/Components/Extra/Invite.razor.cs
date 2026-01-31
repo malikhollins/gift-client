@@ -16,7 +16,8 @@ namespace ClientApp.Components.Extra
 
         public async Task OnUserInvitedAsync(User user)
         {
-            var response = await InviteService.CreateInvite(user, HouseId);
+            var activeUser = UserInfoService.GetUserInfo();
+            var response = await InviteService.CreateInvite(activeUser!.Id, user, HouseId);
             if (response.IsSuccessStatusCode)
             {
                 InvitedUsers.Add(new HouseInvites

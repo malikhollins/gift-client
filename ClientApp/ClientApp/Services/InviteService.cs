@@ -11,10 +11,10 @@ namespace ClientApp.Services
         {
         }
 
-        public Task<HttpResponseMessage> CreateInvite(User userToInvite, int houseId)
+        public Task<HttpResponseMessage> CreateInvite(int userId, User userToInvite, int houseId)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            return httpClient.PostAsJsonAsync("api/Invite", new { HouseId = houseId, userId = userToInvite.Id });
+            return httpClient.PostAsJsonAsync("api/Invite/create", new CreateInviteRequest { UserId = userId, HouseId = houseId, UserToInvite = userToInvite.Id });
         }
 
         public async Task<List<UserInvites>> GetInvitesForUser( int userId )
