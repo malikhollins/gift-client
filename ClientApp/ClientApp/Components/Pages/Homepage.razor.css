@@ -1,14 +1,20 @@
 * {
     margin: 0 auto;
 }
+
 #HomepageGiftAll {
     margin-top: 3%;
     display: flex;
+    width: 100%;
 }
 
-#GiftAppHome {
-    display: flex;
+.HomeGroup {
+    display: column;
+    columns: 2;
     width: 100%;
-    flex-flow: row wrap;
-    justify-content: center;
+}
+
+::deep .HomeGroup > * {
+    break-inside: avoid;
+    margin-bottom: 2em;
 }
