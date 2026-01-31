@@ -11,10 +11,10 @@ namespace ClientApp.Services
         {
         }
 
-        public Task CreateInvite(User userToInvite, House houseId)
+        public Task<HttpResponseMessage> CreateInvite(User userToInvite, int houseId)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            return httpClient.PostAsJsonAsync("api/Invite", new { houseId = houseId.Id, userId = userToInvite.Id });
+            return httpClient.PostAsJsonAsync("api/Invite", new { HouseId = houseId, userId = userToInvite.Id });
         }
 
         public async Task<List<UserInvites>> GetInvitesForUser( int userId )
@@ -24,7 +24,7 @@ namespace ClientApp.Services
             return await DeserializeResponse.DeserializeAsync<List<UserInvites>>(response) ?? [];
         }
 
-        public Task DeleteInvite(DeleteInviteRequest deleteInviteRequest)
+        public Task<HttpResponseMessage> DeleteInvite(DeleteInviteRequest deleteInviteRequest)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             return httpClient.PostAsJsonAsync("api/Invite/delete", deleteInviteRequest);
