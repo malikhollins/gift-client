@@ -43,7 +43,7 @@ namespace ClientApp.Components.Extra
             if (response.IsSuccessStatusCode)
             {
                 await OnSubmitCompleted.InvokeAsync();
-                OnItemEdited.Invoke(ItemData);
+                OnItemEdited.Invoke(ItemData!);
             }
         }
     }

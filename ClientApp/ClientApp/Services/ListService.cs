@@ -35,13 +35,13 @@ namespace ClientApp.Services
             await httpClient.PostAsJsonAsync("/api/List/create/item", createItemRequest);
         }
 
-        public async Task<HttpResponseMessage> UpdateBuyerAsync( UpdateBuyerInListRequest updateBuyerInListRequest )
+        public async Task<HttpResponseMessage> UpdateBuyerAsync( UpdateBuyerInItemRequest updateBuyerInListRequest )
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             return await httpClient.PostAsJsonAsync("/api/List/update/item/buyer", updateBuyerInListRequest);
         }
 
-        public async Task<HttpResponseMessage> UpdateFavoriteInList( UpdateFavoriteItem updateFavoriteItem )
+        public async Task<HttpResponseMessage> UpdateFavoriteInList( UpdateFavoriteItemRequest updateFavoriteItem )
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             return await httpClient.PostAsJsonAsync("/api/List/update/item/favorite", updateFavoriteItem);

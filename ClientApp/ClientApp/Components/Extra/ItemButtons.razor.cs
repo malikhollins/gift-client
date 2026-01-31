@@ -41,7 +41,7 @@ namespace ClientApp.Components.Extra
             switch (type)
             {
                 case EditType.Favorite:
-                    var request = new UpdateFavoriteItem
+                    var request = new UpdateFavoriteItemRequest
                     {
                         ItemId = ItemData.Id,
                         ListId = ListId,
@@ -52,7 +52,7 @@ namespace ClientApp.Components.Extra
                     ItemData.Favorite = !ItemData.Favorite;
                     break;
                 case EditType.UpdateBuyer:
-                    var updateBuyerRequest = new UpdateBuyerInListRequest
+                    var updateBuyerRequest = new UpdateBuyerInItemRequest
                     {
                         ItemId = ItemData.Id,
                         ListId = ListId,

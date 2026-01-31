@@ -31,9 +31,9 @@ namespace ClientApp.Components.Extra
         private CenterModalParameters? editModalParameters;
         private CenterModalParameters? deleteModalParameters;
         private bool userOwnsItem;
-        private Action<bool> onItemfavorited;
+        private Action<bool>? onItemfavorited;
 
-        protected override void OnParametersSet()
+        protected override void OnInitialized()
         {
             var user = UserInfoService.GetUserInfo();
             userOwnsItem = user == null ? false : user.Id == OwnerId;

@@ -22,9 +22,9 @@ namespace ClientApp.Components.Pages
 
         private List<UserList> _userLists { get; set; } = new();
 
-        private CenterModalParameters _centerModalParameters;
+        private CenterModalParameters? _centerModalParameters;
 
-        private HubConnection _hubConnection;
+        private HubConnection? _hubConnection;
 
         private bool _isLoading;
 
@@ -69,6 +69,6 @@ namespace ClientApp.Components.Pages
         private async Task RefreshListsAsync() =>
             _userLists = await ListService.GetListsAsync(HouseId);
 
-        public ValueTask DisposeAsync() => _hubConnection.DisposeAsync();
+        public ValueTask DisposeAsync() => _hubConnection!.DisposeAsync();
     }
 }

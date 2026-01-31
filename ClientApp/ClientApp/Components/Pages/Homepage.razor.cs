@@ -12,7 +12,7 @@ namespace ClientApp.Components.Pages
         [Inject] NavStateService NavStateService { get; set; } = null!;
         public IEnumerable<House> Houses { get; set; } = null!;
         public bool HasNoHouses => (Houses?.Count() ?? 0 ) == 0;
-        private CenterModalParameters _centerModalParameters { get; set; }
+        private CenterModalParameters? _centerModalParameters { get; set; }
 
         private bool _isLoading { get; set; }
 

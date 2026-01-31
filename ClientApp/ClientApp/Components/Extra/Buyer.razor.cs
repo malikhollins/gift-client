@@ -28,7 +28,7 @@ namespace ClientApp.Components.Extra
                 return;
             }
 
-            var updateBuyerRequest = new UpdateBuyerInListRequest
+            var updateBuyerRequest = new UpdateBuyerInItemRequest
             {
                 ItemId = Item.Id,
                 ListId = ListId,

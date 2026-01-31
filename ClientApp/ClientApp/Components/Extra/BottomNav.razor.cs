@@ -15,7 +15,7 @@ namespace ClientApp.Components.Extra
         protected override Task OnInitializedAsync()
         {
             NavStateService.OnNavStateChanged += NavStateService_OnNavStateChanged;
-            UpdateNavParameters( NavStateService.CurrentState );
+            UpdateNavParameters( NavStateService!.CurrentState! );
             return base.OnInitializedAsync();
         }
 
@@ -30,7 +30,7 @@ namespace ClientApp.Components.Extra
             }
 
             GoBackUrl = state.GoBackUrl;
-            CenterModalParameters = state.CenterModalParameters;
+            CenterModalParameters = state!.CenterModalParameters!;
             HouseId = state.HouseId;
             ListId = state.ListId;
             StateHasChanged();
