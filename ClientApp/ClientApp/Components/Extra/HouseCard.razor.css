@@ -3,7 +3,13 @@
     text-align: center;
     display: flex;
     flex-flow: row wrap;
-    align-content: space-evenly;
+}
+
+.wrapper {
+    margin-top: 3%;
+    display: flex;
+    width: 100%;
+    flex-flow: column wrap;
 }
 
 .HeaderContainer {
@@ -18,6 +24,7 @@
 
 ::deep .HomeCard {
     padding: 10px;
+    min-width: 45vw;
 }
 
 .HomeHouseText {
