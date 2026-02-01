@@ -2,8 +2,15 @@
 @using SharedModels
 <div>
     <span> @Model!.House!.OwnerName invited you to @Model.House.Name </span>
-    <button> Accept </button>
-    <button> Decline </button>
+    @if (_responded)
+    {
+        <span>@_respondedText</span>
+    }
+    else
+    {
+        <button @onclick="@(() => UpdateInviteStatusAsync( accepted: true))"> Accept </button>
+        <button @onclick="@( ()=> UpdateInviteStatusAsync( accepted: false))"> Decline </button>
+    }
 </div>
 
 @code {
@@ -14,7 +21,10 @@
 
     [Parameter] public UserInvites Model { get; set; } = null!;
 
-    public void UpdateInviteStatus(bool accepted)
+    private bool _responded = false;
+    private string _respondedText = string.Empty;
+
+    public async Task UpdateInviteStatusAsync(bool accepted)
     {
         var userId = UserInfoService.GetUserInfo()!.Id;
         var request = new UpdateInviteRequest
@@ -24,6 +34,12 @@
             UserId = userId
 
         };
-        InviteService.RespondToUpdate(request);
+        var response = await InviteService.RespondToUpdate(request);
+        if (response.IsSuccessStatusCode)
+        {
+            _responded = true;
+            _respondedText = accepted ? "Accepted!" : "Declieded!";
+            StateHasChanged();
+        }
     }
 }
