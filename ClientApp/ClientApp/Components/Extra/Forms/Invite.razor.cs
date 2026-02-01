@@ -2,7 +2,7 @@
 using ClientApp.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace ClientApp.Components.Extra
+namespace ClientApp.Components.Extra.Forms
 {
     public partial class Invite
     {

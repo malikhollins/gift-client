@@ -16,9 +16,8 @@
 @code {
 
     [Inject] InviteService InviteService { get; set; } = null!;
-
     [Inject] UserInfoService UserInfoService { get; set; } = null!;
-
+    [Inject] HousePageObserver HousePageObserver { get; set; } = null!;
     [Parameter] public UserInvites Model { get; set; } = null!;
 
     private bool _responded = false;
@@ -37,6 +36,11 @@
         var response = await InviteService.RespondToUpdate(request);
         if (response.IsSuccessStatusCode)
         {
+            if ( accepted )
+            {
+                HousePageObserver.NotifyHouseCreated(Model!.House);
+            }
+
             _responded = true;
             _respondedText = accepted ? "Accepted!" : "Declieded!";
             StateHasChanged();
