@@ -1,20 +1,22 @@
 <div class="GiftInvite">
     <div class="inviteBubble">
-        <a class="bi-x-square-fill" id="CloseInviteBubble" href="/profile"> </a>
-    <h1> Invite User </h1>
-        <form>
-            <div class="InviteEmailList"> 
+        <div class="invite-user-container"
+            <span clas="invite-label">Invite: </span>
+            <div class="InviteEmailList">
                 <EmailList OnUserInvited="@OnUserInvitedAsync" />
             </div> <!-- end InviteEmailList -->
+        </div>
 
-            <input type="submit" value="Invite!" >
-        </form>
-
-        <div>
-            @foreach (var invite in InvitedUsers)
-            {
-                <ManageUser HouseId="HouseId" Model="invite" />
-            }
+        <div class="manage-container"
+            <span class="manage-label">Users invited to home</span>
+            <SortableList Class="list" AllowSorting="false" Context="item" TItem="HouseInvites" Data="InvitedUsers">
+                <ItemTemplate>
+                    <ManageUser HouseId="HouseId" Model="@item" />
+                </ItemTemplate>
+                <EmptyDataTemplate>
+                    <span>You haven't invited any users</span>
+                </EmptyDataTemplate>
+            </SortableList>
         </div>
 
     </div> <!-- end inviteBubble -->

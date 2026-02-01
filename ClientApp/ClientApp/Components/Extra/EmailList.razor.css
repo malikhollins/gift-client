@@ -1,21 +1,10 @@
 * {
-    margin: 0 auto;
     box-sizing: border-box;
-    border-radius: 12px;
     color: black;
 }
 
 #EmailList {
-    padding: 10px;
+    margin: 10px;
     font-size: 22px;
     background-color: #848484;
-}
-
-.invited-users-header {
-    margin: 10px;
-    font-size: 18px;
-}
-
-.invited-users-container {
-    background-color: #AB5A5A;
 }

@@ -4,7 +4,7 @@
         @if (GoBackUrl != null && GoBackUrl.Any())
         {
                 <a class="backbutton" href="@GoBackUrl">
-                    <Icon CustomIconName="fa-solid fa-arrow-left" />
+                <Icon CustomIconName="fa-solid fa-arrow-left" Size="IconSize.x5"/>
                 </a>
         }
     </div> <!-- hide when not needed? -->
@@ -13,14 +13,14 @@
         <CascadingValue Value="@ListId" Name="ListId">
             <CascadingValue Value="@HouseId" Name="HouseId">
                 <UniversalModal ModalParameters="CenterModalParameters">
-                    <Icon CustomIconName="fa-solid fa-plus" />
+                    <Icon CustomIconName="fa-solid fa-plus" Size="IconSize.x5"/>
                 </UniversalModal>
             </CascadingValue>
         </CascadingValue>
     </div> <!-- end plusCreateHouse -->
 
     <div class="profileButton"> 
-        <Icon CustomIconName="fa-regular fa-circle-user" />
+        <Icon CustomIconName="fa-regular fa-circle-user" Size="IconSize.x5"/>
     </div> <!-- end profileButton -->
 
 </div> <!-- end bottom nav -->

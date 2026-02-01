@@ -5,10 +5,9 @@
 
 <div class="InvitesContainer">
     <span> Invites </span>
-    <div>
-        @foreach (var invite in Invites)
-        {
-            <InviteCard Model="invite" /> 
-        }
-    </div>
+    <SortableList AllowSorting="false" Context="item" Data="@Invites" TItem="UserInvites">
+        <ItemTemplate>
+            <InviteCard Model="@item" />
+        </ItemTemplate>
+    </SortableList>
 </div>

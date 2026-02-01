@@ -14,6 +14,12 @@ namespace ClientApp.Components.Extra.Forms
 
         private List<HouseInvites> InvitedUsers { get; set; } = [];
 
+        protected override async Task OnInitializedAsync()
+        {
+            var user = UserInfoService.GetUserInfo();
+            InvitedUsers = await InviteService.GetInvitesForHouse( user!.Id, HouseId);
+        }
+
         public async Task OnUserInvitedAsync(User user)
         {
             var activeUser = UserInfoService.GetUserInfo();
