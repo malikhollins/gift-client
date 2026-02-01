@@ -1,21 +1,21 @@
-@page "/invite"
-
 <div class="GiftInvite">
-
     <div class="inviteBubble">
         <a class="bi-x-square-fill" id="CloseInviteBubble" href="/profile"> </a>
     <h1> Invite User </h1>
         <form>
             <div class="InviteEmailList"> 
-                <EmailList OnUserInvited="OnUserInvited" />
+                <EmailList OnUserInvited="@OnUserInvitedAsync" />
             </div> <!-- end InviteEmailList -->
 
             <input type="submit" value="Invite!" >
         </form>
 
-        <div class="confirmationStatus">
-            <p class="inviteStatus"> ~PendingInvite </p>
-        </div> <!-- end confirmationStatus -->
+        <div>
+            @foreach (var invite in InvitedUsers)
+            {
+                <ManageUser HouseId="HouseId" Model="invite" />
+            }
+        </div>
 
     </div> <!-- end inviteBubble -->
 </div> <!-- end GiftInvite --> 

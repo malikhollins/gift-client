@@ -29,7 +29,7 @@ namespace ClientApp.Components.Extra
                 return;
             }
 
-            var request = new UpdateFavoriteItem
+            var request = new UpdateFavoriteItemRequest
             {
                 ItemId = Item.Id,
                 ListId = ListId,

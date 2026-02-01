@@ -22,9 +22,9 @@ namespace ClientApp.Components.Extra
         protected override void OnInitialized()
         {
             var userInfo = UserInfoService.GetUserInfo();
-            if (userInfo.Name.IsNullOrEmpty())
+            if (userInfo!.Name.IsNullOrEmpty())
             {
-                var mailAddress = new MailAddress(userInfo.Email);
+                var mailAddress = new MailAddress(userInfo!.Email!);
                 UserData.Name = mailAddress.User;
             }
             else
@@ -35,7 +35,7 @@ namespace ClientApp.Components.Extra
 
         public async Task HandleValidSubmit()
         {
-            await UserService.UpdateUserInfo(UserData.Name);
+            await UserService.UpdateUserInfo(UserData!.Name!);
 
             NavigationManager.NavigateTo("/homepage");
         }

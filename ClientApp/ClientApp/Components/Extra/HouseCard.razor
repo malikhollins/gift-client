@@ -6,11 +6,21 @@
             <div class="HeaderContainer">
                 <span class="HomeHouseText">@Model.Name</span>
                 <CascadingValue Value="@Model.Id" Name="HouseId">
-                    <UniversalModal ModalParameters="_createListParameters">
-                        <Button Size="ButtonSize.Small">
-                            <Image Class="AddButtonSize" IsResponsive="true" Src="/images/add_64.png" />
-                        </Button>
-                    </UniversalModal>
+                    <div>
+                        @if (_ownsHouse)
+                        {
+                            <UniversalModal ModalParameters="_manageUsersParameters">
+                                <Button Size="ButtonSize.Small">
+                                    <Image Class="AddButtonSize" IsResponsive="true" Src="/images/person_add_64dp.png" />
+                                </Button>
+                            </UniversalModal>
+                        }
+                        <UniversalModal ModalParameters="_createListParameters">
+                            <Button Size="ButtonSize.Small">
+                                <Image Class="AddButtonSize" IsResponsive="true" Src="/images/add_64.png" />
+                            </Button>
+                        </UniversalModal>
+                    </div>
                 </CascadingValue>
             </div>
         </CardTitle>
@@ -48,16 +58,24 @@
 
     [Inject] public ListService ListService { get; set; } = null!;
 
+    [Inject] public UserInfoService UserInfoService { get; set; } = null!;
+
     private bool _isLoading = true;
 
     private List<UserList> _userLists { get; set; } = new();
 
     private CenterModalParameters? _createListParameters;
 
+    private CenterModalParameters? _manageUsersParameters;
+
+    private bool _ownsHouse = false;
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
+        _ownsHouse = UserInfoService.GetUserInfo()!.Id == Model.Owner;
+        _manageUsersParameters = new CenterModalParameters(typeof(Invite), "Manage Users", EventCallback.Empty);
         _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Factory.Create(this, GetListsAsync));
     }
 

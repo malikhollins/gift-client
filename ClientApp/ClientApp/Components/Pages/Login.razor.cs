@@ -26,7 +26,7 @@ namespace ClientApp.Components.Pages
                 if (loggedIn)
                 {
                     var userInfo = UserInfoService.GetUserInfo();
-                    if (userInfo.Name.IsNullOrEmpty())
+                    if (userInfo!.Name.IsNullOrEmpty())
                     {
                         NavigationManager.NavigateTo("/profile");
                     }

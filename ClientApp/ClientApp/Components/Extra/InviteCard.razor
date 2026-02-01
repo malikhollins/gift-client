@@ -1,0 +1,29 @@
+﻿@using ClientApp.Services
+@using SharedModels
+<div>
+    <span> @Model!.House!.OwnerName invited you to @Model.House.Name </span>
+    <button> Accept </button>
+    <button> Decline </button>
+</div>
+
+@code {
+
+    [Inject] InviteService InviteService { get; set; } = null!;
+
+    [Inject] UserInfoService UserInfoService { get; set; } = null!;
+
+    [Parameter] public UserInvites Model { get; set; } = null!;
+
+    public void UpdateInviteStatus(bool accepted)
+    {
+        var userId = UserInfoService.GetUserInfo()!.Id;
+        var request = new UpdateInviteRequest
+        {
+            HouseId = Model!.House!.Id,
+            Status = (int) ( accepted ? InviteStatus.Accepted : InviteStatus.Rejected ),
+            UserId = userId
+
+        };
+        InviteService.RespondToUpdate(request);
+    }
+}

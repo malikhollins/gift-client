@@ -1,0 +1,14 @@
+﻿@if (!Invites.Any())
+{
+    return;
+}
+
+<div class="InvitesContainer">
+    <span> Invites </span>
+    <div>
+        @foreach (var invite in Invites)
+        {
+            <InviteCard Model="invite" /> 
+        }
+    </div>
+</div>
