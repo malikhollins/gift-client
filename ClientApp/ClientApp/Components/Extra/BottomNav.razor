@@ -4,7 +4,7 @@
         @if (GoBackUrl != null && GoBackUrl.Any())
         {
                 <a class="backbutton" href="@GoBackUrl">
-                    <img src="/Images/arrow_back_64.png" asp-append-version="true" width="24" />
+                <Icon CustomIconName="fa-solid fa-arrow-left" Size="IconSize.x5"/>
                 </a>
         }
     </div> <!-- hide when not needed? -->
@@ -13,14 +13,14 @@
         <CascadingValue Value="@ListId" Name="ListId">
             <CascadingValue Value="@HouseId" Name="HouseId">
                 <UniversalModal ModalParameters="CenterModalParameters">
-                    <img src="/Images/add_64.png" asp-append-version="true" width="24" height="24" />
+                    <Icon CustomIconName="fa-solid fa-plus" Size="IconSize.x5"/>
                 </UniversalModal>
             </CascadingValue>
         </CascadingValue>
     </div> <!-- end plusCreateHouse -->
 
     <div class="profileButton"> 
-         <img src="Images/account_circle_64.png" asp-append-version="true" width="24" height="24"/>     
+        <Icon CustomIconName="fa-regular fa-circle-user" Size="IconSize.x5"/>
     </div> <!-- end profileButton -->
 
 </div> <!-- end bottom nav -->

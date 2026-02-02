@@ -1,10 +1,12 @@
 ﻿@using ClientApp.Utils;
 
-<div>
+<div class="manage-user-container">
     <span>@Model!.User!.Name</span> 
     <span>@( wasDeleted ? "removed" : Model.InviteStatus.ToDisplayString())</span> 
     @if ( !wasDeleted)
     {
-        <button @onclick="@DeleteUserFromHouseAsync"> Delete </button>
+        <Button @onclick="@DeleteUserFromHouseAsync"> 
+            <Icon CustomIconName="fa-solid fa-x"  Size="IconSize.x5"/>
+        </Button>
     }
 </div>

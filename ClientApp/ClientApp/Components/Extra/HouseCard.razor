@@ -1,3 +1,4 @@
+@using ClientApp.Components.Extra.Forms
 @using ClientApp.Services
 @using ClientApp.Utils
 <div id="Home">
@@ -11,13 +12,13 @@
                         {
                             <UniversalModal ModalParameters="_manageUsersParameters">
                                 <Button Size="ButtonSize.Small">
-                                    <Image Class="AddButtonSize" IsResponsive="true" Src="/images/person_add_64dp.png" />
+                                    <Icon CustomIconName="fa-solid fa-user-plus" />
                                 </Button>
                             </UniversalModal>
                         }
                         <UniversalModal ModalParameters="_createListParameters">
                             <Button Size="ButtonSize.Small">
-                                <Image Class="AddButtonSize" IsResponsive="true" Src="/images/add_64.png" />
+                                <Icon CustomIconName="fa-solid fa-plus" />
                             </Button>
                         </UniversalModal>
                     </div>

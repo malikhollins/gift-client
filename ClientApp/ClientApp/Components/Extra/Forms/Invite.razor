@@ -1,0 +1,23 @@
+<div class="GiftInvite">
+    <div class="inviteBubble">
+        <div class="invite-user-container"
+            <span clas="invite-label">Invite: </span>
+            <div class="InviteEmailList">
+                <EmailList OnUserInvited="@OnUserInvitedAsync" />
+            </div> <!-- end InviteEmailList -->
+        </div>
+
+        <div class="manage-container"
+            <span class="manage-label">Users invited to home</span>
+            <SortableList Class="list" AllowSorting="false" Context="item" TItem="HouseInvites" Data="InvitedUsers">
+                <ItemTemplate>
+                    <ManageUser HouseId="HouseId" Model="@item" />
+                </ItemTemplate>
+                <EmptyDataTemplate>
+                    <span>You haven't invited any users</span>
+                </EmptyDataTemplate>
+            </SortableList>
+        </div>
+
+    </div> <!-- end inviteBubble -->
+</div> <!-- end GiftInvite --> 

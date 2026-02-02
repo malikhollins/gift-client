@@ -9,7 +9,7 @@
         public double Price { get; set; }
         public string? Link { get; set; }
         public bool Favorite { get; set; }
-        public int Buyer { get; set; }
+        public int? Buyer { get; set; }
         public string? BuyerName { get; set; }
 
         public Item()

@@ -1,9 +1,14 @@
-* {
-    margin: 0 auto;
-    box-sizing: border-box;
-    border-radius: 12px;
-    color: red;
+
+
+.manage-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+.manage-label
 
 .GiftInvite {
     margin-top: 2%;
@@ -11,8 +16,17 @@
     line-height: 1.8;
 }
 
-h1 {
-    margin: 20px;
+.invite-label {
+
+}
+
+
+.invite-user-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
 }
 
 .bi-x-square-fill {
@@ -28,12 +42,17 @@ h1 {
     position: relative;
     padding-top: 1%;
     width: 100%;
-    border-radius: 50px 15px 50px 50px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+::deep .list {
+    margin: 20px;
+    max-height: 40vh;
+    overflow-y: scroll;
+    scroll-behavior: auto;
 }
 
 label {

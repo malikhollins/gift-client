@@ -1,20 +1,31 @@
 ﻿@using ClientApp.Services
 @using SharedModels
-<div>
+<div class="invite-card-wrapper">
     <span> @Model!.House!.OwnerName invited you to @Model.House.Name </span>
-    <button> Accept </button>
-    <button> Decline </button>
+    @if (_responded)
+    {
+        <span>@_respondedText</span>
+    }
+    else
+    {
+        <div>
+            <Button Class="status-btn" @onclick="@(() => UpdateInviteStatusAsync(accepted: true))"> Accept </Button>
+            <Button Class="status-btn" @onclick="@(() => UpdateInviteStatusAsync(accepted: false))"> Decline </Button>
+        </div>
+    }
 </div>
 
 @code {
 
     [Inject] InviteService InviteService { get; set; } = null!;
-
     [Inject] UserInfoService UserInfoService { get; set; } = null!;
-
+    [Inject] HousePageObserver HousePageObserver { get; set; } = null!;
     [Parameter] public UserInvites Model { get; set; } = null!;
 
-    public void UpdateInviteStatus(bool accepted)
+    private bool _responded = false;
+    private string _respondedText = string.Empty;
+
+    public async Task UpdateInviteStatusAsync(bool accepted)
     {
         var userId = UserInfoService.GetUserInfo()!.Id;
         var request = new UpdateInviteRequest
@@ -24,6 +35,17 @@
             UserId = userId
 
         };
-        InviteService.RespondToUpdate(request);
+        var response = await InviteService.RespondToUpdate(request);
+        if (response.IsSuccessStatusCode)
+        {
+            if ( accepted )
+            {
+                HousePageObserver.NotifyHouseCreated(Model!.House);
+            }
+
+            _responded = true;
+            _respondedText = accepted ? "Accepted!" : "Declieded!";
+            StateHasChanged();
+        }
     }
 }

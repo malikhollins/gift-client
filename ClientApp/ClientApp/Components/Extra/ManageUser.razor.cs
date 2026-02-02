@@ -28,8 +28,8 @@ namespace ClientApp.Components.Extra
                 UserInviteToDelete = Model.User!.Id
             };
 
-            var response = InviteService.DeleteInvite(request);
-            if (response.IsCompletedSuccessfully)
+            var response = await InviteService.DeleteInvite(request);
+            if (response.IsSuccessStatusCode)
             {
                 wasDeleted = true;
                 StateHasChanged();

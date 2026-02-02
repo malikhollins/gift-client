@@ -14,7 +14,7 @@ namespace ClientApp.Models
 
         public int Owner { get; set; }
 
-        public int OwnerName { get; set; }
+        public string? OwnerName { get; set; }
 
         public override string ToString()
         {

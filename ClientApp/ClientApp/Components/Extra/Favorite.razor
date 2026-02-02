@@ -1,10 +1,12 @@
 ﻿@if (!CanToggle)
 {
-    <Image IsResponsive="false" Src="@(isFavorited ? "/images/favorite_64dp_filled.png" : "/images/favorite_64.png")" />
+    <div>
+        <Icon CustomIconName="@(isFavorited ? "fa-solid fa-heart" : "fa-regular fa-heart")" Size="IconSize.x5" />
+    </div>
     return;
 }
 
 <Button @onclick=@( async () => await ToggleFavoriteAsync() )>
-    <Image IsResponsive="false" Src="@(isFavorited ? "/images/favorite_64dp_filled.png" : "/Images/favorite_64.png")" />
+    <Icon CustomIconName="@(isFavorited ? "fa-solid fa-heart" : "fa-regular fa-heart")" Size="IconSize.x5" />
 </Button>
 

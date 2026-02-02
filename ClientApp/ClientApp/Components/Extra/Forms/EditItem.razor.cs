@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using SharedModels;
 using System.Text.Json;
 
-namespace ClientApp.Components.Extra
+namespace ClientApp.Components.Extra.Forms
 {
     partial class EditItem
     {
@@ -19,6 +19,8 @@ namespace ClientApp.Components.Extra
         public Item ItemData { get; set; } = null!;
         public EditContext? EditContext { get; set; }
 
+        private bool _submitting = false;
+
         protected override void OnInitialized()
         {
             ItemData = new Item( Item );
@@ -27,6 +29,8 @@ namespace ClientApp.Components.Extra
 
         public async Task Submit()
         {
+            _submitting = true;
+
             var id = UserInfoService.GetUserInfo()?.Id ?? 0;
             var updateItemRequest = new UpdateItemRequest
             {
@@ -42,9 +46,11 @@ namespace ClientApp.Components.Extra
             var response = await ListService.UpdateItemAsync(updateItemRequest);
             if (response.IsSuccessStatusCode)
             {
-                await OnSubmitCompleted.InvokeAsync();
                 OnItemEdited.Invoke(ItemData!);
             }
+
+            await OnSubmitCompleted.InvokeAsync();
+            _submitting = false;
         }
     }
 }

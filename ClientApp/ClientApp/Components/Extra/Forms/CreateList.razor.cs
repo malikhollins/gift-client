@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using SharedModels;
 using System.Diagnostics;
 
-namespace ClientApp.Components.Extra
+namespace ClientApp.Components.Extra.Forms
 {
     public partial class CreateList
     {
@@ -17,6 +17,8 @@ namespace ClientApp.Components.Extra
         public UserList ListData { get; set; } = null!;
         public EditContext? EditContext { get; set; }
 
+        private bool _submitting = false;
+
         protected override void OnInitialized()
         {
             ListData = new UserList();
@@ -25,6 +27,8 @@ namespace ClientApp.Components.Extra
 
         public async Task Submit()
         {
+            _submitting = true;
+
             var request = new CreateListRequest();
             request.Name = ListData.Name;
             request.OwnerId = UserInfoService.GetUserInfo()?.Id ?? -1;
@@ -40,6 +44,8 @@ namespace ClientApp.Components.Extra
             }
 
             await OnSubmitCompleted.InvokeAsync();
+
+            _submitting = false;
         }
     }
 }

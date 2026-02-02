@@ -23,19 +23,19 @@
 .init-icon {
     display: flex;
     flex-grow: 1;
-    max-height: 5vh;
     flex-shrink: 0;
     width: 5vw;
-    min-width: 86px;
+    min-width: 5vw;
+    align-items: center;
 }
 
 .dropdown {
+    align-items: center;
     display: flex;
     flex-grow: 1;
-    max-height: 5vh;
     flex-shrink: 0;
     width: 5vw;
-    min-width: 64px;
+    min-width: 5vw;
 }
 
 .text-link {

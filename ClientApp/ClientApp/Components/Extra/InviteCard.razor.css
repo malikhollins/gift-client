@@ -1,0 +1,11 @@
+﻿.invite-card-wrapper {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    height: 5vh;
+}
+
+.status-btn {
+    margin: 10px;
+}

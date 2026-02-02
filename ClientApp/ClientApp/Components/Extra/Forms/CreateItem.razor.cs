@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Models;
 using SharedModels;
 
-namespace ClientApp.Components.Extra
+namespace ClientApp.Components.Extra.Forms
 {
     public partial class CreateItem
     {
@@ -15,7 +15,9 @@ namespace ClientApp.Components.Extra
         [CascadingParameter( Name = "ListId" )] public int ListId { get; set; } = default!;
         public Item ItemData { get; set; } = null!;
         public EditContext? EditContext { get; set; }
-        
+
+        private bool _submitting = false;
+
         protected override void OnInitialized()
         {
             ItemData = new Item();
@@ -24,6 +26,8 @@ namespace ClientApp.Components.Extra
 
         public async Task Submit()
         {
+            _submitting = true;
+
             var id = UserInfoService.GetUserInfo()?.Id ?? 0;
             var createItemRequest = new CreateItemRequest
             {
@@ -37,6 +41,8 @@ namespace ClientApp.Components.Extra
 
             await ListService.CreateItemAsync(createItemRequest);
             await OnSubmitCompleted.InvokeAsync();
+
+            _submitting = false;
         }
     }
 }

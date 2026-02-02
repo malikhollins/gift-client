@@ -30,7 +30,7 @@ namespace ClientApp.Services
             return httpClient.PostAsJsonAsync("api/Invite/delete", deleteInviteRequest);
         }
 
-        public Task RespondToUpdate( UpdateInviteRequest updateInviteRequest )
+        public Task<HttpResponseMessage> RespondToUpdate( UpdateInviteRequest updateInviteRequest )
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             return httpClient.PostAsJsonAsync("api/Invite/update", updateInviteRequest);

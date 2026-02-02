@@ -5,9 +5,6 @@ namespace ClientApp.Services
     public class UserInfoService
     {
         private User? _user;
-        private House? _house;
-
-        public bool IsLoggedIn() => _user != null;
 
         public User? GetUserInfo()
         {
@@ -23,16 +20,6 @@ namespace ClientApp.Services
             if (user != null)
             { 
                 _user = user;
-            }
-        }
-
-        public House? GetHouseInfo() => _house;
-
-        public void SetActiveHouse(House? house)
-        {
-            if (house != null)
-            {
-                _house = house;
             }
         }
     }

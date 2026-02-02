@@ -8,9 +8,9 @@ namespace ClientApp.Utils
         {
             return status switch
             {
-                InviteStatus.Pending => "Pending",
-                InviteStatus.Accepted => "Accepted",
-                InviteStatus.Rejected => "Rejected",
+                InviteStatus.Pending => "[Pending]",
+                InviteStatus.Accepted => "[Accepted]",
+                InviteStatus.Rejected => "[Rejected]",
                 _ => "Unknown"
             };
         }
