@@ -19,10 +19,18 @@ namespace ClientApp.Components.Extra.Forms
 
         private bool _submitting = false;
 
+        private string _placeholderText = string.Empty;
+
         protected override void OnInitialized()
         {
             ListData = new UserList();
             EditContext = new EditContext(ListData);
+
+            var user = UserInfoService.GetUserInfo();
+            if ( user != null)
+            {
+                _placeholderText = $"{user.Name}'s List";
+            }
         }
 
         public async Task Submit()

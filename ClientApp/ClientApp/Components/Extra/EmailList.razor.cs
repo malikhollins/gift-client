@@ -8,6 +8,7 @@ namespace ClientApp.Components.Extra
     public partial class EmailList
     {
         [Inject] UserService UserService { get; set; } = null!;
+        [Inject] UserInfoService UserInfoService { get; set; } = null!;
 
         private string _inputString { get; set; } = string.Empty;
 
@@ -16,6 +17,16 @@ namespace ClientApp.Components.Extra
         [Parameter]
         public EventCallback<User> OnUserInvited { get; set; }
 
+        [Parameter]
+        public List<User>? StartingUsers { get; set; }
+
+        protected override void OnInitialized()
+        {
+            if (StartingUsers != null)
+            {
+                _invitedUsers = StartingUsers;
+            }
+        }
 
         private void OnAutoCompleteChanged(User user)
         {
@@ -31,7 +42,13 @@ namespace ClientApp.Components.Extra
         public async Task<AutoCompleteDataProviderResult<User>> UsersDataProvider(AutoCompleteDataProviderRequest<User> request)
         {
             var users = await GetPossibleUsersAsync( request.Filter.Value, request.CancellationToken );
-            users.RemoveAll(_invitedUsers.Contains);
+            users.RemoveAll(_invitedUsers.Contains); // remove invited users
+            var user = UserInfoService.GetUserInfo(); // remove the current user
+            if ( user != null)
+            {
+                users.RemoveAll(u => u.Id == user.Id);
+            }
+
             return await Task.FromResult(new AutoCompleteDataProviderResult<User>
             {
                 Data = users,

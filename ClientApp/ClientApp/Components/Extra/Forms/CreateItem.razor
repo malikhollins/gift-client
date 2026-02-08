@@ -21,21 +21,6 @@
                 <ValidationMessage For="() => ItemData.Description" />
             </div><!-- end NameButton -->
 
-            <div class="Button">
-                <label for="ItemPriceLabel" style="text-align:left;">
-                    Enter the items price
-                </label>
-                <InputNumber id="ItemPriceLabel" @bind-Value="@ItemData!.Price" />
-            </div><!-- end NameButton -->
-
-            <div class="Button">
-                <label for="LinkLabel" style="text-align:left;">
-                    Enter a link for the item
-                </label>
-                <InputText id="LinkLabel" @bind-Value="@ItemData!.Link" placeholder="Link here" />
-                <ValidationMessage For="() => ItemData.Link" />
-            </div><!-- end NameButton -->
-
             <div class="sub mitButton">
                 <button disabled="@_submitting" id="submit" class="btn btn-primary" type="submit"> Create item </button>
             </div><!-- end submitButton -->
