@@ -4,7 +4,7 @@ namespace ClientApp.Models
 {
     public class UserList
     {
-        public int Id { get; set; }
+        public int ListId { get; set; }
         
         public int House { get; set; }
         

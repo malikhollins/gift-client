@@ -23,10 +23,12 @@ namespace ClientApp.Services
             return lists ?? [];
         }
 
-        public async Task CreateListAsync( CreateListRequest createListRequest)
+        public async Task<UserList> CreateListAsync( CreateListRequest createListRequest)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            await httpClient.PostAsJsonAsync("/api/List/create/list", createListRequest);
+            var response = await httpClient.PostAsJsonAsync("/api/List/create/list", createListRequest);
+            var createdList = await DeserializeResponse.DeserializeAsync<UserList>(response);
+            return createdList ?? new UserList();
         }
 
         public async Task CreateItemAsync( CreateItemRequest createItemRequest)

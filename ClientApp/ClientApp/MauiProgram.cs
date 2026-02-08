@@ -40,6 +40,7 @@ namespace ClientApp
             builder.Services.AddSingleton<ListService>();
             builder.Services.AddSingleton<NavStateService>();
             builder.Services.AddSingleton<HousePageObserver>();
+            builder.Services.AddSingleton<ListPageObserver>();
             builder.Services.AddJsInteropExtensions();
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

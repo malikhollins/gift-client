@@ -37,7 +37,7 @@ namespace ClientApp.Components.Pages
 
             _isLoading = false;
 
-            HomePageObserver.OnHouseUpdated += HomePageObserver_OnHouseUpdated;
+            HomePageObserver.OnCreated += HomePageObserver_OnHouseUpdated;
         }
 
         private void HomePageObserver_OnHouseUpdated(object? sender, House house)
@@ -54,7 +54,7 @@ namespace ClientApp.Components.Pages
 
         public void Dispose()
         {
-            HomePageObserver.OnHouseUpdated -= HomePageObserver_OnHouseUpdated;
+            HomePageObserver.OnCreated -= HomePageObserver_OnHouseUpdated;
         }
     }
 }

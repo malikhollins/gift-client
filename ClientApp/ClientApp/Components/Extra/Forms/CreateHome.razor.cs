@@ -48,7 +48,7 @@ namespace ClientApp.Components.Extra.Forms
 
             var house = await HouseService.CreateHouseAsync(createHouseRequest);
 
-            HousePageObserver.NotifyHouseCreated(house);
+            HousePageObserver.NotifyCreated(house);
 
             // reset house data
             HouseData = new House();

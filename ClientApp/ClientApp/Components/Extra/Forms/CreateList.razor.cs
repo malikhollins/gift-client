@@ -11,6 +11,7 @@ namespace ClientApp.Components.Extra.Forms
     {
         [Inject] ListService ListService { get; set; } = null!;
         [Inject] UserInfoService UserInfoService { get; set; } = null!;
+        [Inject] ListPageObserver ListPageObserver { get; set; } = null!;
         [CascadingParameter] public EventCallback OnSubmitCompleted { get; set; } = default!;
         [CascadingParameter( Name = "HouseId")] public int HouseId { get; set; } = default!;
 
@@ -44,7 +45,8 @@ namespace ClientApp.Components.Extra.Forms
 
             try
             {
-                await ListService.CreateListAsync(request);
+                var list = await ListService.CreateListAsync(request);
+                ListPageObserver.NotifyCreated(list);
             }
             catch (Exception e)
             {

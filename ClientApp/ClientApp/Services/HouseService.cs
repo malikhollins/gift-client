@@ -19,7 +19,7 @@ namespace ClientApp.Services
             try
             {
                 HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
-                HttpResponseMessage response = await httpClient.GetAsync($"api/House/get/v2/");
+                HttpResponseMessage response = await httpClient.GetAsync($"api/House/get/v3/");
                 return await response.DeserializeAsync<IEnumerable<House>>() ?? [];
             }
             catch ( Exception ex )

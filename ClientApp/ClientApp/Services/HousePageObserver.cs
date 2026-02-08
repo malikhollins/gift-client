@@ -2,9 +2,10 @@
 
 namespace ClientApp.Services
 {
-    public class HousePageObserver
+    public class HousePageObserver : ObserverBase<House>
     {
-        public event EventHandler<House>? OnHouseUpdated;
-        public void NotifyHouseCreated(House house) => OnHouseUpdated?.Invoke(this, house);
+        public override event EventHandler<House>? OnCreated;
+
+        public override void NotifyCreated(House house) => OnCreated?.Invoke(this, house);
     }
 }
