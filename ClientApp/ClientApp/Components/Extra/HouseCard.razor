@@ -82,6 +82,7 @@
         if (!Model.Lists.Contains(list))
         {
             Model.Lists.Add(list);
+            StateHasChanged();
         }
     }
 
