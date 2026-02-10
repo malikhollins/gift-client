@@ -11,6 +11,7 @@ namespace ClientApp.Components.Extra.Forms
     {
         [Inject] ListService ListService { get; set; } = null!;
         [Inject] UserInfoService UserInfoService { get; set; } = null!;
+        [Inject] ListPageObserver ListPageObserver { get; set; } = null!;
         [CascadingParameter] public EventCallback OnSubmitCompleted { get; set; } = default!;
         [CascadingParameter( Name = "HouseId")] public int HouseId { get; set; } = default!;
 
@@ -19,10 +20,18 @@ namespace ClientApp.Components.Extra.Forms
 
         private bool _submitting = false;
 
+        private string _placeholderText = string.Empty;
+
         protected override void OnInitialized()
         {
             ListData = new UserList();
             EditContext = new EditContext(ListData);
+
+            var user = UserInfoService.GetUserInfo();
+            if ( user != null)
+            {
+                _placeholderText = $"{user.Name}'s List";
+            }
         }
 
         public async Task Submit()
@@ -36,7 +45,8 @@ namespace ClientApp.Components.Extra.Forms
 
             try
             {
-                await ListService.CreateListAsync(request);
+                var list = await ListService.CreateListAsync(request);
+                ListPageObserver.NotifyCreated(list);
             }
             catch (Exception e)
             {

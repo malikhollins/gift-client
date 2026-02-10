@@ -9,12 +9,10 @@ namespace ClientApp.Models
         [Required]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "The Gifthouse name must be between 2 and 30 characters.")]
         public string? Name { get; set; }
-
         public string? Email { get; set; }
-
         public int Owner { get; set; }
-
         public string? OwnerName { get; set; }
+        public List<UserList> Lists { get; set; } = new();
 
         public override string ToString()
         {

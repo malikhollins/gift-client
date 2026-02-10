@@ -9,7 +9,7 @@
                 <label for="ListNameLabel" style="text-align:left;">
                     Enter a list name
                 </label>
-                <InputText id="ListNameLabel" @bind-Value="@ListData.Name" placeholder="Name here" />
+                <InputText id="ListNameLabel" @bind-Value="@ListData.Name" placeholder="@_placeholderText" />
                 <ValidationMessage For="() => ListData.Name" />
 
             </div> <!-- end NameButton -->

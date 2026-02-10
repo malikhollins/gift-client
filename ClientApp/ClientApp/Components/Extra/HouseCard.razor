@@ -1,6 +1,8 @@
 @using ClientApp.Components.Extra.Forms
 @using ClientApp.Services
 @using ClientApp.Utils
+@implements IDisposable
+
 <div id="Home">
     <Card Class="HomeCard" TextAlignment="Alignment.Start" Id="@Model.Name">
         <CardTitle Class="HomeHouseTitle" Size="HeadingSize.H3">
@@ -26,30 +28,20 @@
             </div>
         </CardTitle>
 
-        @if (!_isLoading && !_userLists.Any())
+        @if (!@Model.Lists.Any())
         {
             return;
         }
 
         <CardBody>
-            <LoadingIndicator IsLoading="_isLoading">
-                <CustomLoadingContent>
-                    <PlaceholderContainer Animation="PlaceholderAnimation.Glow">
-                        <Placeholder Width="PlaceholderWidth.Col7" />
-                        <Placeholder Width="PlaceholderWidth.Col9" />
-                        <Placeholder Width="PlaceholderWidth.Col6" />
-                        <Placeholder Width="PlaceholderWidth.Col7" />
-                    </PlaceholderContainer>
-                </CustomLoadingContent>
                 <ChildContent>
                     <div class="wrapper">
-                        @foreach (var list in _userLists)
+                        @foreach (var list in Model.Lists)
                         {
                             <ListCard Model="list" HouseId="Model.Id" />
                         }
                     </div>
                 </ChildContent>
-            </LoadingIndicator>
         </CardBody>
     </Card>
 </div> <!-- end Home -->
@@ -57,9 +49,9 @@
     [Parameter]
     public House Model { get; set; } = new();
 
-    [Inject] public ListService ListService { get; set; } = null!;
-
     [Inject] public UserInfoService UserInfoService { get; set; } = null!;
+
+    [Inject] public ListPageObserver ListPageObserver { get; set; } = null!;
 
     private bool _isLoading = true;
 
@@ -77,21 +69,25 @@
 
         _ownsHouse = UserInfoService.GetUserInfo()!.Id == Model.Owner;
         _manageUsersParameters = new CenterModalParameters(typeof(Invite), "Manage Users", EventCallback.Empty);
-        _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Factory.Create(this, GetListsAsync));
+        _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Empty);
     }
 
     protected override void OnInitialized()
     {
-        GetListsAsync().SafeFireAndForget();
+        ListPageObserver.OnCreated += OnListCreated;
     }
 
-    private async Task GetListsAsync()
+    private void OnListCreated(object? sender, UserList list )
     {
-        _isLoading = true;
-        StateHasChanged();
+        if (!Model.Lists.Contains(list))
+        {
+            Model.Lists.Add(list);
+            StateHasChanged();
+        }
+    }
 
-        _userLists = await ListService.GetListsAsync(Model.Id);
-        _isLoading = false;
-        StateHasChanged();
+    public void Dispose()
+    {
+        ListPageObserver.OnCreated -= OnListCreated;
     }
 }

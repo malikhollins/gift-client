@@ -3,7 +3,7 @@
         <div class="invite-user-container"
             <span clas="invite-label">Invite: </span>
             <div class="InviteEmailList">
-                <EmailList OnUserInvited="@OnUserInvitedAsync" />
+                <EmailList StartingUsers="@(InvitedUsers.Select( invite => invite.User ).ToList())" OnUserInvited="@OnUserInvitedAsync" />
             </div> <!-- end InviteEmailList -->
         </div>
 
