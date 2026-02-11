@@ -73,7 +73,6 @@ namespace ClientApp.Components.Extra
 
         protected async Task ShowDeleteModalAsync()
         {
-
             if (deleteModal != null)
             {
                 await deleteModal.ShowModalAsync();

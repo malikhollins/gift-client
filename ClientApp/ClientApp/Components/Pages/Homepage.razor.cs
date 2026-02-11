@@ -9,43 +9,50 @@ namespace ClientApp.Components.Pages
 {
     public partial class Homepage : IDisposable
     {
-        [Inject] HouseService HouseService { get; set; } = null!;
-        [Inject] NavStateService NavStateService { get; set; } = null!;
-        [Inject] HousePageObserver HomePageObserver { get; set; } = null!;
-        public List<House> Houses { get; set; } = null!;
-        public bool HasNoHouses => (Houses?.Count() ?? 0 ) == 0;
-        private CenterModalParameters? _centerModalParameters { get; set; }
-
-        private bool _isLoading { get; set; }
-
+        [Inject] private HouseService HouseService { get; set; } = null!;
+        [Inject] private NavStateService NavStateService { get; set; } = null!;
+        [Inject] private HousePageObserver HomePageObserver { get; set; } = null!;
+        private List<House> Houses { get; set; } = null!;
+        private bool HasNoHouses => (Houses?.Count ?? 0 ) == 0;
+        private CenterModalParameters? CenterModalParameters { get; set; }
+        private bool IsLoading { get; set; }
+        
         protected override async Task OnInitializedAsync()
         {
-            _isLoading = true;
+            IsLoading = true;
 
             await RefreshHousesAsync();
             await base.OnInitializedAsync();
 
-           _centerModalParameters = new CenterModalParameters(
+           CenterModalParameters = new CenterModalParameters(
            typeof(CreateHome),
            "Create New House",
            EventCallback.Empty);
 
             NavStateService.UpdateNavState(new NavState()
             {
-                CenterModalParameters = _centerModalParameters
+                CenterModalParameters = CenterModalParameters
             });
 
-            _isLoading = false;
+            IsLoading = false;
 
-            HomePageObserver.OnCreated += HomePageObserver_OnHouseUpdated;
+            HomePageObserver.OnUpdated += HomePageObserver_OnHouseUpdated;
         }
-
-        private void HomePageObserver_OnHouseUpdated(object? sender, House house)
+        
+        private void HomePageObserver_OnHouseUpdated(object? sender, UpdateEventHouseArgs args)
         {
-            Houses.Add(house);
+            switch (args.UpdateEventType)
+            {
+                case UpdateEventType.Delete:
+                    Houses.RemoveAll( h  => h.Id == args.House.Id );
+                    break;
+                case UpdateEventType.Add:
+                    Houses.Add(args.House);
+                    break;
+            }
             StateHasChanged();
         }
-
+        
         private async Task RefreshHousesAsync()
         {
             var housesAsEnumerable = await HouseService.GetHousesAsync();
@@ -54,7 +61,7 @@ namespace ClientApp.Components.Pages
 
         public void Dispose()
         {
-            HomePageObserver.OnCreated -= HomePageObserver_OnHouseUpdated;
+            HomePageObserver.OnUpdated -= HomePageObserver_OnHouseUpdated;
         }
     }
 }

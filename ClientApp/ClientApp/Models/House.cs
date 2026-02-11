@@ -13,7 +13,6 @@ namespace ClientApp.Models
         public int Owner { get; set; }
         public string? OwnerName { get; set; }
         public List<UserList> Lists { get; set; } = new();
-
         public override string ToString()
         {
             return string.Format("{0}, {1}, {2}", Name, Owner, Id);
