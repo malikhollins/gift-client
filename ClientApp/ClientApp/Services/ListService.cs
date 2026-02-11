@@ -58,7 +58,7 @@ namespace ClientApp.Services
         public async Task<HttpResponseMessage> DeleteListAsync( int listId )
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            return await httpClient.DeleteAsync($"/api/List/delete/list/{listId}");
+            return await httpClient.DeleteAsync($"/api/List/delete/{listId}");
         }
 
         public async Task<HttpResponseMessage> DeleteItemAsync(int listId, int itemId)
