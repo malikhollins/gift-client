@@ -11,7 +11,7 @@ namespace ClientApp.Models
         public int Owner { get; set; }
 
         [Required]
-        [StringLength(30, MinimumLength = 2, ErrorMessage = "The Gifthouse name must be between 2 and 30 characters.")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "The name must be between 2 and 30 characters.")]
         public string? Name { get; set; }
 
         public string? OwnerName { get; set; }

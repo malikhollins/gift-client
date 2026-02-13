@@ -1,4 +1,10 @@
-﻿* {
+﻿@font-face {
+    font-family: "Overused Grotesk";
+    src: url('https://raw.githubusercontent.com/RandomMaerks/Overused-Grotesk/master/fonts/variable/OverusedGroteskRoman-VF.ttf');
+    font-weight: 300 900;
+}
+
+* {
     box-sizing: border-box;
 }
 
@@ -6,11 +12,11 @@
 :root {
     --card-width: 15vw;
     --card-margin: 1vh 1vw 1vh 1vw;
-    --card-text-color: plum !important;
+    --card-text-color: #75ab5a !important;
 }
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Overused Grotesk, Cambria, Georgia, serif;
     height: 100%;
     width: 100%;
 }
@@ -20,16 +26,21 @@ html, body {
     width: 100%;
 }
 
-a, .btn-link {
+a, .btn-link, h5.modal-title {
     color: black;
 }
-
-/* EditForm input[type=text] */
-    #EmailLabel, #HouseNameLabel, input[type=text], input[type=email] {
+    h5.modal-title {
+        font-size: 22px;
+    }
+    /* EditForm input[type=text] */
+#EmailLabel, #HouseNameLabel, #ListNameLabel, input[type=text], input[type=email], #ItemNameLabel, #ItemDescriptionLabel {
     border-radius: 12px;
     background-color: #848484;
     border: none;
     width: 99%;
+}
+
+#HouseNameLabel, input[type=text], input[type=email], #ItemNameLabel, #ItemDescriptionLabel {
     padding: 10px;
 }
 
@@ -43,6 +54,7 @@ a, .btn-link {
 
 .validation-message {
     color: #e50000;
+    font-size: 22px;
 }
 
 #blazor-error-ui {

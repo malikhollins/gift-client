@@ -1,14 +1,23 @@
-﻿.wrapper {
+﻿* {
+    margin: 0 auto;
+}
+
+.wrapper {
+    color: var(--card-text-color);
     display: flex;
     flex-flow: column;
     align-content: space-evenly;
-    width: 100%;
+    width: 80%;
     height: 100%;
 }
 
 
 .name {
-    text-align: left;
+    color: black;
     font-size: 36px;
     padding: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    /* at less than 800px the Favorite needs to move into the Item Buttons*/
 }

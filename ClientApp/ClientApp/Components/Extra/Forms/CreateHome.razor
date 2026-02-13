@@ -7,7 +7,7 @@
 
             <div class="NameButton">
                 <label for="HouseNameLabel" style="text-align:left;">
-                    Enter a Gifthouse name
+                    Enter a Gifthouse name:
                     </label>
                 <InputText id="HouseNameLabel" @bind-Value="@HouseData!.Name" placeholder="Name here" />
                 <ValidationMessage For="() => HouseData.Name" />
@@ -15,10 +15,10 @@
             </div><!-- end NameButton -->
 
             <div class="EmailButton">
-                <label for="EmailLabel" style="text-align:left;">
-                    Add others
+                <label style="text-align:left;">
+                    Add others:
                 </label> <br />
-                <EmailList OnUserInvited="OnUserInvited" />
+                <EmailList  OnUserInvited="OnUserInvited"/>
             </div><!-- end EmailButton -->
 
                 @if ( _usersToInvite.Count > 0 )
