@@ -1,13 +1,13 @@
 <div class="GiftInvite">
     <div class="inviteBubble">
-        <div class="invite-user-container"
+        <div class="invite-user-container">
             <span clas="invite-label">Invite: </span>
             <div class="InviteEmailList">
                 <EmailList StartingUsers="@(InvitedUsers.Select( invite => invite.User ).ToList())" OnUserInvited="@OnUserInvitedAsync" />
             </div> <!-- end InviteEmailList -->
         </div>
-
-        <div class="manage-container"
+        
+        <div class="manage-container">
             <span class="manage-label">Users invited to home</span>
             <SortableList Class="list" AllowSorting="false" Context="item" TItem="HouseInvites" Data="InvitedUsers">
                 <ItemTemplate>
@@ -18,6 +18,5 @@
                 </EmptyDataTemplate>
             </SortableList>
         </div>
-
     </div> <!-- end inviteBubble -->
 </div> <!-- end GiftInvite --> 

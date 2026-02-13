@@ -1,6 +1,6 @@
+@using ClientApp.Components.Extra.Confirmation
 @using ClientApp.Components.Extra.Forms
 @using ClientApp.Services
-@using ClientApp.Utils
 @implements IDisposable
 
 <div id="Home">
@@ -10,19 +10,29 @@
                 <span class="HomeHouseText">@Model.Name</span>
                 <CascadingValue Value="@Model.Id" Name="HouseId">
                     <div>
-                        @if (_ownsHouse)
-                        {
-                            <UniversalModal ModalParameters="_manageUsersParameters">
-                                <Button Size="ButtonSize.Small">
-                                    <Icon CustomIconName="fa-solid fa-user-plus" />
-                                </Button>
-                            </UniversalModal>
-                        }
                         <UniversalModal ModalParameters="_createListParameters">
                             <Button Size="ButtonSize.Small">
-                                <Icon CustomIconName="fa-solid fa-plus" />
+                                <Icon CustomIconName="fa-solid fa-plus"/>
                             </Button>
                         </UniversalModal>
+                        @if (_ownsHouse)
+                        {
+                            <UniversalModal @ref="@_manageUserModal" ModalParameters="_manageUsersParameters"/>
+                            <UniversalModal @ref="@_deleteModal" ModalParameters="_deleteModalParameters"/>
+                            <Dropdown>
+                                <DropdownToggleButton>
+                                    <Icon CustomIconName="fa-solid fa-ellipsis-vertical"/>
+                                </DropdownToggleButton>
+                                <DropdownMenu>
+                                    <DropdownItem @onclick="ShowDeleteHouseModalAsync">
+                                        Delete
+                                    </DropdownItem>
+                                    <DropdownItem @onclick="ShowManageHouseModalAsync">
+                                        Manage Users
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        }
                     </div>
                 </CascadingValue>
             </div>
@@ -34,60 +44,131 @@
         }
 
         <CardBody>
-                <ChildContent>
-                    <div class="wrapper">
-                        @foreach (var list in Model.Lists)
+            <ChildContent>
+                <div class="wrapper">
+                    @foreach (var list in _otherLists)
+                    {
+                        <ListCard Model="list" HouseId="Model.Id"/>
+                    }
+                </div>
+                <div>
+                    <div class="user-lists-header">
+                        <span class="user-lists-header-label"> Your lists </span>
+                        <Dropdown>
+                            <DropdownToggleButton>
+                                <Icon CustomIconName="fa-solid fa-ellipsis-vertical"/>
+                            </DropdownToggleButton>
+                            <DropdownMenu>
+                                <DropdownItem @onclick="NavigateToManageListPage">
+                                    Manage Lists
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
+                    <div>
+                        @foreach (var list in _userOwnedList)
                         {
-                            <ListCard Model="list" HouseId="Model.Id" />
+                            <ListCard Model="list" HouseId="Model.Id"/>
                         }
                     </div>
-                </ChildContent>
+                </div>
+            </ChildContent>
         </CardBody>
     </Card>
 </div> <!-- end Home -->
+
 @code {
-    [Parameter]
-    public House Model { get; set; } = new();
+    [Parameter] public House Model { get; set; } = new();
 
     [Inject] public UserInfoService UserInfoService { get; set; } = null!;
-
     [Inject] public ListPageObserver ListPageObserver { get; set; } = null!;
-
-    private bool _isLoading = true;
-
-    private List<UserList> _userLists { get; set; } = new();
+    [Inject] public HousePageObserver HousePageObserver { get; set; } = null!;
+    [Inject] public HouseService HouseService { get; set; } = null!;
+    [Inject] NavigationManager NavigationManager { get; set; } = null!;
 
     private CenterModalParameters? _createListParameters;
-
     private CenterModalParameters? _manageUsersParameters;
-
-    private bool _ownsHouse = false;
+    private UniversalModal? _deleteModal;
+    private UniversalModal? _manageUserModal;
+    private CenterModalParameters? _deleteModalParameters;
+    private bool _ownsHouse;
+    private List<UserList> _userOwnedList = new();
+    private List<UserList> _otherLists = new();
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        _ownsHouse = UserInfoService.GetUserInfo()!.Id == Model.Owner;
+        _userOwnedList.Clear();
+        _otherLists.Clear();
+        
+        var user = UserInfoService.GetUserInfo();
+        _ownsHouse = user!.Id == Model.Owner;
+        _userOwnedList = Model!.Lists.Where(list => list.Owner == user.Id).ToList();
+        _otherLists = Model!.Lists.Where(list => list.Owner != user.Id).ToList();
         _manageUsersParameters = new CenterModalParameters(typeof(Invite), "Manage Users", EventCallback.Empty);
         _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Empty);
+        _deleteModalParameters = new CenterModalParameters(typeof(BasicConfirm), "Delete this house?", EventCallback.Factory.Create(this, DeleteHouseAsync));
     }
 
     protected override void OnInitialized()
     {
-        ListPageObserver.OnCreated += OnListCreated;
+        ListPageObserver.OnUpdated += OnListCreated;
     }
 
-    private void OnListCreated(object? sender, UserList list )
+    private void OnListCreated(object? sender, UpdateEventListArgs updateEventListArgs)
     {
-        if (!Model.Lists.Contains(list))
+        switch (updateEventListArgs.UpdateEventType)
         {
-            Model.Lists.Add(list);
-            StateHasChanged();
+            case UpdateEventType.Delete:
+                Model.Lists.RemoveAll(list => list.ListId == updateEventListArgs.UserList.ListId);
+                break;
+            case UpdateEventType.Add:
+                if (Model.Lists.All(list => list.ListId != updateEventListArgs.UserList.ListId))
+                {
+                    Model.Lists.Add(updateEventListArgs.UserList);
+                }
+
+                break;
         }
+
+        StateHasChanged();
     }
 
     public void Dispose()
     {
-        ListPageObserver.OnCreated -= OnListCreated;
+        ListPageObserver.OnUpdated -= OnListCreated;
     }
+
+    private async Task DeleteHouseAsync()
+    {
+        var response = await HouseService.DeleteHouseAsync(Model!.Id);
+        if (response.IsSuccessStatusCode)
+        {
+            var update = new UpdateEventHouseArgs(Model!, UpdateEventType.Delete);
+            HousePageObserver.NotifyUpdated(update);
+        }
+    }
+    
+    private void NavigateToManageListPage()
+    {
+        NavigationManager.NavigateTo($"/ManageListPage/{Model!.Id}");
+    }
+
+    private async Task ShowManageHouseModalAsync()
+    {
+        if (_manageUserModal != null)
+        {
+            await _manageUserModal.ShowModalAsync();
+        }
+    }
+
+    private async Task ShowDeleteHouseModalAsync()
+    {
+        if (_deleteModal != null)
+        {
+            await _deleteModal.ShowModalAsync();
+        }
+    }
+
 }

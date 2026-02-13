@@ -40,3 +40,7 @@
 ::deep .HomeHouseCards {
     text-decoration: none;
 }
+
+::deep .dropdown-toggle::after {
+    display: none;
+}

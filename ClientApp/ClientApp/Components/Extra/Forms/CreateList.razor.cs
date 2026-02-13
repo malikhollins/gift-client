@@ -34,7 +34,7 @@ namespace ClientApp.Components.Extra.Forms
             }
         }
 
-        public async Task Submit()
+        private async Task Submit()
         {
             _submitting = true;
 
@@ -46,7 +46,8 @@ namespace ClientApp.Components.Extra.Forms
             try
             {
                 var list = await ListService.CreateListAsync(request);
-                ListPageObserver.NotifyCreated(list);
+                var update = new UpdateEventListArgs(list, UpdateEventType.Add);
+                ListPageObserver.NotifyUpdated(update);
             }
             catch (Exception e)
             {

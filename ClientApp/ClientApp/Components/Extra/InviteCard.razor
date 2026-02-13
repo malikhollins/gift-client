@@ -25,7 +25,7 @@
     private bool _responded = false;
     private string _respondedText = string.Empty;
 
-    public async Task UpdateInviteStatusAsync(bool accepted)
+    private async Task UpdateInviteStatusAsync(bool accepted)
     {
         var userId = UserInfoService.GetUserInfo()!.Id;
         var request = new UpdateInviteRequest
@@ -40,11 +40,12 @@
         {
             if ( accepted )
             {
-                HousePageObserver.NotifyCreated(Model!.House);
+                var update = new UpdateEventHouseArgs( Model!.House, UpdateEventType.Add );
+                HousePageObserver.NotifyUpdated(update);
             }
-
+            
             _responded = true;
-            _respondedText = accepted ? "Accepted!" : "Declieded!";
+            _respondedText = accepted ? "Accepted!" : "Declined!";
             StateHasChanged();
         }
     }
