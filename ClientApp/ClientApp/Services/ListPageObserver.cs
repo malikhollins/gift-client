@@ -2,10 +2,10 @@
 
 namespace ClientApp.Services
 {
-    public class ListPageObserver : ObserverBase<UserList>
+    public class ListPageObserver : ObserverBase<UpdateEventListArgs>
     {
-        public override event EventHandler<UserList>? OnCreated;
+        public override event EventHandler<UpdateEventListArgs>? OnUpdated;
 
-        public override void NotifyCreated(UserList house) => OnCreated?.Invoke(this, house);
+        public override void NotifyUpdated(UpdateEventListArgs eventArguments) => OnUpdated?.Invoke(this, eventArguments);
     }
 }

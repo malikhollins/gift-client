@@ -27,10 +27,10 @@ namespace ClientApp.Services
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             var response = await httpClient.PostAsJsonAsync("/api/List/create/list", createListRequest);
-            var createdList = await DeserializeResponse.DeserializeAsync<UserList>(response);
+            var createdList = await response.DeserializeAsync<UserList>();
             return createdList ?? new UserList();
         }
-
+        
         public async Task CreateItemAsync( CreateItemRequest createItemRequest)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
@@ -55,10 +55,10 @@ namespace ClientApp.Services
             return await httpClient.PostAsJsonAsync("/api/List/update/item", updateItemRequest);
         }
         
-        public async Task DeleteListAsync( int listId )
+        public async Task<HttpResponseMessage> DeleteListAsync( int listId )
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
-            await httpClient.DeleteAsync($"/api/List/delete/list/{listId}");
+            return await httpClient.DeleteAsync($"/api/List/delete/{listId}");
         }
 
         public async Task<HttpResponseMessage> DeleteItemAsync(int listId, int itemId)
@@ -71,7 +71,7 @@ namespace ClientApp.Services
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             var response = await httpClient.GetAsync($"/api/List/get/items/{listId}");
-            return await DeserializeResponse.DeserializeAsync<List<Item>>(response) ?? new List<Item>();
+            return await response.DeserializeAsync<List<Item>>() ?? [];
         }
     }
 }

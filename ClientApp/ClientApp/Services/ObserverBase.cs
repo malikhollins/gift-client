@@ -4,8 +4,7 @@ namespace ClientApp.Services
 {
     public abstract class ObserverBase<T>
     {
-        public abstract event EventHandler<T>? OnCreated;
-
-        public abstract void NotifyCreated(T house);
+        public abstract event EventHandler<T>? OnUpdated;
+        public abstract void NotifyUpdated(T eventArguments);
     }
 }

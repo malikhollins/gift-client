@@ -18,8 +18,7 @@ namespace ClientApp.Components.Extra.Forms
         public EditContext? EditContext { get; set; }
 
         private readonly List<User> _usersToInvite = [];
-
-        private bool _submitting = false;
+        private bool _submitting;
 
         protected override void OnInitialized()
         {
@@ -34,8 +33,8 @@ namespace ClientApp.Components.Extra.Forms
                 _usersToInvite.Add(user);
             }
         }
-
-        public async Task Submit()
+        
+        private async Task Submit()
         {
             _submitting = true;
 
@@ -48,8 +47,9 @@ namespace ClientApp.Components.Extra.Forms
 
             var house = await HouseService.CreateHouseAsync(createHouseRequest);
 
-            HousePageObserver.NotifyCreated(house);
-
+            var update = new UpdateEventHouseArgs( house, UpdateEventType.Add );
+            HousePageObserver.NotifyUpdated(update);
+            
             // reset house data
             HouseData = new House();
             _usersToInvite.Clear();

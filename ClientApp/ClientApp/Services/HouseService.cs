@@ -13,13 +13,13 @@ namespace ClientApp.Services
         {
             _httpClientFactory = httpClientFactory;
         }
-
+        
         public async Task<IEnumerable<House>> GetHousesAsync()
         {
             try
             {
-                HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
-                HttpResponseMessage response = await httpClient.GetAsync($"api/House/get/v3/");
+                var httpClient = _httpClientFactory.CreateClient("base-url");
+                var response = await httpClient.GetAsync($"api/House/get/v3/");
                 return await response.DeserializeAsync<IEnumerable<House>>() ?? [];
             }
             catch ( Exception ex )
@@ -28,13 +28,19 @@ namespace ClientApp.Services
                 return [];
             }
         }
-
+        
         public async Task<House> CreateHouseAsync( CreateHouseRequest createHouseRequest )
         {
-            HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
+            var httpClient = _httpClientFactory.CreateClient("base-url");
             var uri = "api/House/create";
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync( uri, createHouseRequest);
+            var response = await httpClient.PostAsJsonAsync( uri, createHouseRequest);
             return await response.DeserializeAsync<House>() ?? new House();
+        }
+        
+        public async Task<HttpResponseMessage> DeleteHouseAsync(int houseId)
+        {
+            var httpClient = _httpClientFactory.CreateClient("base-url");
+            return await httpClient.DeleteAsync($"api/House/delete/{houseId}");
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿@using System.Diagnostics.CodeAnalysis
+@using ClientApp.Services
+@implements IDisposable
+
+
+<h3>Manage lists</h3>
+
+<div>
+    @foreach (var list in _listsUserOwns)
+    {
+        <ListCard Model="list" EditMode="true" />
+    }
+</div>
+
+@code {
+
+    [Inject] public UserInfoService UserInfoService { get; set; } = null!;
+
+    [Inject] public ListPageObserver ListPageObserver { get; set; } = null!;
+    
+    [Parameter, AllowNull] public List<UserList> Model { get; set; } = [];
+
+    private readonly List<UserList> _listsUserOwns = [];
+    
+    protected override void OnParametersSet()
+    {
+        var user = UserInfoService.GetUserInfo();
+        _listsUserOwns.Clear();
+        _listsUserOwns.AddRange( Model!.Where( list => list.Owner == user!.Id ) );
+    }
+
+    protected override void OnInitialized()
+    {
+        ListPageObserver.OnUpdated += ListPageObserver_OnUpdated;
+    }
+
+    private void ListPageObserver_OnUpdated(object? sender, UpdateEventListArgs updateEventListArgs)
+    {
+        if (updateEventListArgs.UpdateEventType == UpdateEventType.Delete)
+        {
+            _listsUserOwns.RemoveAll(list => list.ListId == updateEventListArgs.UserList.ListId);
+        }
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        ListPageObserver.OnUpdated -= ListPageObserver_OnUpdated;
+    }
+
+}
