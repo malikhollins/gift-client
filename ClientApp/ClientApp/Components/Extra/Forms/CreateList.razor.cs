@@ -46,6 +46,8 @@ namespace ClientApp.Components.Extra.Forms
             try
             {
                 var list = await ListService.CreateListAsync(request);
+                list.House = HouseId;
+                list.Owner = request.OwnerId;
                 var update = new UpdateEventListArgs(list, UpdateEventType.Add);
                 ListPageObserver.NotifyUpdated(update);
             }

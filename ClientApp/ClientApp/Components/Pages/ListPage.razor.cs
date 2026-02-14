@@ -14,6 +14,8 @@ namespace ClientApp.Components.Pages
         [Parameter] public int ListId { get; set; }
         [Parameter] public int HouseId { get; set; }
         [Parameter] public int UserId { get; set; }
+        [Parameter] public string OwnerName { get; set; } = null!;
+        [Parameter] public string ListName { get; set; } = null!;
 
         private List<Item> _itemsInList = [];
 
