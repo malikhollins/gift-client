@@ -99,16 +99,23 @@
     {
         base.OnParametersSet();
 
-        _userOwnedList.Clear();
-        _otherLists.Clear();
-        
         var user = UserInfoService.GetUserInfo();
         _ownsHouse = user!.Id == Model.Owner;
-        _userOwnedList = Model!.Lists.Where(list => list.Owner == user.Id).ToList();
-        _otherLists = Model!.Lists.Where(list => list.Owner != user.Id).ToList();
+
+        RefreshLists();
+        
         _manageUsersParameters = new CenterModalParameters(typeof(Invite), "Manage Users", EventCallback.Empty);
         _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Empty);
         _deleteModalParameters = new CenterModalParameters(typeof(BasicConfirm), "Delete this house?", EventCallback.Factory.Create(this, DeleteHouseAsync));
+    }
+
+    public void RefreshLists()
+    {
+        _userOwnedList.Clear();
+        _otherLists.Clear();
+        var user = UserInfoService.GetUserInfo();
+        _userOwnedList = Model!.Lists.Where(list => list.Owner == user!.Id).ToList();
+        _otherLists = Model!.Lists.Where(list => list.Owner != user!.Id).ToList();
     }
 
     protected override void OnInitialized()
@@ -118,6 +125,11 @@
 
     private void OnListCreated(object? sender, UpdateEventListArgs updateEventListArgs)
     {
+        if (Model.Id != updateEventListArgs.UserList.House)
+        {
+            return;
+        }
+
         switch (updateEventListArgs.UpdateEventType)
         {
             case UpdateEventType.Delete:
@@ -132,6 +144,7 @@
                 break;
         }
 
+        RefreshLists();
         StateHasChanged();
     }
 

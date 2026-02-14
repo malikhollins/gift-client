@@ -1,6 +1,6 @@
 ﻿<div class="card-wrapper">
     <Card>
-        <CardLink Class="link" Disabled="EditMode" To=@(EditMode ? null : $"/house/{HouseId}/list/{Model.ListId}/owner/{Model.Owner}")>
+        <CardLink Class="link" Disabled="EditMode" To=@(EditMode ? null : $"/house/{HouseId}/list/{Model.ListId}/{Model.Name}/owner/{Model.Owner}/{Model.OwnerName}")>
             <CardBody>
                 <CardTitle Class="text-override">
                     <div class="header-container">
