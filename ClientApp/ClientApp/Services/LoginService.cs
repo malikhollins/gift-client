@@ -111,8 +111,10 @@ namespace ClientApp.Services
 
                 var user = await VerifyAuth0LoginAsync(loginResult);
 
-
                 _userInfoService.SetUserInfo(user);
+
+                await _authTokenService.RefreshTokenAsync();
+
                 return user != null;
             }
             catch (Exception ex)
