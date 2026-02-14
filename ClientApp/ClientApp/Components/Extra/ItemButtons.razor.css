@@ -1,9 +1,10 @@
-﻿#GiftItemEdits {
+﻿
+#GiftItemEdits {
     display: flex;
     flex-direction: column;
 }
 
-.FavoriteItem {
+.FavoriteItem, .UpdateBuyer, .Modify {
     margin-top: 1vh;
     margin-bottom: 1vh;
 }
@@ -12,29 +13,19 @@
     border-width: 1px;
     border-color: black;
     border-radius: 5px;
-    text-align: left
-}
-
-.UpdateBuyer {
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+    text-align: left;
 }
 
 ::deep .UpdateBuyer * {
     border-width: 1px;
     border-color: black;
     border-radius: 5px;
-    text-align: left
-}
-
-.Modify {
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+    text-align: left;
 }
 
 ::deep .Modify * {
     border-width: 1px;
     border-color: black;
     border-radius: 5px;
-    text-align: left
+    text-align: left;
 }

@@ -10,3 +10,7 @@
 ::deep .link {
     text-decoration: none;
 }
+
+::deep .card-subtitle {
+    color: black;
+}

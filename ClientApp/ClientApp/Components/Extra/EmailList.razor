@@ -1,4 +1,4 @@
-<div id="EmailList">
+<div id="EmailLabel">
     <AutoComplete DataProvider="UsersDataProvider"
                   Placeholder="Enter email"
                   @bind-Value="_inputString"
@@ -6,4 +6,4 @@
                   PropertyName="Email"
                   OnChanged="(User user ) => OnAutoCompleteChanged( user )"
                   StringComparison="StringComparison.Ordinal" />
-</div> <!-- end EmailList -->
+</div> <!-- end EmailLabel -->

@@ -21,6 +21,7 @@
 }
 
 .init-icon {
+    color: black;
     display: flex;
     flex-grow: 1;
     flex-shrink: 0;
@@ -38,19 +39,8 @@
     min-width: 5vw;
 }
 
-.text-link {
-   
-}
-
 .text-link a {
     text-decoration: none;
-}
-
-.text-link {
-
-}
-
-.description {
 }
 
 .text-description {

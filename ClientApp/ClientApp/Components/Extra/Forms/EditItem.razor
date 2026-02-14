@@ -7,7 +7,7 @@
 
             <div class="Button">
                 <label for="ItemNameLabel" style="text-align:left;">
-                    Change the items name
+                    Change the items name:
                 </label>
                 <InputText id="ItemNameLabel" @bind-Value="@ItemData!.Name" placeholder="Name here" />
                 <ValidationMessage For="() => ItemData.Name" />
@@ -15,7 +15,7 @@
 
             <div class="Button">
                 <label for="ItemDescriptionLabel" style="text-align:left;">
-                    Change the items description
+                    Change the items description:
                 </label>
                 <InputText id="ItemDescriptionLabel" @bind-Value="@ItemData!.Description" placeholder="Description here" />
                 <ValidationMessage For="() => ItemData.Description" />

@@ -5,16 +5,23 @@
 #HomepageGiftAll {
     margin-top: 3%;
     display: flex;
-    width: 100%;
 }
 
 .HomeGroup {
-    display: column;
     columns: 2;
-    width: 100%;
 }
 
 ::deep .HomeGroup > * {
     break-inside: avoid;
-    margin-bottom: 2em;
+    --card-margin: 0 0 2em 0;
+}
+
+@media screen and (max-width: 900px) {
+    .HomeGroup {
+        columns: 1;
+        min-width: 80vw;
+    }
+    ::deep .HomeCard {
+        min-width: 80vw;
+    }
 }

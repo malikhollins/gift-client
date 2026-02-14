@@ -37,6 +37,10 @@
     position: relative;
 }
 
+#EmailLabel {
+    padding: 6px;
+}
+
 label, p.messageStore, #submit, input {
     font-size: 22px;
 }

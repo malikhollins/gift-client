@@ -6,15 +6,15 @@
                 <EmailList StartingUsers="@(InvitedUsers.Select( invite => invite.User ).ToList())" OnUserInvited="@OnUserInvitedAsync" />
             </div> <!-- end InviteEmailList -->
         </div>
-        
         <div class="manage-container">
-            <span class="manage-label">Users invited to home</span>
+            <span class="manage-label">Users invited to home:</span>
+
             <SortableList Class="list" AllowSorting="false" Context="item" TItem="HouseInvites" Data="InvitedUsers">
                 <ItemTemplate>
                     <ManageUser HouseId="HouseId" Model="@item" />
                 </ItemTemplate>
                 <EmptyDataTemplate>
-                    <span>You haven't invited any users</span>
+                    <span class="empty-users">You haven't invited any users yet!</span>
                 </EmptyDataTemplate>
             </SortableList>
         </div>

@@ -25,6 +25,7 @@
 ::deep .HomeCard {
     padding: 10px;
     min-width: 45vw;
+    border: 1px solid black;
 }
 
 .HomeHouseText {

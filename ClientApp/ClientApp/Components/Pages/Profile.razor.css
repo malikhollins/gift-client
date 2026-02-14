@@ -1,3 +1,7 @@
 * {
-    text-align: center;
+    margin: 0 auto;
+}
+
+.updateUserInfo {
+    padding-top: 2%;
 }
