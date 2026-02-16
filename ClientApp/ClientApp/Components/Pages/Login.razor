@@ -2,12 +2,14 @@
 
 <div class="GiftAllLogin">
     <div class="titlePage"> <h1> GIFT ALL </h1>
-        <Button 
-            Style="background-color: #CC7575;border: none;text-align: center;font-size: 25px;" 
-            Size="ButtonSize.Large" 
-            @ref="_loginButton" 
-            @onclick="OnLoginClickedAsync">
+        @if (_retry)
+        {
+            <Button Style="background-color: #CC7575;border: none;text-align: center;font-size: 25px;"
+                    Size="ButtonSize.Large"
+                    @ref="_loginButton"
+                    @onclick="LoginAsync">
                 LOGIN
-        </Button>
+            </Button>
+        }
     </div> <!-- end titlePage -->
 </div> <!-- end GiftAllLogin -->

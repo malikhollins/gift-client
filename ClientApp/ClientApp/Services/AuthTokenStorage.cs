@@ -1,4 +1,6 @@
-﻿namespace ClientApp.Services
+﻿using System.IdentityModel.Tokens.Jwt;
+
+namespace ClientApp.Services
 {
     public class AuthTokenStorage
     {
@@ -15,8 +17,23 @@
             }
         }
 
-        public Task<string?> GetAuthTokenAsync() => SecureStorage.GetAsync( "auth_token" );
+        public Task<string?> GetAuthTokenAsync() => SecureStorage.GetAsync("auth_token");
 
         public Task<string?> GetRefreshTokenAsync() => SecureStorage.GetAsync("refresh_token");
+
+        public async Task<string?> GetValidAuthTokenAsync()
+        {
+            var accessToken = await GetAuthTokenAsync();
+            if (accessToken != null)
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(accessToken);
+                if ( jwtToken.ValidTo > DateTime.UtcNow)
+                {
+                    return accessToken;
+                }
+            }
+            return null;
+        }
     }
 }

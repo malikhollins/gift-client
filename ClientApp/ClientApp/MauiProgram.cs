@@ -1,6 +1,7 @@
 ﻿using ClientApp.Services;
 using Majorsoft.Blazor.Components.Common.JsInterop;
 using Microsoft.Extensions.Logging;
+using NReco.Logging.File;
 
 namespace ClientApp
 {
@@ -41,6 +42,11 @@ namespace ClientApp
             builder.Services.AddSingleton<NavStateService>();
             builder.Services.AddSingleton<HousePageObserver>();
             builder.Services.AddSingleton<ListPageObserver>();
+            builder.Services.AddLogging(loggingBuilder => {
+                loggingBuilder.AddConsole();
+                loggingBuilder.AddDebug();
+                //loggingBuilder.AddFile("User.log", append: true);
+            });
             builder.Services.AddJsInteropExtensions();
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

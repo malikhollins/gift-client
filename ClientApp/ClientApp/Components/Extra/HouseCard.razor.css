@@ -12,6 +12,10 @@
     flex-flow: column wrap;
 }
 
+.line-break {
+    border: black solid 1px;
+}
+
 .HeaderContainer {
     display: flex;
     justify-content: space-between;
@@ -44,4 +48,9 @@
 
 ::deep .dropdown-toggle::after {
     display: none;
+}
+
+.user-lists-header {
+    display: flex;
+    justify-content: space-between;
 }

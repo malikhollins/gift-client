@@ -14,3 +14,19 @@
 ::deep .card-subtitle {
     color: black;
 }
+
+.body-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+}
