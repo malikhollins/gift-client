@@ -3,6 +3,8 @@
     text-align: center;
     display: flex;
     flex-flow: row wrap;
+    background-color: var(--card-background-color);
+    border-color: var(--card-border-color);
 }
 
 .wrapper {
@@ -53,4 +55,9 @@
 .user-lists-header {
     display: flex;
     justify-content: space-between;
+}
+
+.user-owned-lists {
+    background-color: var(--card-background-color-secondary);
+    padding: 10px;
 }

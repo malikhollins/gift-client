@@ -4,6 +4,7 @@
     text-align: left;
     display: flex;
     flex-flow: column;
+    background-color: var(--card-background-color);
 }
 
 .card-body {
