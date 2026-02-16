@@ -1,0 +1,14 @@
+﻿::deep .list-group-item {
+    border: none;
+    margin-top: 4%;
+}
+span {
+    display: none;
+}
+
+@media (max-width: 600px) {
+
+    ::deep .list-group-item {
+        margin-top: 6%;
+    }
+}

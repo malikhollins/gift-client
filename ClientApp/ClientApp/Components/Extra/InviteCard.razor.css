@@ -1,11 +1,18 @@
-﻿.invite-card-wrapper {
+﻿* {
+    margin: 0 auto;
+}.invite-card-wrapper {
     display: flex;
     align-items: center;
-    text-align: center;
-    justify-content: space-between;
-    height: 5vh;
+    height: 7vh;
 }
 
-.status-btn {
-    margin: 10px;
+hr {
+    margin-top: 1%;
+}
+
+@media (min-width: 1000px) {
+
+    hr {
+        display: none;
+    }
 }

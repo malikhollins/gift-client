@@ -11,13 +11,11 @@
     height: 100%;
 }
 
-
 .name {
     color: black;
     font-size: 36px;
-    padding: 20px;
-}
-
-@media only screen and (max-width: 800px) {
-    /* at less than 800px the Favorite needs to move into the Item Buttons*/
-}
+    padding-top: 20px;
+} .owner {
+      font-size: 22px;
+      float: right;
+  }

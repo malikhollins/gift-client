@@ -45,3 +45,14 @@
 ::deep .dropdown-toggle::after {
     display: none;
 }
+
+.user-lists-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-owned-lists {
+    background-color: var(--card-background-color-secondary);
+    padding: 10px;
+    border-radius: 6px;
+}

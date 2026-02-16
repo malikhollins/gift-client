@@ -16,6 +16,11 @@
     --card-margin: 0 0 2em 0;
 }
 
+.textContainer p.text {
+    width: 100%;
+    font-size: 22px;
+}
+
 @media screen and (max-width: 900px) {
     .HomeGroup {
         columns: 1;
