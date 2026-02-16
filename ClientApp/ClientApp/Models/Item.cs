@@ -1,10 +1,14 @@
-﻿namespace ClientApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ClientApp.Models
 {
     public class Item
     {
         public int Id { get; set; }
         public int ListId { get; set; }
+        [Required]
         public string? Name { get; set; }
+        [Required]
         public string? Description { get; set; }
         public double Price { get; set; }
         public string? Link { get; set; }
