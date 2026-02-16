@@ -2,6 +2,7 @@
 using ClientApp.Models;
 using ClientApp.Utils;
 using Duende.IdentityModel.OidcClient;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,19 +16,22 @@ namespace ClientApp.Services
         private readonly UserInfoService _userInfoService;
         private readonly AuthTokenStorage _authTokenStorage;
         private readonly AuthTokenService _authTokenService;
+        private readonly ILogger<LoginService> _logger;
 
         public LoginService(
-            Auth0Client client, 
-            IHttpClientFactory httpClientFactory, 
-            UserInfoService userInfoService, 
+            Auth0Client client,
+            IHttpClientFactory httpClientFactory,
+            UserInfoService userInfoService,
             AuthTokenStorage authTokenStorage,
-            AuthTokenService authTokenService )
+            AuthTokenService authTokenService,
+            ILogger<LoginService> logger)
         {
             _authClient = client;
             _httpClientFactory = httpClientFactory;
             _userInfoService = userInfoService;
             _authTokenStorage = authTokenStorage;
             _authTokenService = authTokenService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -39,23 +43,15 @@ namespace ClientApp.Services
         private static string BuildUri(string? authId, string? email) => string.Format("/api/User/get/{0}/{1}", authId, email);
 
         /// <summary>
-        /// Verify with the database that the user exists
+        /// Create a user with the database
         /// </summary>
         /// <remarks>
         /// TODO: Move this to the callback for auth0
         /// </remarks>
         /// <param name="auth0LoginResult"></param>
         /// <returns></returns>
-        private async Task<User?> VerifyAuth0LoginAsync(LoginResult auth0LoginResult)
+        private async Task<User?> CreateUserAsync(LoginResult auth0LoginResult)
         {
-            await _authTokenStorage.UpdateTokensAsync(auth0LoginResult.AccessToken, auth0LoginResult.RefreshToken);
-            var userFromClaims = GetUserFromClaims(auth0LoginResult.User.Claims);
-            if (userFromClaims != null)
-            {
-                return userFromClaims;
-            }
-
-            // create a user from the database - one doesn't exist yet
 
             try
             {
@@ -80,38 +76,55 @@ namespace ClientApp.Services
         {
             try
             {
-                var token = await _authTokenService.RefreshTokenAsync();
-                if ( token != null )
+                var token = await _authTokenStorage.GetValidAuthTokenAsync();
+                if (token != null)
                 {
                     var handler = new JwtSecurityTokenHandler();
-                    var jwtToken = handler.ReadJwtToken( token );
-
-                    if (jwtToken.ValidTo > DateTime.UtcNow)
+                    var jwtToken = handler.ReadJwtToken(token);
+                    var claims = jwtToken.Claims;
+                    var userFromClaims = GetUserFromClaims(claims);
+                    if (userFromClaims != null && !userFromClaims.Name.IsNullOrEmpty())
                     {
-                        var claims = jwtToken.Claims;
-                        var userFromClaims = GetUserFromClaims(claims);
-                        if (userFromClaims != null && !userFromClaims.Name.IsNullOrEmpty())
-                        {
-                            _userInfoService.SetUserInfo(userFromClaims);
-                            return true;
-                        }
+                        _userInfoService.SetUserInfo(userFromClaims);
+                        return true;
                     }
                 }
+#if DEBUG
+                var stopwatch = Stopwatch.StartNew();
+#endif
 
                 var loginResult = await _authClient.LoginAsync(extraParameters: new Dictionary<string, string>
                     {
                         {
-                            "audience", "https://gift-application-service-garfg.ondigitalocean.app/"}
-                     });
+                            "audience", "https://gift-application-service-garfg.ondigitalocean.app/"
+                        }
+                    });
+
                 if (loginResult.IsError)
                 {
                     // auth0 doesn't throw exceptions, throw it for them
-                    throw new Exception(loginResult.Error);
+                    throw new Exception(loginResult.Error, new Exception(loginResult.ErrorDescription));
                 }
 
-                var user = await VerifyAuth0LoginAsync(loginResult);
+                await _authTokenStorage.UpdateTokensAsync(loginResult.AccessToken, loginResult.RefreshToken);
 
 
+#if DEBUG
+                _logger.LogInformation("Auth0 login finished - it took {time} seconds", stopwatch.Elapsed.TotalSeconds);
+                stopwatch.Restart();
+#endif
+
+                var user  = GetUserFromClaims(loginResult.User.Claims);
+                if (user != null)
+                {
+                    return true;
+                }
+
+                user = await CreateUserAsync(loginResult);
+#if DEBUG
+                _logger.LogInformation("Creating user finished - it took {time} seconds", stopwatch.Elapsed.TotalSeconds);
+                stopwatch.Stop();
+#endif
                 _userInfoService.SetUserInfo(user);
                 return user != null;
             }

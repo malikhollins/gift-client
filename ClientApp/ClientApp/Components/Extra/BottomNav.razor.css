@@ -1,6 +1,6 @@
 .bottomNav {
     height: 10vh;
-    background-color: rgb(171, 90, 90);
+    background-color: var(--nav-bar-color);
     width: 100%;
     border-radius: 15px 15px 0 0;
     display: flex inline !important;
@@ -13,8 +13,4 @@
     width: 24px;
     height: 24px;
     margin: auto;
-}
-
-    a.create {
-    background-image: url(/Images/gift.png);
 }

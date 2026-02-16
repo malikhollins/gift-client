@@ -1,25 +1,28 @@
 ﻿<div class="card-wrapper">
-    <Card>
-        <CardLink Class="link" Disabled="EditMode" To=@(EditMode ? null : $"/house/{HouseId}/list/{Model.ListId}/{Model.Name}/owner/{Model.Owner}/{Model.OwnerName}")>
+    <Card Class="ListCard">
+        <CardLink Class="link" Disabled="EditMode"
+                  To=@(EditMode ? null : $"/house/{HouseId}/list/{Model.ListId}/{Model.Name}/owner/{Model.Owner}/{Model.OwnerName}")>
             <CardBody>
-                <CardTitle Class="text-override">
-                    <div class="header-container">
-                        <div class="list-name">
-                            @Model.Name
-                        </div>
-                        @if (EditMode)
-                        {
-                            <div class="dropdown-container">
-                                <UniversalModal ModalParameters="_deleteListParameters">
-                                    <Button onclick="">
-                                        <Icon CustomIconName="fa-solid fa-x"/>
-                                    </Button>
-                                </UniversalModal>
+                <div class="body-container">
+                    <div class="text-container">
+                        <CardTitle Class="text-override">
+                            <div class="list-name">
+                                @Model.Name
                             </div>
-                        }
+                        </CardTitle>
+                        <CardSubTitle Class="text-override">@Model.OwnerName</CardSubTitle>
                     </div>
-                </CardTitle>
-                <CardSubTitle Class="text-override">@Model.OwnerName</CardSubTitle>
+                    @if (EditMode)
+                    {
+                        <div class="delete-container">
+                            <UniversalModal ModalParameters="_deleteListParameters">
+                                <Button onclick="">
+                                    Delete
+                                </Button>
+                            </UniversalModal>
+                        </div>
+                    }
+                </div>
             </CardBody>
         </CardLink>
     </Card>
