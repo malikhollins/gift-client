@@ -1,4 +1,5 @@
 ﻿@using ClientApp.Services
+@using Microsoft.FluentUI.AspNetCore.Components
 @inherits LayoutComponentBase
 @implements IDisposable;
 
@@ -14,6 +15,11 @@
 }
 
 <Modal IsServiceModal="true" />
+<FluentToastProvider />
+<FluentDialogProvider />
+<FluentTooltipProvider />
+<FluentMessageBarProvider />
+<FluentMenuProvider />
 
 @code {
     [Inject] ModalService ModalService { get; set; } = default!;
