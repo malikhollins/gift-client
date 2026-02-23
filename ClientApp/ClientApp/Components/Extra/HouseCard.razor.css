@@ -60,4 +60,5 @@
 .user-owned-lists {
     background-color: var(--card-background-color-secondary);
     padding: 10px;
+    border-radius: 6px;
 }
