@@ -1,5 +1,13 @@
 ﻿<div class="card-wrapper">
     <Card Class="ListCard">
+        
+        @if (Model.Deleted)
+        {
+            <CardBody>
+                Deleted!
+            </CardBody>
+        }
+        
         <CardLink Class="link" Disabled="EditMode"
                   To=@(EditMode ? null : $"/house/{HouseId}/list/{Model.ListId}/{Model.Name}/owner/{Model.Owner}/{Model.OwnerName}")>
             <CardBody>

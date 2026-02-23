@@ -1,13 +1,22 @@
 ﻿<div class="card-wrapper">
     <div class="card-body">
-        <div class="init-icon">            
+        
+        @if (Model.Deleted)
+        {
+            <div>
+                This item was deleted
+            </div>
+            return;
+        }
+        
+        <div class="init-icon">
             @if (userOwnsItem)
             {
-                <Favorite OnFavoriteToggled="@onItemfavorited" ListId="@ListId" Item="@Model" />
+                <Favorite OnFavoriteToggled="@onItemfavorited" ListId="@ListId" Item="@Model"/>
             }
             else
             {
-                <Buyer ListId="@ListId" Item="@Model" />
+                <Buyer ListId="@ListId" Item="@Model"/>
             }
         </div>
         <div class="text-description">
@@ -25,15 +34,15 @@
                     <CascadingValue Value="@ListId" Name="ListId">
                         <CascadingValue Value="@Model">
                             <CascadingValue Value="@OnItemEdited">
-                                <UniversalModal @ref="@editModal" ModalParameters="@editModalParameters" />
-                                <UniversalModal @ref="@deleteModal" ModalParameters="@deleteModalParameters" />
+                                <UniversalModal @ref="@editModal" ModalParameters="@editModalParameters"/>
+                                <UniversalModal @ref="@deleteModal" ModalParameters="@deleteModalParameters"/>
                             </CascadingValue>
                         </CascadingValue>
                     </CascadingValue>
                 </CascadingValue>
                 <Dropdown>
                     <DropdownToggleButton>
-                        <Icon CustomIconName="fa-solid fa-ellipsis-vertical" Size="IconSize.x5" />
+                        <Icon CustomIconName="fa-solid fa-ellipsis-vertical" Size="IconSize.x5"/>
                     </DropdownToggleButton>
                     <DropdownMenu>
                         <DropdownItem @onclick=@ShowEditModalAsync>
@@ -48,7 +57,7 @@
             }
             else
             {
-                <Favorite ListId="@ListId" Item="@Model" CanToggle="false" />
+                <Favorite ListId="@ListId" Item="@Model" CanToggle="false"/>
             }
         </div>
     </div>

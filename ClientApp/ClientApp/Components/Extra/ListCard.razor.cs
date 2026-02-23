@@ -1,11 +1,12 @@
-﻿using ClientApp.Components.Extra.Confirmation;
+﻿using System.ComponentModel;
+using ClientApp.Components.Extra.Confirmation;
 using ClientApp.Models;
 using ClientApp.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace ClientApp.Components.Extra
 {
-    public partial class ListCard
+    public partial class ListCard : IDisposable
     {
         [Inject] private ListService ListService { get; set; } = null!;
         [Inject] private ListPageObserver ListPageObserver { get; set; } = null!;
@@ -14,6 +15,18 @@ namespace ClientApp.Components.Extra
         [Parameter] public bool EditMode { get; set; }
 
         private CenterModalParameters? _deleteListParameters;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            
+            Model.PropertyChanged += ModelOnPropertyChanged;
+        }
+
+        private void ModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            StateHasChanged();
+        }
 
         protected override void OnParametersSet()
         {
@@ -33,6 +46,11 @@ namespace ClientApp.Components.Extra
                 var update = new UpdateEventListArgs(Model, UpdateEventType.Delete);
                 ListPageObserver.NotifyUpdated(update);
             }
+        }
+        
+        public void Dispose()
+        {
+            Model.PropertyChanged -= ModelOnPropertyChanged;
         }
     }
 }

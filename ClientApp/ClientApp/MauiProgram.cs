@@ -1,6 +1,7 @@
 ﻿using ClientApp.Services;
 using Majorsoft.Blazor.Components.Common.JsInterop;
 using Microsoft.Extensions.Logging;
+using Microsoft.FluentUI.AspNetCore.Components;
 using NReco.Logging.File;
 
 namespace ClientApp
@@ -34,6 +35,7 @@ namespace ClientApp
             builder.Services.SetupAuth0Authentication();
 
             // setup app specific services
+            builder.Services.AddFluentUIComponents();
             builder.Services.AddSingleton<HouseService>();
             builder.Services.AddSingleton<UserInfoService>();
             builder.Services.AddSingleton<UserService>();
@@ -42,6 +44,7 @@ namespace ClientApp
             builder.Services.AddSingleton<NavStateService>();
             builder.Services.AddSingleton<HousePageObserver>();
             builder.Services.AddSingleton<ListPageObserver>();
+            builder.Services.AddSingleton<HubService>();
             builder.Services.AddLogging(loggingBuilder => {
                 loggingBuilder.AddConsole();
                 loggingBuilder.AddDebug();

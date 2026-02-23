@@ -51,27 +51,31 @@
                         <ListCard Model="list" HouseId="Model.Id"/>
                     }
                 </div>
-                <div class="user-owned-lists">
-                    <div class="user-lists-header">
-                        <span class="user-lists-header-label"> Owned lists: </span>
-                        <Dropdown>
-                            <DropdownToggleButton>
-                                <Icon CustomIconName="fa-solid fa-ellipsis-vertical"/>
-                            </DropdownToggleButton>
-                            <DropdownMenu>
-                                <DropdownItem @onclick="NavigateToManageListPage">
-                                    Manage Lists
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    </div>
-                    <div>
-                        @foreach (var list in _userOwnedList)
-                        {
-                            <ListCard Model="list" HouseId="Model.Id"/>
-                        }
-                    </div>
-                </div>
+                
+                @if (_userOwnedList.Any())
+                {
+                    <div class="user-owned-lists">
+                        <div class="user-lists-header">
+                            <span class="user-lists-header-label"> Your lists </span>
+                            <Dropdown>
+                                <DropdownToggleButton>
+                                    <Icon CustomIconName="fa-solid fa-ellipsis-vertical"/>
+                                </DropdownToggleButton>
+                                <DropdownMenu>
+                                    <DropdownItem @onclick="NavigateToManageListPage">
+                                        Manage Lists
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                        <div>
+                            @foreach (var list in _userOwnedList)
+                            {
+                                <ListCard Model="list" HouseId="Model.Id"/>
+                            }
+                        </div>
+                    </div>   
+                }
             </ChildContent>
         </CardBody>
     </Card>
