@@ -8,12 +8,14 @@
     }
     else
     {
-        <div>
+        <div class="buttons">
             <Button Class="status-btn" @onclick="@(() => UpdateInviteStatusAsync(accepted: true))"> Accept </Button>
             <Button Class="status-btn" @onclick="@(() => UpdateInviteStatusAsync(accepted: false))"> Decline </Button>
         </div>
     }
+
 </div>
+<hr style="width:100%;" />
 
 @code {
 

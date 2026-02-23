@@ -27,7 +27,6 @@
     flex-grow: 1;
     flex-shrink: 0;
     width: 5vw;
-    min-width: 5vw;
     align-items: center;
 }
 
@@ -51,4 +50,10 @@
 
 ::deep .dropdown-toggle::after {
     display: none;
+}
+
+@media only screen and (max-width: 900px) {
+    .card-wrapper {
+        text-align: center;
+    }
 }
