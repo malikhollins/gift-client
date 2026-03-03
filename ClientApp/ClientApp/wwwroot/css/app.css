@@ -34,8 +34,10 @@ a, .btn-link, h5.modal-title {
     color: black;
 }
     h5.modal-title {
+        margin-top: auto;
         font-size: 22px;
     }
+
     /* EditForm input[type=text] */
 #EmailLabel, #HouseNameLabel, #ListNameLabel, input[type=text], input[type=email], #ItemNameLabel, #ItemDescriptionLabel {
     border-radius: 12px;
