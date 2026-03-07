@@ -4,11 +4,7 @@
     color: black;
 }
 
-.modal-backdrop {
-    z-index: 0 !important;
-}
-
-.modal-backdrop.show {
+.modal-backdrop, .modal-backdrop.show {
     z-index: 0 !important;
 }
 

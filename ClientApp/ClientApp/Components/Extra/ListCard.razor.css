@@ -4,8 +4,7 @@
 }
 
 .card-wrapper {
-    margin: var(--card-margin);
-    text-align: left;
+    margin-top: 1%;
 }
 
 ::deep .text-override {
@@ -23,6 +22,8 @@
 .body-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
 }
 
 .delete-container {
@@ -34,4 +35,5 @@
 .text-container {
     display: flex;
     flex-direction: column;
+    width: 75%;
 }
