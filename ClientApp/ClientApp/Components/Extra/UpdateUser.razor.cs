@@ -18,7 +18,7 @@ namespace ClientApp.Components.Extra
         public NavigationManager NavigationManager { get; set; } = null!;
 
         public User UserData { get; set; } = new();
-
+        
         protected override void OnInitialized()
         {
             var userInfo = UserInfoService.GetUserInfo();
@@ -36,8 +36,6 @@ namespace ClientApp.Components.Extra
         public async Task HandleValidSubmit()
         {
             await UserService.UpdateUserInfo(UserData!.Name!);
-
-            NavigationManager.NavigateTo("/homepage");
         }
     }
 }

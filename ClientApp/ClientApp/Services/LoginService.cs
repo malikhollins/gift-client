@@ -117,6 +117,7 @@ namespace ClientApp.Services
                 var user  = GetUserFromClaims(loginResult.User.Claims);
                 if (user != null)
                 {
+                    _userInfoService.SetUserInfo(user);
                     return true;
                 }
 
