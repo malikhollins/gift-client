@@ -3,13 +3,18 @@
     text-align: center;
     display: flex;
     flex-flow: row wrap;
+    background-color: var(--card-background-color);
+    border-color: var(--card-border-color);
 }
 
 .wrapper {
-    margin-top: 3%;
     display: flex;
     width: 100%;
     flex-flow: column wrap;
+}
+
+.line-break {
+    border: black solid 1px;
 }
 
 .HeaderContainer {
@@ -52,7 +57,9 @@
 }
 
 .user-owned-lists {
+    margin-top: 1%;
     background-color: var(--card-background-color-secondary);
     padding: 10px;
     border-radius: 6px;
 }
+

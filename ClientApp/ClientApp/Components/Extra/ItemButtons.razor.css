@@ -9,21 +9,7 @@
     margin-bottom: 1vh;
 }
 
-::deep .FavoriteItem * {
-    border-width: 1px;
-    border-color: black;
-    border-radius: 5px;
-    text-align: left;
-}
-
-::deep .UpdateBuyer * {
-    border-width: 1px;
-    border-color: black;
-    border-radius: 5px;
-    text-align: left;
-}
-
-::deep .Modify * {
+::deep .FavoriteItem *, ::deep .UpdateBuyer *, ::deep .Modify * {
     border-width: 1px;
     border-color: black;
     border-radius: 5px;

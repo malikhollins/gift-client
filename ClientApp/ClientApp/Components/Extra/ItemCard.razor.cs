@@ -1,4 +1,5 @@
-﻿using ClientApp.Components.Extra.Confirmation;
+﻿using System.ComponentModel;
+using ClientApp.Components.Extra.Confirmation;
 using ClientApp.Components.Extra.Forms;
 using ClientApp.Models;
 using ClientApp.Services;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace ClientApp.Components.Extra
 {
-    public partial class ItemCard
+    public partial class ItemCard : IDisposable
     {
         [Parameter]
         public int ListId { get; set; }
@@ -61,6 +62,13 @@ namespace ClientApp.Components.Extra
                 Title: "Delete item?",
                 OnCancelCallback: EventCallback.Empty,
                 OnCloseCallback: EventCallback.Factory.Create(this, DeleteItemAsync));
+            
+            Model.PropertyChanged += ModelOnPropertyChanged;
+        }
+
+        private void ModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            StateHasChanged();
         }
 
         protected async Task ShowEditModalAsync()
@@ -86,6 +94,11 @@ namespace ClientApp.Components.Extra
             {
                 OnItemDeleted?.Invoke(Model.Id);
             }
+        }
+        
+        public void Dispose()
+        {
+            Model.PropertyChanged -= ModelOnPropertyChanged;
         }
     }
 }

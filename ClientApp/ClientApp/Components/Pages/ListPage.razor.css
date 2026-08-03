@@ -2,6 +2,17 @@
     margin: 0 auto;
 }
 
+.name {
+    color: black;
+    padding-top: 20px;
+}
+
+.owner {
+    font-size: 22px;
+}
+h2 {
+    border-bottom: 1px solid var(--card-text-color);
+}
 .wrapper {
     color: var(--card-text-color);
     display: flex;
@@ -11,11 +22,3 @@
     height: 100%;
 }
 
-.name {
-    color: black;
-    font-size: 36px;
-    padding-top: 20px;
-} .owner {
-      font-size: 22px;
-      float: right;
-  }

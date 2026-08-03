@@ -13,6 +13,10 @@
     --card-width: 15vw;
     --card-margin: 1vh 1vw 1vh 1vw;
     --card-text-color: #75ab5a !important;
+    --card-background-color: #fdfdfd;
+    --card-border-color: black;
+    --nav-bar-color: #d16f6f !important;
+    --card-background-color-secondary: #9c9c9c;
 }
 
 html, body {
@@ -30,8 +34,10 @@ a, .btn-link, h5.modal-title {
     color: black;
 }
     h5.modal-title {
+        margin-top: auto;
         font-size: 22px;
     }
+
     /* EditForm input[type=text] */
 #EmailLabel, #HouseNameLabel, #ListNameLabel, input[type=text], input[type=email], #ItemNameLabel, #ItemDescriptionLabel {
     border-radius: 12px;

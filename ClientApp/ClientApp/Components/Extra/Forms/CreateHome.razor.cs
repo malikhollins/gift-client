@@ -46,7 +46,7 @@ namespace ClientApp.Components.Extra.Forms
             };
 
             var house = await HouseService.CreateHouseAsync(createHouseRequest);
-
+            house.Lists ??= [];
             var update = new UpdateEventHouseArgs( house, UpdateEventType.Add );
             HousePageObserver.NotifyUpdated(update);
             

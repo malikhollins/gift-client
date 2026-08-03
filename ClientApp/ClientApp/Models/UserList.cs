@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace ClientApp.Models
 {
-    public class UserList
+    public class UserList : NotificationObject
     {
         public int ListId { get; set; }
         
@@ -15,5 +17,12 @@ namespace ClientApp.Models
         public string? Name { get; set; }
 
         public string? OwnerName { get; set; }
+
+        private bool _deleted;
+        public bool Deleted
+        {
+            get => _deleted;
+            set => SetField( ref _deleted, value);
+        }
     }
 }
