@@ -54,22 +54,15 @@ namespace ClientApp.Components.Pages
             }
 
             Connection ??= HubService.Build();
-            await Connection.SendAsync("JoinHouses",  user.Id, Houses );
 
             Connection.On("NotifyListCreated", () =>
             {
                 housesOrListsChanged = true;
             });
 
-            Connection.On("NotifyListDeleted", ( object obj ) =>
+            Connection.On("NotifyListDeleted", ( int listId ) =>
             {
                 housesOrListsChanged = true;
-                
-                if (obj is not int listId)
-                {
-                    return;
-                }
-                
                 foreach (var house in Houses)
                 {
                     foreach (var list in house.Lists)
@@ -81,6 +74,10 @@ namespace ClientApp.Components.Pages
                     }
                 }
             });
+            
+            await Connection.StartAsync();
+            
+            await Connection.SendAsync("JoinHouses",  user.Id, Houses );
         }
 
         private async Task<bool> ShouldRefreshHousesAsync()
@@ -125,6 +122,7 @@ namespace ClientApp.Components.Pages
         public async ValueTask DisposeAsync()
         {
             if (Connection != null) await Connection.DisposeAsync();
+            Connection = null;
         }
     }
 }
