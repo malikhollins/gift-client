@@ -1,7 +1,34 @@
-﻿button {
+﻿.updateUserInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.updateUserInfo label {
+    font-weight: 600;
+    color: var(--card-text-color);
+    display: block;
+}
+
+.updateUserInfo input[type="text"],
+.updateUserInfo input[type="email"],
+.updateUserInfo input,
+.updateUserInfo InputText {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border-color);
+    background-color: var(--card-background-color-secondary);
+    color: inherit;
+}
+
+button {
     padding: 5px;
     margin-top: 1%;
     border-radius: 12px;
     border: none;
     background-color: var(--nav-bar-color);
+    color: white;
 }

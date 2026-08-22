@@ -13,7 +13,8 @@ public partial class Profile : ComponentBase
         var nav = new NavState
         {
             CenterModalParameters = null,
-            GoBackUrl = "/homepage"
+            GoBackUrl = "/homepage",
+            RemoveProfileIcon = true
         };
         NavStateService.UpdateNavState(nav);
     }

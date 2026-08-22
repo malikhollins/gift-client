@@ -12,8 +12,8 @@ namespace ClientApp.Components.Extra
         [Inject] private ListService ListService { get; set; } = null!;
         [Inject] private UserInfoService UserInfoService { get; set; } = null!;
 
-        private bool isBought;
-
+        private bool didUserBuy;
+        private bool isPurchased;
         private bool canInteract;
 
         protected override void OnParametersSet() => RefreshButton();
@@ -21,8 +21,9 @@ namespace ClientApp.Components.Extra
         private void RefreshButton()
         {
             var user = UserInfoService.GetUserInfo();
-            isBought = Item.Buyer == user!.Id;
-            canInteract = !isBought || Item.Buyer == null;
+            didUserBuy = Item.Buyer == user!.Id;
+            isPurchased = Item.Buyer != null;
+            canInteract = didUserBuy || !isPurchased;
         }
 
         private async Task MarkAsBuyerAsync()
@@ -33,17 +34,19 @@ namespace ClientApp.Components.Extra
                 return;
             }
 
+            int? buyerId = user.Id == Item.Buyer ? null : user.Id;
             var updateBuyerRequest = new UpdateBuyerInItemRequest
             {
+                UserId = user.Id,
                 ItemId = Item.Id,
                 ListId = ListId,
-                BuyerId = user.Id == Item.Buyer ? null : user.Id
+                BuyerId = buyerId
             };
 
             var response = await ListService.UpdateBuyerAsync(updateBuyerRequest);
             if ( response.IsSuccessStatusCode )
             {
-                Item.Buyer = user.Id;
+                Item.Buyer = buyerId;
                 RefreshButton();
                 StateHasChanged();
             }

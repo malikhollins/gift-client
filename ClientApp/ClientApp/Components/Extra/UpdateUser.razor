@@ -1,12 +1,12 @@
 ﻿<div class="updateUserInfo">
-    <h3>Update User Information</h3>
+    <span> User information </span>
     <EditForm Model="@UserData" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div>
-            <label for="name">Enter a Name:</label>
+            <label for="name">Enter Name:</label>
             <InputText id="name" @bind-Value="UserData.Name" />
         </div>
-        <button type="submit">Update Name</button>
+        <button type="submit"> Update </button>
     </EditForm>
 </div>

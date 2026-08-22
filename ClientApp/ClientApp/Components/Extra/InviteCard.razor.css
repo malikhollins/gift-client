@@ -1,9 +1,45 @@
 ﻿* {
     margin: 0 auto;
-}.invite-card-wrapper {
+}
+
+.invite-card-wrapper {
     display: flex;
     align-items: center;
-    height: 7vh;
+    height: auto;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+}
+
+.invite-card-wrapper span {
+    flex: 1 1 auto;
+    color: var(--card-text-color);
+    text-align: left;
+}
+
+.buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.status-btn ::deep {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border-color);
+    color: white;
+    cursor: pointer;
+    background-image: none;
+    box-shadow: none;
+}
+
+/* increase specificity so library button styles don't override colors */
+button.status-btn.accept ::deep,
+.btn.status-btn.accept ::deep {
+    background-color: var(--invite-accept-color);
+}
+
+button.status-btn.reject ::deep,
+.btn.status-btn.reject ::deep {
+    background-color: var(--invite-reject-color);
 }
 
 hr {
@@ -11,7 +47,6 @@ hr {
 }
 
 @media (min-width: 1000px) {
-
     hr {
         display: none;
     }

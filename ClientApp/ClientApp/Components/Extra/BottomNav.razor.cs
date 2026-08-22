@@ -7,16 +7,34 @@ namespace ClientApp.Components.Extra
     public partial class BottomNav : IDisposable
     {
         [Inject] NavStateService NavStateService { get; set; } = null!;
+        [Inject] InviteService InviteService { get; set; } = null!;
+        [Inject] UserInfoService UserInfoService { get; set; } = null!;
         [Parameter] public string? GoBackUrl { get; set; }
         [Parameter] public CenterModalParameters CenterModalParameters { get; set; } = default!;
         private int HouseId { get; set; }
         private int ListId { get; set; }
+        private bool HasInvites { get; set; }
+        private bool RemoveProfileIcon { get; set; }
 
         protected override Task OnInitializedAsync()
         {
             NavStateService.OnNavStateChanged += NavStateService_OnNavStateChanged;
             UpdateNavParameters( NavStateService!.CurrentState! );
             return base.OnInitializedAsync();
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            var user = UserInfoService.GetUserInfo();
+            if (user != null)
+            {
+                var inviteResponse = await InviteService.GetInvitesForUser(user.Id);
+                HasInvites = inviteResponse.Any(invite => invite.InviteStatus == InviteStatus.Pending);
+            }
+            else
+            {
+                HasInvites = false;
+            }
         }
 
         private void NavStateService_OnNavStateChanged(object? sender, NavState naveState )
@@ -33,6 +51,7 @@ namespace ClientApp.Components.Extra
             CenterModalParameters = state!.CenterModalParameters!;
             HouseId = state.HouseId;
             ListId = state.ListId;
+            RemoveProfileIcon = state.RemoveProfileIcon;
             StateHasChanged();
         }
 
