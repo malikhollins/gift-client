@@ -66,58 +66,46 @@ namespace ClientApp.Components.Pages
             }
 
             Connection ??= HubService.Build();
+            
+            Connection.On("NotifyItemCreated", (Item item) =>
+            {
+                var inList = _itemsInList.Any(i => i.Id == item.Id);
+                if (!inList)
+                {
+                    _itemsInList.Add(item);
+                }
+            });
+
+            Connection.On("NotifyItemUpdated", (UpdateItemRequest item) =>
+            {
+                var itemInList = _itemsInList.FirstOrDefault(i => i.Id == item.ItemId);
+                itemInList?.Update(item);
+            });
+
+            Connection.On("NotifyItemDeleted", (int itemId) =>
+            {
+                var itemInList = _itemsInList.FirstOrDefault(i => i.Id == itemId);
+                if (itemInList != null)
+                {
+                    itemInList.Deleted = true;
+                }
+            });
+
+            Connection.On("NotifyFavoriteUpdated", (UpdateFavoriteItemRequest favoriteItemRequest) =>
+            {
+                var itemInList = _itemsInList.FirstOrDefault(i => i.Id == favoriteItemRequest.ItemId);
+                itemInList?.Update(favoriteItemRequest);
+            });
+
+            Connection.On("NotifyBuyerUpdated", (UpdateBuyerInItemRequest buyerInItemRequest) =>
+            {
+                var itemInList = _itemsInList.FirstOrDefault(i => i.Id == buyerInItemRequest.ItemId);
+                itemInList?.Update(buyerInItemRequest);
+            });
+            
+            await Connection.StartAsync();
+            
             await Connection.SendAsync("JoinList", ListId);
-
-            Connection.On("NotifyItemCreated", (object obj) =>
-            {
-                if (obj is Item item)
-                {
-                    var inList = _itemsInList.Any(i => i.Id == item.Id);
-                    if (!inList)
-                    {
-                        _itemsInList.Add(item);
-                    }
-                }
-            });
-
-            Connection.On("NotifyItemUpdated", (object obj) =>
-            {
-                if (obj is UpdateItemRequest item)
-                {
-                    var itemInList = _itemsInList.FirstOrDefault(i => i.Id == item.ItemId);
-                    itemInList?.Update(item);
-                }
-            });
-
-            Connection.On("NotifyItemDeleted", (object obj) =>
-            {
-                if (obj is int itemId)
-                {
-                    var itemInList = _itemsInList.FirstOrDefault(i => i.Id == itemId);
-                    if (itemInList != null)
-                    {
-                        itemInList.Deleted = true;
-                    }
-                }
-            });
-
-            Connection.On("NotifyFavoriteUpdated", (object obj) =>
-            {
-                if (obj is UpdateFavoriteItemRequest favoriteItemRequest)
-                {
-                    var itemInList = _itemsInList.FirstOrDefault(i => i.Id == favoriteItemRequest.ItemId);
-                    itemInList?.Update(favoriteItemRequest);
-                }
-            });
-
-            Connection.On("NotifyBuyerUpdated", (object obj) =>
-            {
-                if (obj is UpdateBuyerInItemRequest buyerInItemRequest)
-                {
-                    var itemInList = _itemsInList.FirstOrDefault(i => i.Id == buyerInItemRequest.ItemId);
-                    itemInList?.Update(buyerInItemRequest);
-                }
-            });
         }
 
         private void UpdateItemInList(Item item)

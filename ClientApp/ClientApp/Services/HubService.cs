@@ -19,6 +19,7 @@ public class HubService
             {
                 options.AccessTokenProvider = async () => await _authTokenService.RefreshTokenAsync();
             })
+            .WithAutomaticReconnect()
             .Build();
     }
 }
