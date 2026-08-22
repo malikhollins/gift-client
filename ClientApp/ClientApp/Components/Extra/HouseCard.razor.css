@@ -63,3 +63,23 @@
     border-radius: 6px;
 }
 
+/* Expand/collapse animations */
+.house-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 250ms ease-in-out, padding 200ms ease-in-out;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.house-body.expanded {
+    /* Large enough to show content; using a big max-height allows transition to work for varying content sizes */
+    max-height: 2000px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.expand-button {
+    margin-right: 8px;
+}
+

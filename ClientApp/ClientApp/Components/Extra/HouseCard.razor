@@ -9,7 +9,11 @@
             <div class="HeaderContainer">
                 <span class="HomeHouseText">@Model.Name</span>
                 <CascadingValue Value="@Model.Id" Name="HouseId">
-                    <div>
+                    <div class="header-actions">
+                        <Button Size="ButtonSize.Small" @onclick="ToggleExpand" Class="expand-button" Title="Toggle lists">
+                            <Icon CustomIconName="@( Model.IsExpanded ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down" )"/>
+                        </Button>
+
                         <UniversalModal ModalParameters="_createListParameters">
                             <Button Size="ButtonSize.Small">
                                 <Icon CustomIconName="fa-solid fa-plus"/>
@@ -38,21 +42,22 @@
             </div>
         </CardTitle>
 
-        @if (!@Model.Lists.Any())
-        {
-            <p class="text-italic"> No lists in this house! Add one! </p>
-            return;
-        }
 
         <CardBody>
-            <ChildContent>
+            <div class="house-body @(Model.IsExpanded ? "expanded" : "collapsed")">
+
+                @if (!@Model.Lists.Any())
+                {
+                    <p class="text-italic"> No lists in this house! Add one! </p>
+                }
+
                 <div class="wrapper">
                     @foreach (var list in _otherLists)
                     {
                         <ListCard Model="list" HouseId="Model.Id"/>
                     }
                 </div>
-                
+
                 @if (_userOwnedList.Any())
                 {
                     <div class="user-owned-lists">
@@ -77,7 +82,7 @@
                         </div>
                     </div>   
                 }
-            </ChildContent>
+            </div>
         </CardBody>
     </Card>
 </div> <!-- end Home -->
@@ -156,6 +161,12 @@
     public void Dispose()
     {
         ListPageObserver.OnUpdated -= OnListCreated;
+    }
+
+    private void ToggleExpand()
+    {
+        Model.IsExpanded = !Model.IsExpanded;
+        InvokeAsync(StateHasChanged);
     }
 
     private async Task DeleteHouseAsync()
