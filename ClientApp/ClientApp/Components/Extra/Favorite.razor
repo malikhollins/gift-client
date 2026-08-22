@@ -6,7 +6,7 @@
     return;
 }
 
-<Button @onclick=@( async () => await ToggleFavoriteAsync() )>
+<Button Class="icon-only" @onclick=@( async () => await ToggleFavoriteAsync() )>
     <Icon CustomIconName="@(isFavorited ? "fa-solid fa-heart" : "fa-regular fa-heart")" Size="IconSize.x5" />
 </Button>
 

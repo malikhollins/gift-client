@@ -4,6 +4,29 @@
     font-weight: 300 900;
 }
 
+/* Buttons that contain only an icon: remove borders/shadows to render them
+   as flat icon buttons. Apply to both standard .btn and BlazorBootstrap's
+   .bb-button when given the .icon-only helper class. */
+.icon-only,
+.icon-only:focus,
+.icon-only:active,
+button.icon-only,
+.bb-button.icon-only {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding: 0.25rem; /* keep a small touch target */
+    width: auto;
+    height: auto;
+}
+
+/* If you want a subtle focus ring for accessibility, enable this and
+   adjust color/width as needed. */
+.icon-only:focus-visible {
+    outline: 2px solid rgba(0,0,0,0.12);
+    outline-offset: 2px;
+}
+
 /* Reusable utility to render text in italic where needed */
 .text-italic {
     font-style: italic;

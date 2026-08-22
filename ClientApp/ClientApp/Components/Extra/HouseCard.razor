@@ -10,12 +10,12 @@
                 <span class="HomeHouseText">@Model.Name</span>
                 <CascadingValue Value="@Model.Id" Name="HouseId">
                     <div class="header-actions">
-                        <Button Size="ButtonSize.Small" @onclick="ToggleExpand" Class="expand-button" Title="Toggle lists">
+                        <Button Size="ButtonSize.Small" @onclick="ToggleExpand" Class="expand-button icon-only" Title="Toggle lists">
                             <Icon CustomIconName="@( Model.IsExpanded ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down" )"/>
                         </Button>
 
                         <UniversalModal ModalParameters="_createListParameters">
-                            <Button Size="ButtonSize.Small">
+                            <Button Size="ButtonSize.Small" Class="icon-only">
                                 <Icon CustomIconName="fa-solid fa-plus"/>
                             </Button>
                         </UniversalModal>
@@ -43,7 +43,7 @@
         </CardTitle>
 
 
-        <CardBody>
+        <CardBody Class="@($"house-body-wrapper {(Model.IsExpanded ? "expanded" : "collapsed")}")">
             <div class="house-body @(Model.IsExpanded ? "expanded" : "collapsed")">
 
                 @if (!@Model.Lists.Any())
