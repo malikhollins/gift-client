@@ -1,6 +1,6 @@
 .bottomNav {
     height: 10vh;
-    background-color: var(--nav-bar-color);
+    background-color: var(--bottomnav-bg-color, var(--nav-bar-color));
     width: 100%;
     border-radius: 15px 15px 0 0;
     display: flex inline !important;
@@ -13,4 +13,5 @@
     width: 24px;
     height: 24px;
     margin: auto;
+    color: var(--bottomnav-icon-color, var(--card-text-color));
 }

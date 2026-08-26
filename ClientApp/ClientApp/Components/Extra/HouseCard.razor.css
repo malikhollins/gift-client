@@ -13,14 +13,31 @@
     flex-flow: column wrap;
 }
 
-.line-break {
-    border: black solid 1px;
+    .line-break {
+    border: var(--house-card-linebreak-border-color, black) solid 1px;
 }
 
 .HeaderContainer {
     display: flex;
     justify-content: space-between;
 }
+
+    .HeaderContainer .header-actions {
+        display: grid;
+        grid-template-columns: 24px 24px 24px;
+        gap: 8px;
+        align-items: center;
+        justify-items: center;
+    }
+
+        ::deep .HeaderContainer .header-actions > * {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            padding: 0;
+        }
 
 ::deep .AddButtonSize {
     height: 2em;
@@ -30,11 +47,35 @@
 ::deep .HomeCard {
     padding: 10px;
     min-width: 45vw;
-    border: 1px solid black;
+    border: 1px solid var(--house-card-border-color, var(--card-border-color));
 }
 
 .HomeHouseText {
     margin-right: 2vw;
+    color: var(--house-card-homehouse-text-color, var(--card-text-color));
+}
+
+/* map icons and other text/backgrounds to globals */
+::deep .fa-chevron-down {
+    color: var(--house-card-chevron-color, var(--card-text-color));
+}
+
+::deep .fa-plus {
+    color: var(--house-card-plus-color, var(--card-text-color));
+}
+
+::deep .fa-ellipsis-vertical {
+    color: var(--house-card-hamburger-color, var(--card-text-color));
+}
+
+.user-lists-header-label,
+::deep .user-lists-header-label {
+    color: var(--house-card-user-lists-header-label-color, var(--card-text-color));
+}
+
+.house-body p,
+::deep .house-body p {
+    color: var(--house-card-housebody-text-color, var(--card-text-color));
 }
 
 ::deep .HomeHouseTitle {

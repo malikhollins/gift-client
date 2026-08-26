@@ -25,7 +25,7 @@
     padding: 6px 10px;
     border-radius: 8px;
     border: 1px solid var(--card-border-color);
-    color: white;
+    color: var(--invitecard-status-text-color, white);
     cursor: pointer;
     background-image: none;
     box-shadow: none;

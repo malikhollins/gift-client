@@ -20,12 +20,12 @@ button.icon-only,
     height: auto;
 }
 
-/* If you want a subtle focus ring for accessibility, enable this and
+    /* If you want a subtle focus ring for accessibility, enable this and
    adjust color/width as needed. */
-.icon-only:focus-visible {
-    outline: 2px solid rgba(0,0,0,0.12);
-    outline-offset: 2px;
-}
+    .icon-only:focus-visible {
+        outline: 2px solid rgba(0,0,0,0.12);
+        outline-offset: 2px;
+    }
 
 /* Reusable utility to render text in italic where needed */
 .text-italic {
@@ -48,6 +48,42 @@ button.icon-only,
     /* Invite button colors */
     --invite-accept-color: #26b050; /* green */
     --invite-reject-color: #e50000; /* red */
+    /* HouseCard component variables */
+    --house-card-border-color: var(--card-border-color);
+    --house-card-linebreak-border-color: var(--house-card-border-color);
+    --house-card-homehouse-text-color: var(--card-text-color);
+    --house-card-chevron-color: var(--card-text-color);
+    --house-card-plus-color: var(--card-text-color);
+    --house-card-hamburger-color: var(--card-text-color);
+    --house-card-user-lists-header-label-color: var(--card-text-color);
+    --house-card-housebody-text-color: var(--card-text-color);
+    /* Header variables */
+    --header-border-color: black;
+    --header-h1-color: black;
+    --header-link-color: black;
+    /* ListPage */
+    --listpage-name-color: black;
+    /* InviteCard */
+    --invitecard-status-text-color: white;
+    /* CreateHome */
+    --createhome-close-icon-color: #AB5A5A;
+    --createhome-input-bg: #848484;
+    --createhome-button-bg: #AB5A5A;
+    --createhome-button-text-color: black;
+    /* CreateItem */
+    --createitem-close-icon-color: #AB5A5A;
+    --createitem-input-bg: #848484;
+    --createitem-button-bg: #AB5A5A;
+    --createitem-button-text-color: black;
+    /* Bottom nav */
+    --bottomnav-bg-color: var(--nav-bar-color);
+    --bottomnav-icon-color: var(--card-text-color);
+    --bottomnav-plus-color: var(--card-text-color);
+    --bottomnav-profile-color: var(--card-text-color);
+    /* User settings */
+    --usercard-title-color: plum;
+    --updateuser-button-bg: var(--nav-bar-color);
+    --updateuser-button-text-color: white;
 }
 
 html, body {
@@ -62,14 +98,15 @@ html, body {
 }
 
 a, .btn-link, h5.modal-title {
-    color: black;
+    color: inherit;
 }
-    h5.modal-title {
-        margin-top: auto;
-        font-size: 22px;
-    }
 
-    /* EditForm input[type=text] */
+h5.modal-title {
+    margin-top: auto;
+    font-size: 22px;
+}
+
+/* EditForm input[type=text] */
 #EmailLabel, #HouseNameLabel, #ListNameLabel, input[type=text], input[type=email], #ItemNameLabel, #ItemDescriptionLabel {
     border-radius: 12px;
     background-color: #848484;
@@ -124,11 +161,30 @@ a, .btn-link, h5.modal-title {
     }
 
 /* Responsive */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
 
-    #Home, #homeUserCard {
-        width: 100% !important;
+    .fluent-pull-container {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
+
+        .fluent-pull-container::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            background: transparent;
+        }
+
+
+    main {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+        main::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            background: transparent;
+        }
 
     span.webCreate {
         display: none;

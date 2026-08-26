@@ -7,6 +7,9 @@
 }
 
 .HomeGroup {
+    flex: auto;
+    align-items: center;
+    justify-items: center;
     margin: 3%;
     columns: 2;
 }
@@ -25,6 +28,11 @@
     .HomeGroup {
         columns: 1;
         min-width: 80vw;
+        flex: auto;
+        align-items: center;
+        justify-items: center;
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
     }
     ::deep .HomeCard {
         min-width: 80vw;

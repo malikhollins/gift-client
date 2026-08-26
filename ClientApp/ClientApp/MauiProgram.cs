@@ -38,6 +38,7 @@ namespace ClientApp
             builder.Services.AddFluentUIComponents();
             builder.Services.AddSingleton<HouseService>();
             builder.Services.AddSingleton<UserInfoService>();
+            builder.Services.AddSingleton<HouseExpandService>();
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<InviteService>();
             builder.Services.AddSingleton<ListService>();
