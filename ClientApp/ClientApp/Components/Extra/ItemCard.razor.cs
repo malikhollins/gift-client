@@ -68,7 +68,7 @@ namespace ClientApp.Components.Extra
 
         private void ModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         protected async Task ShowEditModalAsync()

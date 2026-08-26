@@ -1,3 +1,3 @@
-﻿<Button Disabled="@(!canInteract)" @onclick=@( async () => await MarkAsBuyerAsync() )>
-    <Icon CustomIconName="@( isBought ? "fa-solid fa-user-check" : "fa-regular fa-user" )" Size="IconSize.x5" />
+﻿<Button Class="icon-only" Disabled="@(!canInteract)" @onclick=@( async () => await MarkAsBuyerAsync() )>
+    <Icon CustomIconName="@( isPurchased ? "fa-solid fa-user-check" : "fa-regular fa-user" )" Size="IconSize.x5" />
 </Button>

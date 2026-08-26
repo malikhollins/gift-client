@@ -19,7 +19,7 @@ namespace ClientApp.Components.Extra
         protected override void OnParametersSet()
         {
             isFavorited = Item.Favorite;
-        }
+        }   
 
         private async Task ToggleFavoriteAsync()
         {
@@ -40,9 +40,12 @@ namespace ClientApp.Components.Extra
             var response = await ListService.UpdateFavoriteInList(request);
             if ( response.IsSuccessStatusCode )
             {
-                isFavorited = !isFavorited;
-                OnFavoriteToggled.Invoke(isFavorited);
-                StateHasChanged();
+                // Use the value we sent in the request as the new visual state
+                // (Item.Favorite may not yet be updated elsewhere).
+                isFavorited = request.Favorited;
+                Item.Favorite = isFavorited;
+                OnFavoriteToggled?.Invoke(isFavorited);
+                await InvokeAsync(StateHasChanged);
             }
         }
     }

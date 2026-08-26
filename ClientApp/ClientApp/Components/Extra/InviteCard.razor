@@ -9,8 +9,8 @@
     else
     {
         <div class="buttons">
-            <Button Class="status-btn" @onclick="@(() => UpdateInviteStatusAsync(accepted: true))"> Accept </Button>
-            <Button Class="status-btn" @onclick="@(() => UpdateInviteStatusAsync(accepted: false))"> Decline </Button>
+            <Button Class="status-btn accept" @onclick="@(() => UpdateInviteStatusAsync(accepted: true))"> Accept </Button>
+            <Button Class="status-btn reject" @onclick="@(() => UpdateInviteStatusAsync(accepted: false))"> Decline </Button>
         </div>
     }
 

@@ -1,13 +1,20 @@
-﻿@if (!Invites.Any())
-{
-    return;
-}
+﻿
+<div class="invites">
+    
+    <span> Invites </span>
 
-<div class="InvitesContainer">
-    <span > Invites </span>
-    <SortableList AllowSorting="false" Context="item" Data="@Invites" TItem="UserInvites">
-        <ItemTemplate>
-            <InviteCard Model="@item" />
-        </ItemTemplate>
-    </SortableList>
+    @if (Invites.Any())
+    {
+        <SortableList AllowSorting="false" Context="item" Data="@Invites" TItem="UserInvites">
+            <ItemTemplate>
+                <InviteCard Model="@item" />
+            </ItemTemplate>
+        </SortableList>
+    }
+    else
+    {
+        <div class="no-invites">
+            <span class="text-italic"> No invites yet </span>
+        </div>
+    }
 </div>

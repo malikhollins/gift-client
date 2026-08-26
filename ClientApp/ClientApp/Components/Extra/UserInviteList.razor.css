@@ -1,14 +1,29 @@
-﻿::deep .list-group-item {
-    border: none;
-    margin-top: 4%;
+﻿/* Ensure invite list content is left-aligned and visible inside its card */
+.invites {
+    width: 100%;
+    text-align: left;
 }
+
 span {
-    display: none;
+    display: block;
+    color: var(--card-text-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.no-invites {
+    color: var(--card-text-color);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+::deep .list-group-item {
+    border: none;
+    margin-top: 0.75rem;
 }
 
 @media (max-width: 600px) {
-
     ::deep .list-group-item {
-        margin-top: 6%;
+        margin-top: 0.9rem;
     }
 }

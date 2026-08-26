@@ -3,11 +3,11 @@
 }
 
 #HomepageGiftAll {
-    margin-top: 3%;
     display: flex;
 }
 
 .HomeGroup {
+    margin: 3%;
     columns: 2;
 }
 

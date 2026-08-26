@@ -1,7 +1,20 @@
-* {
-    margin: 0 auto;
+/* Profile page layout and card styles */
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 2%;
+    width: 100%;
 }
 
-.updateUserInfo {
-    padding-top: 2%;
+.profile-card,
+.invites-card {
+    width: 100%;
+    background-color: var(--card-background-color);
+    color: var(--card-text-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: left;
 }
