@@ -94,6 +94,7 @@
     [Inject] public ListPageObserver ListPageObserver { get; set; } = null!;
     [Inject] public HousePageObserver HousePageObserver { get; set; } = null!;
     [Inject] public HouseService HouseService { get; set; } = null!;
+    [Inject] public HouseExpandService HouseExpandService { get; set; } = null!;
     [Inject] NavigationManager NavigationManager { get; set; } = null!;
 
     private CenterModalParameters? _createListParameters;
@@ -117,6 +118,7 @@
         _manageUsersParameters = new CenterModalParameters(typeof(Invite), "Manage Users", EventCallback.Empty);
         _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Empty);
         _deleteModalParameters = new CenterModalParameters(typeof(BasicConfirm), "Delete this house?", EventCallback.Factory.Create(this, DeleteHouseAsync));
+        HouseExpandService.ApplyTo(Model!);
     }
 
     public void RefreshLists()
@@ -166,6 +168,7 @@
     private void ToggleExpand()
     {
         Model.IsExpanded = !Model.IsExpanded;
+        HouseExpandService.Set(Model.Id, Model.IsExpanded);
         InvokeAsync(StateHasChanged);
     }
 

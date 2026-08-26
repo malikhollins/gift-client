@@ -3,7 +3,7 @@
 }
 
 .name {
-    color: black;
+    color: var(--listpage-name-color, black);
     padding-top: 20px;
 }
 

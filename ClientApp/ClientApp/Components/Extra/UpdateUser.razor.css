@@ -29,6 +29,6 @@ button {
     margin-top: 1%;
     border-radius: 12px;
     border: none;
-    background-color: var(--nav-bar-color);
-    color: white;
+    background-color: var(--updateuser-button-bg, var(--nav-bar-color));
+    color: var(--updateuser-button-text-color, white);
 }
