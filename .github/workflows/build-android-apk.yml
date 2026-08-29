@@ -1,0 +1,54 @@
+# .github/workflows/build-android-apk.yml
+#
+# Builds an unsigned .NET MAUI Android APK and uploads it as a workflow
+# artifact so anyone can download it from the Actions run and send it to
+# someone.
+
+name: Build Android APK
+
+on:
+  workflow_dispatch: 
+  push:
+    branches: [ "main" ]
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build-android:
+    name: Build Android APK
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.0'
+
+      - name: Install MAUI workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore dependencies
+        run: dotnet restore ./ClientApp/ClientApp/ClientApp.csproj
+
+      - name: Publish Android build (unsigned APK)
+        run: >
+          dotnet publish ./ClientApp/ClientApp/ClientApp.csproj
+          -c Release
+          -f net9.0-android
+          -p:AndroidPackageFormat=apk
+          --no-restore
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: |
+            **/*-Signed.apk
+            **/*.apk
+          if-no-files-found: error
