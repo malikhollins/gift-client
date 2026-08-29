@@ -13,8 +13,8 @@ namespace ClientApp
                 Domain = "dev-783iaokvar74ul5a.us.auth0.com", // these strings are not confiedntial
                 ClientId = "jmnIEMYDbuiLUUsKPgYIruQg4op2DHsZ",
                 Scope = "openid profile email offline_access",
-                RedirectUri = "com.companyname.clientapp://callback",
-                PostLogoutRedirectUri = "com.companyname.clientapp://callback",
+                RedirectUri = "com.mhollins.giftingapp://callback",
+                PostLogoutRedirectUri = "com.mhollins.giftingapp://callback",
                 Browser = new WebAuthenticatorBrowser()
             }));
 

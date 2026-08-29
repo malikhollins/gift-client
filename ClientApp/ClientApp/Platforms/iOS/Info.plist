@@ -32,10 +32,10 @@
     <array>
         <dict>
             <key>CFBundleURLName</key>
-            <string>com.companyname.clientapp</string>
+            <string>com.mhollins.giftingapp</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.companyname.clientapp</string>
+                <string>com.mhollins.giftingapp</string>
             </array>
         </dict>
     </array>
