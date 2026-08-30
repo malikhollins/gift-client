@@ -84,6 +84,8 @@ button.icon-only,
     --usercard-title-color: plum;
     --updateuser-button-bg: var(--nav-bar-color);
     --updateuser-button-text-color: white;
+    /* Login */
+    --login-button-bg: #CC7575;
 }
 
 html, body {
