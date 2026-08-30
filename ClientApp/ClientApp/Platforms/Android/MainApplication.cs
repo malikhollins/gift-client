@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Runtime;
+using Android.Webkit;
 
 namespace ClientApp
 {
@@ -12,5 +13,14 @@ namespace ClientApp
         }
 
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+#if DEBUG
+            Android.Webkit.WebView.SetWebContentsDebuggingEnabled(true);
+#endif
+        }
     }
 }
