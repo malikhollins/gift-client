@@ -13,7 +13,6 @@ namespace ClientApp.Components.Pages
         [Inject] ILogger<Login> Logger { get; set; } = null!;
 
         private BlazorBootstrap.Button _loginButton = null!;
-        private bool _retry = false;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -53,7 +52,6 @@ namespace ClientApp.Components.Pages
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                _retry = true;
             }
             finally
             {

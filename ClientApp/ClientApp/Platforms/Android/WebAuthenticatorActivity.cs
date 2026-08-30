@@ -10,5 +10,5 @@ namespace MyMauiApp.Platforms.Android;
               DataScheme = CALLBACK_SCHEME)]
 public class WebAuthenticatorActivity : Microsoft.Maui.Authentication.WebAuthenticatorCallbackActivity
 {
-    const string CALLBACK_SCHEME = "myapp";
+    const string CALLBACK_SCHEME = "com.mhollins.giftingapp";
 }
