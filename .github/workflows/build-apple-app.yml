@@ -1,3 +1,5 @@
+name:  Build iOS & Publish To Testflight
+
 on:
   workflow_dispatch:
   push:
@@ -27,8 +29,6 @@ jobs:
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: global.json
 
       - name: Install Workloads
         run: dotnet workload restore ClientApp/ClientApp.sln
