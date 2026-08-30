@@ -15,11 +15,6 @@ namespace ClientApp.Components.Pages
         private BlazorBootstrap.Button _loginButton = null!;
         private bool _retry = false;
 
-        protected override async Task OnInitializedAsync()
-        {
-            await LoginAsync();
-            await base.OnInitializedAsync();
-        }
 
         public async Task LoginAsync()
         {

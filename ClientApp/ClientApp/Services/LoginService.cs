@@ -17,6 +17,7 @@ namespace ClientApp.Services
         private readonly AuthTokenStorage _authTokenStorage;
         private readonly AuthTokenService _authTokenService;
         private readonly ILogger<LoginService> _logger;
+        private readonly AuthLoginCoordinator _loginCoordinator;
 
         public LoginService(
             Auth0Client client,
@@ -24,7 +25,8 @@ namespace ClientApp.Services
             UserInfoService userInfoService,
             AuthTokenStorage authTokenStorage,
             AuthTokenService authTokenService,
-            ILogger<LoginService> logger)
+            ILogger<LoginService> logger,
+            AuthLoginCoordinator loginCoordinator)
         {
             _authClient = client;
             _httpClientFactory = httpClientFactory;
@@ -32,6 +34,7 @@ namespace ClientApp.Services
             _authTokenStorage = authTokenStorage;
             _authTokenService = authTokenService;
             _logger = logger;
+            _loginCoordinator = loginCoordinator;
         }
 
         /// <summary>
@@ -74,6 +77,13 @@ namespace ClientApp.Services
 
         public async Task<bool> LoginAsync()
         {
+            // Prevent overlapping login flows without using a static flag.
+            if (!_loginCoordinator.TryEnter())
+            {
+                _logger.LogInformation("Login already in progress, skipping duplicate call.");
+                return false;
+            }
+
             try
             {
                 var token = await _authTokenStorage.GetValidAuthTokenAsync();
@@ -133,6 +143,10 @@ namespace ClientApp.Services
             {
                 Debug.WriteLine(ex);
                 return false;
+            }
+            finally
+            {
+                _loginCoordinator.Exit();
             }
         }
 
