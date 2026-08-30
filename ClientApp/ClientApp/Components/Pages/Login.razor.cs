@@ -15,6 +15,14 @@ namespace ClientApp.Components.Pages
         private BlazorBootstrap.Button _loginButton = null!;
         private bool _retry = false;
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            var canLoginAutomatically = await LoginService.CanLoginAutomaticallyAsync();
+            if (canLoginAutomatically)
+            {
+                await LoginAsync();
+            }
+        }
 
         public async Task LoginAsync()
         {

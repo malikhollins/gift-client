@@ -75,6 +75,31 @@ namespace ClientApp.Services
             return null;
         }
 
+        public async Task<bool> CanLoginAutomaticallyAsync()
+        {
+            if (!_loginCoordinator.TryEnter())
+            {
+                _logger.LogInformation("Login already in progress, skipping duplicate call.");
+                _loginCoordinator.Exit();
+                return false;
+            }
+            var token = await _authTokenStorage.GetValidAuthTokenAsync();
+            if (token != null)
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(token);
+                var claims = jwtToken.Claims;
+                var userFromClaims = GetUserFromClaims(claims);
+                if (userFromClaims != null && !userFromClaims.Name.IsNullOrEmpty())
+                {
+                    _loginCoordinator.Exit();
+                    return true;
+                }
+            }
+            _loginCoordinator.Exit();
+            return false;
+        }
+
         public async Task<bool> LoginAsync()
         {
             // Prevent overlapping login flows without using a static flag.
