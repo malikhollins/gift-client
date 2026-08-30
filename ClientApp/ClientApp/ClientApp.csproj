@@ -58,24 +58,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <MauiImage Remove="Resources\Images\backhome.png" />
-      <MauiImage Remove="Resources\Images\emptycitizen.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="Resources\Images\backhome.png">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-      <Content Include="Resources\Images\emptycitizen.png">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-      <Content Include="Resources\Images\gift.png" />
-      <Content Include="Resources\Images\gift_all.png.ico" />
-    </ItemGroup>
-
-    <ItemGroup>
 		<PackageReference Include="Blazor.Bootstrap" Version="3.4.0" />
 		<PackageReference Include="Majorsoft.Blazor.Components.Common.JsInterop" Version="1.5.0" />
 		<PackageReference Include="mhollins.SharedModels" Version="1.0.10" />
