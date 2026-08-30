@@ -15,7 +15,7 @@ jobs:
 
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
-      DOTNET_VERSION: "net9.0"
+      DOTNET_VERSION: "net10.0"
 
     steps:
       - name: Checkout Code
@@ -30,6 +30,8 @@ jobs:
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
 
       - name: Install Workloads
         run: dotnet workload restore ClientApp/ClientApp.sln
