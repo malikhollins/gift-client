@@ -11,6 +11,7 @@ jobs:
     name: Build iOS
     runs-on: macos-15
     timeout-minutes: 45
+    environment: secrets
 
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
