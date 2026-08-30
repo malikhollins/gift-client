@@ -1,5 +1,5 @@
 on:
-  workflow_dispatch:   
+  workflow_dispatch:
   push:
     tags:
       - "v*"
@@ -32,7 +32,7 @@ jobs:
 
       - name: Install Workloads
         run: dotnet workload restore ClientApp/ClientApp.sln
-        
+
       - name: Import Apple Certificate
         uses: apple-actions/import-codesign-certs@v4
         with:
@@ -43,26 +43,26 @@ jobs:
 
       - name: Download Provisioning Profile
         uses: apple-actions/download-provisioning-profiles@v4
-        with: 
-          bundle-id: 'com.mhollins.giftingapp'
-          profile-type: 'IOS_APP_STORE'
+        with:
+          bundle-id: "com.mhollins.giftingapp"
+          profile-type: "IOS_APP_STORE"
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-          
+
       - name: Build
         run: |
-            dotnet publish -c Release -f ${{ env.DOTNET_VERSION }}-ios \
+          dotnet publish -c Release -f ${{ env.DOTNET_VERSION }}-ios \
             -p:ArchiveOnBuild=true \
             -p:RuntimeIdentifier=ios-arm64 \
             -p:CodesignKey="${{ secrets.APPLE_DISTRIBUTION_CERT_NAME }}" \
             ClientApp/ClientApp/ClientApp.csproj
 
       - name: Upload to TestFlight
-      uses: apple-actions/upload-testflight-build@v1
-      with:
-        app-type: ios
-        app-path: 'ClientApp/ClientApp/bin/Release/${{env.DOTNET_VERSION}}-ios/ios-arm64/publish/ClientApp.ipa'
-        issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-        api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-        api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+        uses: apple-actions/upload-testflight-build@v1
+        with:
+          app-type: ios
+          app-path: ClientApp/ClientApp/bin/Release/${{ env.DOTNET_VERSION }}-ios/ios-arm64/publish/ClientApp.ipa
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
