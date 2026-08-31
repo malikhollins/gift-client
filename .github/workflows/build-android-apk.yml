@@ -55,7 +55,6 @@ jobs:
           -p:AndroidPackageFormat=apk
           -p:ApplicationDisplayVersion=${{ steps.version.outputs.version }}
           -p:ApplicationVersion=${{ github.run_number }}
-          -p:CodesignKey="${{ secrets.APPLE_DISTRIBUTION_CERT_NAME }}"
           --no-restore
 
       - name: Upload APK artifact
