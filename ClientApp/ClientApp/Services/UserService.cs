@@ -9,11 +9,12 @@ namespace ClientApp.Services
         public UserService( IHttpClientFactory httpClientFactory ) : base( httpClientFactory )
         {
         }
-        public async Task UpdateUserInfo(string name)
+        public async Task<bool> UpdateUserInfo(string name)
         {
             var httpClient = _httpClientFactory.CreateClient("base-url");
             var uri = $"api/User/update/name?name={Uri.EscapeDataString(name)}";
-            await httpClient.PostAsync(uri, null); 
+            var response = await httpClient.PostAsync(uri, null);
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<List<User>> BulkGetUsersAsync(string input, CancellationToken cancellationToken = default)
