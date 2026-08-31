@@ -1,8 +1,6 @@
 #Home {
     margin: var(--card-margin);
     text-align: center;
-    display: flex;
-    flex-flow: row wrap;
     background-color: var(--card-background-color);
     border-color: var(--card-border-color);
 }
@@ -30,7 +28,12 @@
         justify-items: center;
     }
 
-        ::deep .HeaderContainer .header-actions > * {
+        /* More specific selector instead of wildcard to avoid affecting unrelated children */
+        ::deep .HeaderContainer .header-actions > button,
+        ::deep .HeaderContainer .header-actions > a,
+        ::deep .HeaderContainer .header-actions > svg,
+        ::deep .HeaderContainer .header-actions > .icon,
+        ::deep .HeaderContainer .header-actions > .btn {
             display: flex;
             align-items: center;
             justify-content: center;

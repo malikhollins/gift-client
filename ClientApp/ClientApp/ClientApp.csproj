@@ -76,4 +76,8 @@
         <PackageReference Include="WebSerializer" Version="1.3.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Doc\" />
+    </ItemGroup>
+
 </Project>

@@ -19,7 +19,7 @@ namespace ClientApp
             }));
 
             services.AddAuthorizationCore();
-            services.AddScoped<AuthenticationStateProvider, Auth0AuthenticationStateProvider>();
+            services.AddSingleton<AuthLoginCoordinator>();
             services.AddSingleton<LoginService>();
             services.AddSingleton<AuthTokenStorage>();
             services.AddSingleton<AuthTokenService>();

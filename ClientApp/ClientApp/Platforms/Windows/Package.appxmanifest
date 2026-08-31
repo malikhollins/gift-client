@@ -38,7 +38,7 @@
       </uap:VisualElements>
       <Extensions>
           <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="myapp">
+          <uap:Protocol Name="com.mhollins.giftingapp">
               <uap:DisplayName>MauiAuth0App</uap:DisplayName>
           </uap:Protocol>
           </uap:Extension>

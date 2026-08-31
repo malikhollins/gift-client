@@ -2,6 +2,13 @@
     height: 100%;
 }
 
+::deep .login-button {
+    background-color: var(--login-button-bg);
+    border: none;
+    text-align: center;
+    font-size: 25px;
+}
+
 .GiftAllLogin {
     width: 100%;
     height: 100%;
