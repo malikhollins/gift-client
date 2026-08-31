@@ -26,6 +26,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Extract version from tag
+        id: version
+        shell: bash
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG#v}
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -46,6 +53,9 @@ jobs:
           -c Release
           -f net10.0-android
           -p:AndroidPackageFormat=apk
+          -p:ApplicationDisplayVersion=${{ steps.version.outputs.version }}
+          -p:ApplicationVersion=${{ github.run_number }}
+          -p:CodesignKey="${{ secrets.APPLE_DISTRIBUTION_CERT_NAME }}"
           --no-restore
 
       - name: Upload APK artifact

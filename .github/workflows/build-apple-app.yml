@@ -18,6 +18,13 @@ jobs:
       DOTNET_VERSION: "net10.0"
 
     steps:
+      - name: Extract version from tag
+        id: version
+        shell: bash
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG#v}
+
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
@@ -58,6 +65,8 @@ jobs:
           dotnet publish -c Release -f ${{ env.DOTNET_VERSION }}-ios \
             -p:ArchiveOnBuild=true \
             -p:RuntimeIdentifier=ios-arm64 \
+            -p:ApplicationDisplayVersion=${{ steps.version.outputs.version }} \
+            -p:ApplicationVersion=${{ github.run_number }} \
             -p:CodesignKey="${{ secrets.APPLE_DISTRIBUTION_CERT_NAME }}" \
             ClientApp/ClientApp/ClientApp.csproj
 
