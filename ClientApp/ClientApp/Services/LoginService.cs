@@ -17,6 +17,7 @@ namespace ClientApp.Services
         private readonly AuthTokenStorage _authTokenStorage;
         private readonly AuthTokenService _authTokenService;
         private readonly ILogger<LoginService> _logger;
+        private readonly AuthLoginCoordinator _loginCoordinator;
 
         public LoginService(
             Auth0Client client,
@@ -24,7 +25,8 @@ namespace ClientApp.Services
             UserInfoService userInfoService,
             AuthTokenStorage authTokenStorage,
             AuthTokenService authTokenService,
-            ILogger<LoginService> logger)
+            ILogger<LoginService> logger,
+            AuthLoginCoordinator loginCoordinator)
         {
             _authClient = client;
             _httpClientFactory = httpClientFactory;
@@ -32,6 +34,7 @@ namespace ClientApp.Services
             _authTokenStorage = authTokenStorage;
             _authTokenService = authTokenService;
             _logger = logger;
+            _loginCoordinator = loginCoordinator;
         }
 
         /// <summary>
@@ -72,8 +75,40 @@ namespace ClientApp.Services
             return null;
         }
 
+        public async Task<bool> CanLoginAutomaticallyAsync()
+        {
+            if (!_loginCoordinator.TryEnter())
+            {
+                _logger.LogInformation("Login already in progress, skipping duplicate call.");
+                _loginCoordinator.Exit();
+                return false;
+            }
+            var token = await _authTokenStorage.GetValidAuthTokenAsync();
+            if (token != null)
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(token);
+                var claims = jwtToken.Claims;
+                var userFromClaims = GetUserFromClaims(claims);
+                if (userFromClaims != null && !userFromClaims.Name.IsNullOrEmpty())
+                {
+                    _loginCoordinator.Exit();
+                    return true;
+                }
+            }
+            _loginCoordinator.Exit();
+            return false;
+        }
+
         public async Task<bool> LoginAsync()
         {
+            // Prevent overlapping login flows without using a static flag.
+            if (!_loginCoordinator.TryEnter())
+            {
+                _logger.LogInformation("Login already in progress, skipping duplicate call.");
+                return false;
+            }
+
             try
             {
                 var token = await _authTokenStorage.GetValidAuthTokenAsync();
@@ -133,6 +168,10 @@ namespace ClientApp.Services
             {
                 Debug.WriteLine(ex);
                 return false;
+            }
+            finally
+            {
+                _loginCoordinator.Exit();
             }
         }
 
