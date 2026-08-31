@@ -43,7 +43,7 @@ namespace ClientApp.Services
         /// <param name="authId"></param>
         /// <param name="email"></param>
         /// <returns></returns>
-        private static string BuildUri(string? authId, string? email) => string.Format("/api/User/get/{0}/{1}", authId, email);
+        private static string BuildUri(string? authId, string? email) => string.Format("/api/User/get/{0}/{1}", authId, email ?? "null");
 
         /// <summary>
         /// Create a user with the database
@@ -53,14 +53,14 @@ namespace ClientApp.Services
         /// </remarks>
         /// <param name="auth0LoginResult"></param>
         /// <returns></returns>
-        private async Task<User?> CreateUserAsync(LoginResult auth0LoginResult)
+        public async Task<User?> GetUserAsync(IEnumerable<Claim> auth0LoginResult)
         {
 
             try
             {
                 // gather inputs for uri parameters
-                var authId = auth0LoginResult.User.Claims.FirstOrDefault(claim => claim.Type == "sub");
-                var email = auth0LoginResult.User.Claims.FirstOrDefault(claim => claim.Type == "name");
+                var authId = auth0LoginResult.FirstOrDefault(claim => claim.Type == "sub");
+                var email = auth0LoginResult.FirstOrDefault(claim => claim.Type == "name");
                 var uri = BuildUri(authId?.Value, email?.Value);
 
                 HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
@@ -156,7 +156,7 @@ namespace ClientApp.Services
                     return true;
                 }
 
-                user = await CreateUserAsync(loginResult);
+                user = await GetUserAsync(loginResult.User.Claims);
 #if DEBUG
                 _logger.LogInformation("Creating user finished - it took {time} seconds", stopwatch.Elapsed.TotalSeconds);
                 stopwatch.Stop();
