@@ -8,6 +8,10 @@
         <CardTitle Class="HomeHouseTitle" Size="HeadingSize.H3">
             <div class="HeaderContainer">
                 <span class="HomeHouseText">@Model.Name</span>
+                @if (_hasAssignment)
+                {
+                    <Icon CustomIconName="fa-solid fa-star" Title="You have a gift assignment" />
+                }
                 <CascadingValue Value="@Model.Id" Name="HouseId">
                     <div class="header-actions">
                         <Button Size="ButtonSize.Small" @onclick="ToggleExpand" Class="expand-button icon-only" Title="Toggle lists">
@@ -28,6 +32,9 @@
                                     <Icon CustomIconName="fa-solid fa-ellipsis-vertical"/>
                                 </DropdownToggleButton>
                                 <DropdownMenu>
+                                    <DropdownItem @onclick="NavigateToRandomGiftingPage">
+                                        Random gifting
+                                    </DropdownItem>
                                     <DropdownItem @onclick="ShowDeleteHouseModalAsync">
                                         Delete
                                     </DropdownItem>
@@ -95,6 +102,7 @@
     [Inject] public HousePageObserver HousePageObserver { get; set; } = null!;
     [Inject] public HouseService HouseService { get; set; } = null!;
     [Inject] public HouseExpandService HouseExpandService { get; set; } = null!;
+    [Inject] public PairService PairService { get; set; } = null!;
     [Inject] NavigationManager NavigationManager { get; set; } = null!;
 
     private CenterModalParameters? _createListParameters;
@@ -103,15 +111,17 @@
     private UniversalModal? _manageUserModal;
     private CenterModalParameters? _deleteModalParameters;
     private bool _ownsHouse;
+    private bool _hasAssignment;
     private List<UserList> _userOwnedList = new();
     private List<UserList> _otherLists = new();
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        base.OnParametersSet();
+        await base.OnParametersSetAsync();
 
         var user = UserInfoService.GetUserInfo();
-        _ownsHouse = user!.Id == Model.Owner;
+        _ownsHouse = user?.Id == Model.Owner;
+        _hasAssignment = user != null && (await PairService.GetUserPairingAsync(Model.Id)).Any();
 
         RefreshLists();
         
@@ -185,6 +195,11 @@
     private void NavigateToManageListPage()
     {
         NavigationManager.NavigateTo($"/ManageListPage/{Model!.Id}");
+    }
+
+    private void NavigateToRandomGiftingPage()
+    {
+        NavigationManager.NavigateTo($"/house/{Model!.Id}/random-gifting");
     }
 
     private async Task ShowManageHouseModalAsync()

@@ -1,0 +1,173 @@
+.random-gifting-page {
+    margin: 0 auto;
+    max-width: 760px;
+    padding: 2rem 1.25rem 6rem;
+}
+
+.random-gifting-header {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+}
+
+.random-gifting-back {
+    align-items: center;
+    border: 1px solid #d6d0c4;
+    border-radius: 50%;
+    color: #27251f;
+    display: inline-flex;
+    height: 2.75rem;
+    justify-content: center;
+    text-decoration: none;
+    width: 2.75rem;
+}
+
+.random-gifting-eyebrow {
+    color: #8a5d35;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.25rem;
+    text-transform: uppercase;
+}
+
+.random-gifting-header h1 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1;
+    margin: 0;
+}
+
+.random-gifting-intro {
+    border-bottom: 1px solid #ddd7cd;
+    color: #5d5a53;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 1.5rem 0;
+    padding-bottom: 1.5rem;
+}
+
+.random-gifting-intro p,
+.random-gifting-preview-header p {
+    margin: 0;
+    max-width: 36rem;
+}
+
+.random-gifting-actions,
+.random-gifting-manual-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.random-gifting-actions button,
+.random-gifting-manual > button,
+.random-gifting-manual-row button {
+    background: #d16f6f;
+    border: 0;
+    border-radius: 0.5rem;
+    color: #fff;
+    padding: 0.7rem 1rem;
+}
+
+.random-gifting-actions button:disabled,
+.random-gifting-manual button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.random-gifting-status {
+    background: #f2eee7;
+    border-left: 4px solid #8a5d35;
+    color: #4d493f;
+    margin: 1.25rem 0;
+    padding: 0.85rem 1rem;
+}
+
+.random-gifting-error {
+    border-left-color: #b34545;
+}
+
+.random-gifting-success {
+    border-left-color: #4d8a5a;
+}
+
+.random-gifting-manual,
+.random-gifting-preview {
+    border-top: 1px solid #ddd7cd;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+}
+
+.random-gifting-preview-header {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.random-gifting-preview-header h2 {
+    font-size: 1.35rem;
+    margin: 0;
+}
+
+.random-gifting-preview-header span {
+    color: #777168;
+    font-size: 0.9rem;
+}
+
+.random-gifting-manual-list,
+.random-gifting-list {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.random-gifting-manual-row {
+    align-items: center;
+    background: #f8f5ef;
+    border: 1px solid #e5dfd4;
+    border-radius: 0.5rem;
+    padding: 0.65rem 0.75rem;
+}
+
+.random-gifting-manual-row select {
+    background: #fff;
+    border: 1px solid #d6d0c4;
+    border-radius: 0.35rem;
+    flex: 1 1 10rem;
+    min-width: 0;
+    padding: 0.6rem;
+}
+
+.random-gifting-manual-row .random-gifting-remove {
+    background: transparent;
+    color: #8a5d35;
+    padding: 0.4rem;
+}
+
+.random-gifting-pair {
+    align-items: center;
+    background: #f8f5ef;
+    border: 1px solid #e5dfd4;
+    border-radius: 0.5rem;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    padding: 0.9rem 1rem;
+}
+
+.random-gifting-pair span:last-child {
+    color: #8a5d35;
+    text-align: right;
+}
+
+@media screen and (max-width: 700px) {
+    .random-gifting-page {
+        padding-top: 1.25rem;
+    }
+
+    .random-gifting-preview-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

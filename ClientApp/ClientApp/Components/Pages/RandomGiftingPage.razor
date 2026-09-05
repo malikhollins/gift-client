@@ -1,0 +1,250 @@
+@page "/house/{HouseId:int}/random-gifting"
+@using ClientApp.Models
+@using ClientApp.Services
+
+<div class="random-gifting-page">
+    <div class="random-gifting-header">
+        <a class="random-gifting-back" href="/homepage" aria-label="Back to homes">
+            <Icon CustomIconName="fa-solid fa-arrow-left" />
+        </a>
+        <div>
+            <p class="random-gifting-eyebrow">@(_house?.Name ?? "Household")</p>
+            <h1>Random gifting</h1>
+        </div>
+    </div>
+
+    <div class="random-gifting-intro">
+        <p>Generate a fresh gift exchange for everyone in this household. Review the assignments before making them live.</p>
+    </div>
+
+    @if (_isLoading)
+    {
+        <div class="random-gifting-status">Loading household...</div>
+    }
+    else if (_house == null)
+    {
+        <div class="random-gifting-status random-gifting-error">This household could not be found.</div>
+    }
+    else
+    {
+        <div class="random-gifting-actions">
+            <Button Disabled="@(_isGenerating || _isApplying)" @onclick="GenerateAsync">
+                @(_isGenerating ? "Generating..." : "Generate pairings")
+            </Button>
+            @if (_pairings.Count > 0)
+            {
+                <Button Disabled="@(_isGenerating || _isApplying)" @onclick="ApplyAsync">
+                    @(_isApplying ? "Applying..." : "Apply pairings")
+                </Button>
+            }
+        </div>
+
+        <section class="random-gifting-manual">
+            <div class="random-gifting-preview-header">
+                <div>
+                    <h2>Manual pairings</h2>
+                    <p>Choose who gives to each list, then upload the complete set.</p>
+                </div>
+                <Button Disabled="@(_isGenerating || _isApplying)" @onclick="AddManualPairing">
+                    Add pairing
+                </Button>
+            </div>
+
+            <div class="random-gifting-manual-list">
+                @foreach (var pairing in _manualPairings)
+                {
+                    <div class="random-gifting-manual-row">
+                        <select @bind="pairing.UserId" aria-label="Person giving a gift">
+                            @foreach (var list in _house.Lists)
+                            {
+                                <option value="@list.Owner">@GetUserName(list.Owner)</option>
+                            }
+                        </select>
+                        <Icon CustomIconName="fa-solid fa-arrow-right" />
+                        <select @bind="pairing.ListId" aria-label="List receiving a gift">
+                            @foreach (var list in _house.Lists)
+                            {
+                                <option value="@list.ListId">@GetListName(list.ListId)</option>
+                            }
+                        </select>
+                        <Button Class="random-gifting-remove" Disabled="@(_manualPairings.Count == 1 || _isApplying)" @onclick="() => RemoveManualPairing(pairing)" Title="Remove pairing">
+                            <Icon CustomIconName="fa-solid fa-xmark" />
+                        </Button>
+                    </div>
+                }
+            </div>
+
+            <Button Disabled="@(_isGenerating || _isApplying || !CanUploadManualPairings)" @onclick="UploadManualPairingsAsync">
+                @(_isApplying ? "Uploading..." : "Upload manual pairings")
+            </Button>
+        </section>
+
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <div class="random-gifting-status @(_hasError ? "random-gifting-error" : "random-gifting-success")">@_message</div>
+        }
+
+        @if (_pairings.Count > 0)
+        {
+            <section class="random-gifting-preview">
+                <div class="random-gifting-preview-header">
+                    <h2>Pairing preview</h2>
+                    <span>@_pairings.Count assignments</span>
+                </div>
+                <div class="random-gifting-list">
+                    @foreach (var pairing in _pairings)
+                    {
+                        <div class="random-gifting-pair">
+                            <span>@GetUserName(pairing.UserId)</span>
+                            <Icon CustomIconName="fa-solid fa-arrow-right" />
+                            <span>@GetListName(pairing.ListId)</span>
+                        </div>
+                    }
+                </div>
+            </section>
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public int HouseId { get; set; }
+
+    [Inject] public HouseService HouseService { get; set; } = null!;
+    [Inject] public PairService PairService { get; set; } = null!;
+
+    private House? _house;
+    private List<PairingData> _pairings = new();
+    private bool _isLoading = true;
+    private bool _isGenerating;
+    private bool _isApplying;
+    private bool _hasError;
+    private string? _message;
+    private List<PairingData> _manualPairings = new();
+
+    private bool CanUploadManualPairings => _manualPairings.Count > 0
+        && _manualPairings.Select(pairing => pairing.UserId).Distinct().Count() == _manualPairings.Count
+        && _manualPairings.Select(pairing => pairing.ListId).Distinct().Count() == _manualPairings.Count;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _isLoading = true;
+        _house = (await HouseService.GetHousesAsync()).FirstOrDefault(house => house.Id == HouseId);
+        _manualPairings = _house?.Lists.Take(1)
+            .Select(list => new PairingData { UserId = list.Owner, ListId = list.ListId })
+            .ToList() ?? new();
+        _isLoading = false;
+    }
+
+    private void AddManualPairing()
+    {
+        var availableGiver = _house!.Lists.FirstOrDefault(list => _manualPairings.All(pairing => pairing.UserId != list.Owner));
+        var availableList = _house.Lists.FirstOrDefault(list => _manualPairings.All(pairing => pairing.ListId != list.ListId));
+        if (availableGiver == null || availableList == null)
+        {
+            return;
+        }
+
+        _manualPairings.Add(new PairingData { UserId = availableGiver.Owner, ListId = availableList.ListId });
+    }
+
+    private void RemoveManualPairing(PairingData pairing)
+    {
+        _manualPairings.Remove(pairing);
+    }
+
+    private async Task UploadManualPairingsAsync()
+    {
+        _isApplying = true;
+        _message = null;
+        _hasError = false;
+
+        try
+        {
+            var response = await PairService.SetManualPairingsAsync(HouseId, _manualPairings);
+            _message = response.IsSuccessStatusCode
+                ? "Manual pairings uploaded successfully."
+                : "Manual pairings could not be uploaded. Check that every person and list is used once.";
+            _hasError = !response.IsSuccessStatusCode;
+            if (response.IsSuccessStatusCode)
+            {
+                _pairings = _manualPairings.Select(pairing => new PairingData
+                {
+                    UserId = pairing.UserId,
+                    ListId = pairing.ListId
+                }).ToList();
+            }
+        }
+        catch
+        {
+            _message = "Manual pairings could not be uploaded. Check your connection and try again.";
+            _hasError = true;
+        }
+        finally
+        {
+            _isApplying = false;
+        }
+    }
+
+    private async Task GenerateAsync()
+    {
+        _isGenerating = true;
+        _message = null;
+        _hasError = false;
+
+        try
+        {
+            _pairings = await PairService.GenerateRandomPairingsAsync(HouseId);
+            _message = _pairings.Count > 0
+                ? "Review the assignments, then apply them when ready."
+                : "No pairings were generated. This household may need more lists.";
+            _hasError = _pairings.Count == 0;
+        }
+        catch
+        {
+            _pairings.Clear();
+            _message = "Pairings could not be generated. Check that you are the household owner.";
+            _hasError = true;
+        }
+        finally
+        {
+            _isGenerating = false;
+        }
+    }
+
+    private async Task ApplyAsync()
+    {
+        _isApplying = true;
+        _message = null;
+        _hasError = false;
+
+        try
+        {
+            var response = await PairService.ApplyPairingsAsync(HouseId);
+            _message = response.IsSuccessStatusCode
+                ? "Pairings applied successfully."
+                : "Pairings could not be applied. Generate a new preview and try again.";
+            _hasError = !response.IsSuccessStatusCode;
+        }
+        catch
+        {
+            _message = "Pairings could not be applied. Check your connection and try again.";
+            _hasError = true;
+        }
+        finally
+        {
+            _isApplying = false;
+        }
+    }
+
+    private string GetUserName(int userId)
+    {
+        return _house?.Lists.FirstOrDefault(list => list.Owner == userId)?.OwnerName
+            ?? $"User {userId}";
+    }
+
+    private string GetListName(int listId)
+    {
+        var list = _house?.Lists.FirstOrDefault(item => item.ListId == listId);
+        return list == null ? $"List {listId}" : $"{list.OwnerName}'s list";
+    }
+}

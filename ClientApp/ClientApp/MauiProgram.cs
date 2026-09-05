@@ -42,6 +42,7 @@ namespace ClientApp
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<InviteService>();
             builder.Services.AddSingleton<ListService>();
+            builder.Services.AddSingleton<PairService>();
             builder.Services.AddSingleton<NavStateService>();
             builder.Services.AddSingleton<HousePageObserver>();
             builder.Services.AddSingleton<ListPageObserver>();
