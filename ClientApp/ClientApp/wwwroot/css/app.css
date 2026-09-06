@@ -86,6 +86,26 @@ button.icon-only,
     --updateuser-button-text-color: white;
     /* Login */
     --login-button-bg: #CC7575;
+    /* Random gifting page */
+    --random-gifting-heading-color: #27251f;
+    --random-gifting-muted-color: #5d5a53;
+    --random-gifting-subtle-text-color: #777168;
+    --random-gifting-accent-color: #8a5d35;
+    --random-gifting-action-bg: #d16f6f;
+    --random-gifting-action-text-color: #fff;
+    --random-gifting-panel-bg: #fff;
+    --random-gifting-soft-bg: #f8f5ef;
+    --random-gifting-row-bg: #fcfaf7;
+    --random-gifting-status-bg: #f2eee7;
+    --random-gifting-border-color: #e5dfd4;
+    --random-gifting-divider-color: #ddd7cd;
+    --random-gifting-input-border-color: #d6d0c4;
+    --random-gifting-error-color: #b34545;
+    --random-gifting-success-color: #4d8a5a;
+    /* User invites list */
+    --user-invites-warning-color: #9a3434;
+    --user-invites-leave-house-bg: #ab5a5a;
+    --user-invites-leave-house-text-color: white;
 }
 
 html, body {

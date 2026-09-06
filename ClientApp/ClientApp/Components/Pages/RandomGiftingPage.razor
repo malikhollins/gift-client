@@ -1,0 +1,109 @@
+@page "/house/{HouseId:int}/random-gifting"
+@using ClientApp.Models
+@using ClientApp.Services
+
+<div class="random-gifting-page">
+    <div class="random-gifting-header">
+        <div>
+            <h1>Gift Exchange:</h1>
+            <div class="random-gifting-house-name" title="@(_house?.Name ?? "Household")">
+                @(_house?.Name ?? "Household")
+            </div>
+        </div>
+    </div>
+
+    <div class="random-gifting-intro">
+        <p>Generate a fresh gift exchange for everyone in this household. Review the assignments before making them live.</p>
+    </div>
+
+    @if (_isLoading)
+    {
+        <div class="random-gifting-status">Loading household...</div>
+    }
+    else if (_house == null)
+    {
+        <div class="random-gifting-status random-gifting-error">This household could not be found.</div>
+    }
+    else
+    {
+        <AutomaticPairingWorkflow
+            HouseId="HouseId"
+            House="_house"
+            ActiveLists="ActiveLists.ToList()"
+            IsBlocked="_manualBusy"
+            RefreshVersion="_refreshVersion"
+            OnBusyChanged="SetAutomaticBusy" />
+
+        <ManualPairingEditor
+            HouseId="HouseId"
+            ActiveLists="ActiveLists.ToList()"
+            IsBlocked="_automaticBusy"
+            GetUserName="GetUserName"
+            GetListName="GetListName"
+            OnBusyChanged="SetManualBusy"
+            OnPairingsUploaded="HandleManualPairingsUploaded" />
+    }
+</div>
+
+@code {
+    [Parameter] public int HouseId { get; set; }
+
+    [Inject] public HouseService HouseService { get; set; } = null!;
+    [Inject] public NavStateService NavStateService { get; set; } = null!;
+
+    private House? _house;
+    private bool _isLoading = true;
+    private bool _automaticBusy;
+    private bool _manualBusy;
+    private int _refreshVersion;
+
+    private IEnumerable<UserList> ActiveLists => _house?.Lists.Where(list => !list.Deleted) ?? [];
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _isLoading = true;
+        _house = NavStateService.CurrentState?.House;
+
+        if (_house is null || _house.Id != HouseId)
+        {
+            _house = (await HouseService.GetHousesAsync()).FirstOrDefault(house => house.Id == HouseId);
+        }
+
+        NavStateService.UpdateNavState(new NavState
+        {
+            GoBackUrl = "/homepage",
+            CenterModalParameters = null,
+            HouseId = HouseId
+        });
+        _isLoading = false;
+    }
+
+    private Task SetAutomaticBusy(bool busy)
+    {
+        _automaticBusy = busy;
+        return InvokeAsync(StateHasChanged);
+    }
+
+    private Task SetManualBusy(bool busy)
+    {
+        _manualBusy = busy;
+        return InvokeAsync(StateHasChanged);
+    }
+
+    private Task HandleManualPairingsUploaded(List<PairingData> pairings)
+    {
+        _refreshVersion++;
+        return InvokeAsync(StateHasChanged);
+    }
+
+    private string GetUserName(int userId)
+    {
+        return _house?.Lists.FirstOrDefault(list => list.Owner == userId)?.OwnerName ?? $"User {userId}";
+    }
+
+    private string GetListName(int listId)
+    {
+        var list = _house?.Lists.FirstOrDefault(item => item.ListId == listId);
+        return list is null ? $"List {listId}" : $"{list.OwnerName}'s list";
+    }
+}

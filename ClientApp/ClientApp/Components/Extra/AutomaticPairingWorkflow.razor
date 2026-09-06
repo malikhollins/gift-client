@@ -1,0 +1,78 @@
+<div class="random-gifting-actions">
+    <Button class="random-gifting-actions" Disabled="@IsBusy" @onclick="GenerateAsync">
+        @(_isGenerating ? "Generating..." : "Generate pairings")
+    </Button>
+    @if (_pairings.Count > 0)
+    {
+        <Button class="random-gifting-actions" Disabled="@IsBusy" @onclick="ApplyAsync">
+            @(_isApplying ? "Applying..." : "Apply pairings")
+        </Button>
+        <Button class="random-gifting-actions" Disabled="@IsBusy" @onclick="DeleteActivePairing">
+            Delete Active Pairing
+        </Button>
+    }
+</div>
+
+@if (_repairEntries.Count > 0)
+{
+    <section class="random-gifting-repair">
+        <div class="random-gifting-preview-header random-gifting-repair-header">
+            <div>
+                <h2>Repair pairings</h2>
+                <p>One or more members are missing assignments after a household change.</p>
+            </div>
+        </div>
+
+        <div class="random-gifting-status random-gifting-error">
+            Pairings need attention. Choose a list for each missing member and save the repair.
+        </div>
+
+        <div class="random-gifting-repair-list">
+            @foreach (var repair in _repairEntries)
+            {
+                <div class="random-gifting-repair-row">
+                    <div class="random-gifting-repair-user">@repair.UserName</div>
+                    <select value="@repair.ListId" @onchange="@(e => UpdateRepairList(repair.UserId, ParseListId(e.Value)))" aria-label="@($"List for {repair.UserName}")">
+                        <option value="0">Select a list</option>
+                        @foreach (var list in GetAvailableRepairListsForUser(repair.UserId))
+                        {
+                            <option value="@list.ListId">@GetListName(list.ListId)</option>
+                        }
+                    </select>
+                </div>
+            }
+        </div>
+
+        <div class="random-gifting-upload-action">
+            <Button Disabled="@(!_canSubmitRepairs || IsBusy)" @onclick="RepairMissingPairingsAsync">
+                @(_isRepairing ? "Saving repairs..." : "Save repairs")
+            </Button>
+        </div>
+    </section>
+}
+
+@if (_pairings.Count > 0)
+{
+    <section class="random-gifting-preview">
+        <div class="random-gifting-preview-header">
+            <h2>Pairing preview</h2>
+            <span>@_pairings.Count assignments</span>
+        </div>
+        <div class="random-gifting-list">
+            @foreach (var pairing in _pairings)
+            {
+                <div class="random-gifting-pair">
+                    <span>@GetUserName(pairing.UserId)</span>
+                    <Icon CustomIconName="fa-solid fa-arrow-right" />
+                    <span>@GetListName(pairing.ListId)</span>
+                </div>
+            }
+        </div>
+    </section>
+}
+
+@if (!string.IsNullOrWhiteSpace(_message))
+{
+    <div class="random-gifting-status @(_hasError ? "random-gifting-error" : "random-gifting-success")">@_message</div>
+}
+

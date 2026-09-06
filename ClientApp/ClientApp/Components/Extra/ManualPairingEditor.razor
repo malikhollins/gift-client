@@ -1,0 +1,54 @@
+<section class="random-gifting-manual">
+    <div class="random-gifting-preview-header random-gifting-manual-header">
+        <div>
+            <h2>Manual pairings</h2>
+            <p>Choose who gives to each list, then upload the complete set.</p>
+        </div>
+    </div>
+
+    <div class="random-gifting-manual-add">
+        @if (ActiveLists.Count != 0 )
+        {
+            <Button Class="random-gifting-add" Disabled="@IsBusy" @onclick="AddManualPairing">+ Add pairing</Button>
+        }
+        else
+        {
+            <p class="random-gifting-hint"> User needs to have active lists in the household. </p>
+        }
+    </div>
+
+    <div class="random-gifting-manual-list">
+        @foreach (var pairing in _manualPairings)
+        {
+            <div class="random-gifting-manual-row">
+                <select @bind="pairing.UserId" aria-label="Person giving a gift">
+                    @foreach (var list in ActiveLists)
+                    {
+                        <option value="@list.Owner">@GetUserName(list.Owner)</option>
+                    }
+                </select>
+                <Icon CustomIconName="fa-solid fa-arrow-right" />
+                <select @bind="pairing.ListId" aria-label="List receiving a gift">
+                    @foreach (var list in ActiveLists)
+                    {
+                        <option value="@list.ListId">@GetListName(list.ListId)</option>
+                    }
+                </select>
+                <Button Class="random-gifting-remove" Disabled="@IsBusy" @onclick="() => RemoveManualPairing(pairing)" Title="Remove pairing">
+                    <Icon CustomIconName="fa-solid fa-xmark" />
+                </Button>
+            </div>
+        }
+    </div>
+
+    <div class="random-gifting-upload-action">
+        <Button Class="random-gifting-upload" Disabled="@(!CanUploadManualPairings || IsBusy)" @onclick="UploadManualPairingsAsync">
+            @(_isUploading ? "Uploading..." : "Upload manual pairings")
+        </Button>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(_message))
+    {
+        <div class="random-gifting-status @(_hasError ? "random-gifting-error" : "random-gifting-success")">@_message</div>
+    }
+</section>
