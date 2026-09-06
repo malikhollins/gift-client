@@ -6,7 +6,8 @@ namespace ClientApp.Components.Extra
 {
     public partial class UniversalModal
     {
-        private Modal modal = default!;
+        private Modal? modal;
+        private bool showWhenReady;
 
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -15,12 +16,33 @@ namespace ClientApp.Components.Extra
         public EventCallback OnSubmitCompleted { get; set; }
         public EventCallback OnClose { get; set; }
 
-        public Task ShowModalAsync() => modal.ShowAsync();
+        public Task ShowModalAsync()
+        {
+            if (modal != null)
+            {
+                return modal.ShowAsync();
+            }
+
+            showWhenReady = true;
+            return Task.CompletedTask;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (showWhenReady && modal != null)
+            {
+                showWhenReady = false;
+                await modal.ShowAsync();
+            }
+        }
 
         protected override Task OnParametersSetAsync()
         {
             OnSubmitCompleted = EventCallback.Factory.Create(this, async () => 
             {
+                if (modal is null)
+                    return;
+
                 await modal.HideAsync();
                 if ( ModalParameters is null)
                     return;
@@ -29,6 +51,9 @@ namespace ClientApp.Components.Extra
 
             OnClose = EventCallback.Factory.Create(this, async () => 
             {
+                if (modal is null)
+                    return;
+
                 await modal.HideAsync();
             });
 

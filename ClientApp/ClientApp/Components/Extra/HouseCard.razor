@@ -33,13 +33,13 @@
                                 </DropdownToggleButton>
                                 <DropdownMenu>
                                     <DropdownItem @onclick="NavigateToRandomGiftingPage">
-                                        Random gifting
-                                    </DropdownItem>
-                                    <DropdownItem @onclick="ShowDeleteHouseModalAsync">
-                                        Delete
+                                        Gift Exchange
                                     </DropdownItem>
                                     <DropdownItem @onclick="ShowManageHouseModalAsync">
                                         Manage Users
+                                    </DropdownItem>
+                                    <DropdownItem @onclick="ShowDeleteHouseModalAsync">
+                                        Delete
                                     </DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
@@ -103,6 +103,7 @@
     [Inject] public HouseService HouseService { get; set; } = null!;
     [Inject] public HouseExpandService HouseExpandService { get; set; } = null!;
     [Inject] public PairService PairService { get; set; } = null!;
+    [Inject] public NavStateService NavStateService { get; set; } = null!;
     [Inject] NavigationManager NavigationManager { get; set; } = null!;
 
     private CenterModalParameters? _createListParameters;
@@ -199,6 +200,12 @@
 
     private void NavigateToRandomGiftingPage()
     {
+        NavStateService.UpdateNavState(new NavState
+        {
+            HouseId = Model.Id,
+            House = Model
+        });
+
         NavigationManager.NavigateTo($"/house/{Model!.Id}/random-gifting");
     }
 

@@ -3,18 +3,38 @@
     
     <span> Invites </span>
 
-    @if (Invites.Any())
+    @if (PendingInvites.Any())
     {
-        <SortableList AllowSorting="false" Context="item" Data="@Invites" TItem="UserInvites">
+        <SortableList AllowSorting="false" Context="item" Data="@PendingInvites" TItem="UserInvites">
             <ItemTemplate>
                 <InviteCard Model="@item" />
             </ItemTemplate>
         </SortableList>
     }
-    else
+
+    @if (AcceptedInvites.Any())
     {
-        <div class="no-invites">
-            <span class="text-italic"> No invites yet </span>
+        <div class="house-memberships">
+            <h3>Houses you are in</h3>
+            <p class="membership-warning">Leaving a house deletes the lists and items you had in it.</p>
+            @foreach (var invite in AcceptedInvites)
+            {
+                <div class="house-membership">
+                    <span>@invite.House?.Name</span>
+                    <Button Class="leave-house-button" @onclick="() => ConfirmLeaveHouseAsync(invite)">
+                        Leave house
+                    </Button>
+                </div>
+            }
         </div>
     }
+
+    @if (!PendingInvites.Any() && !AcceptedInvites.Any())
+    {
+        <div class="no-invites">
+            <span class="text-italic"> No invites or house memberships yet </span>
+        </div>
+    }
+
+    <UniversalModal @ref="_leaveHouseModal" ModalParameters="_leaveHouseParameters" />
 </div>

@@ -1,0 +1,10 @@
+<div class="leave-house-confirmation">
+    <p>Leaving this house deletes the lists and items you had in it. Are you sure you want to leave?</p>
+    <Button @onclick="() => OnSubmitCompleted.InvokeAsync()">Leave house</Button>
+    <Button @onclick="() => OnClose.InvokeAsync()">Cancel</Button>
+</div>
+
+@code {
+    [CascadingParameter] public EventCallback OnSubmitCompleted { get; set; }
+    [CascadingParameter(Name = "OnClose")] public EventCallback OnClose { get; set; }
+}

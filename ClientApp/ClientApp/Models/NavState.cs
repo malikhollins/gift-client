@@ -8,6 +8,8 @@
 
         public int HouseId { get; set; }
 
+        public House? House { get; set; }
+
         public int ListId { get; set; }
 
         public bool RemoveProfileIcon { get; set; }
