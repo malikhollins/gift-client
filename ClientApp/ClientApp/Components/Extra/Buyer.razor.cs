@@ -37,6 +37,7 @@ namespace ClientApp.Components.Extra
             int? buyerId = user.Id == Item.Buyer ? null : user.Id;
             var updateBuyerRequest = new UpdateBuyerInItemRequest
             {
+                UserId = user.Id,
                 ItemId = Item.Id,
                 ListId = ListId,
                 BuyerId = buyerId
