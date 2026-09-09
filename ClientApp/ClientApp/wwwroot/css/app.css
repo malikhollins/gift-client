@@ -38,16 +38,30 @@ button.icon-only,
 
 /* custom variables */
 :root {
+    --app-bg: #f8f9fa;
+    --surface: #ffffff;
+    --primary: #1a73e8;
+    --primary-hover: #1769d1;
+    --selection: #d3e3fd;
+    --text: #202124;
+    --text-secondary: #5f6368;
+    --text-disabled: #9aa0a6;
+    --border: #dadce0;
+    --hover: #f1f3f4;
+    --active: #e8f0fe;
+    --success: #188038;
+    --warning: #f9ab00;
+    --error: #d93025;
     --card-width: 15vw;
     --card-margin: 1vh 1vw 1vh 1vw;
-    --card-text-color: #75ab5a !important;
-    --card-background-color: #fdfdfd;
-    --card-border-color: black;
-    --nav-bar-color: #d16f6f !important;
-    --card-background-color-secondary: #9c9c9c;
+    --card-text-color: var(--text);
+    --card-background-color: var(--surface);
+    --card-border-color: var(--border);
+    --nav-bar-color: var(--surface);
+    --card-background-color-secondary: var(--hover);
     /* Invite button colors */
-    --invite-accept-color: #26b050; /* green */
-    --invite-reject-color: #e50000; /* red */
+    --invite-accept-color: var(--success);
+    --invite-reject-color: var(--error);
     /* HouseCard component variables */
     --house-card-border-color: var(--card-border-color);
     --house-card-linebreak-border-color: var(--house-card-border-color);
@@ -58,34 +72,34 @@ button.icon-only,
     --house-card-user-lists-header-label-color: var(--card-text-color);
     --house-card-housebody-text-color: var(--card-text-color);
     /* Header variables */
-    --header-border-color: black;
-    --header-h1-color: black;
-    --header-link-color: black;
+    --header-border-color: var(--border);
+    --header-h1-color: var(--text);
+    --header-link-color: var(--primary);
     /* ListPage */
-    --listpage-name-color: black;
+    --listpage-name-color: var(--text);
     /* InviteCard */
     --invitecard-status-text-color: white;
     /* CreateHome */
-    --createhome-close-icon-color: #AB5A5A;
-    --createhome-input-bg: #848484;
-    --createhome-button-bg: #AB5A5A;
-    --createhome-button-text-color: black;
+    --createhome-close-icon-color: var(--primary);
+    --createhome-input-bg: var(--surface);
+    --createhome-button-bg: var(--primary);
+    --createhome-button-text-color: var(--surface);
     /* CreateItem */
-    --createitem-close-icon-color: #AB5A5A;
-    --createitem-input-bg: #848484;
-    --createitem-button-bg: #AB5A5A;
-    --createitem-button-text-color: black;
+    --createitem-close-icon-color: var(--primary);
+    --createitem-input-bg: var(--surface);
+    --createitem-button-bg: var(--primary);
+    --createitem-button-text-color: var(--surface);
     /* Bottom nav */
     --bottomnav-bg-color: var(--nav-bar-color);
     --bottomnav-icon-color: var(--card-text-color);
     --bottomnav-plus-color: var(--card-text-color);
     --bottomnav-profile-color: var(--card-text-color);
     /* User settings */
-    --usercard-title-color: plum;
+    --usercard-title-color: var(--text);
     --updateuser-button-bg: var(--nav-bar-color);
     --updateuser-button-text-color: white;
     /* Login */
-    --login-button-bg: #CC7575;
+    --login-button-bg: var(--primary);
     /* Random gifting page */
     --random-gifting-heading-color: #27251f;
     --random-gifting-muted-color: #5d5a53;
@@ -112,6 +126,8 @@ html, body {
     font-family: Overused Grotesk, Cambria, Georgia, serif;
     height: 100%;
     width: 100%;
+    background-color: var(--app-bg);
+    color: var(--text);
 }
 
 #app {
@@ -131,8 +147,8 @@ h5.modal-title {
 /* EditForm input[type=text] */
 #EmailLabel, #HouseNameLabel, #ListNameLabel, input[type=text], input[type=email], #ItemNameLabel, #ItemDescriptionLabel {
     border-radius: 12px;
-    background-color: #848484;
-    border: none;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
     width: 99%;
 }
 
