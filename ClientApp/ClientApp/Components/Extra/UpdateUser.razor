@@ -6,6 +6,7 @@
         <div>
             <label for="name">Enter Name:</label>
             <InputText id="name" @bind-Value="UserData.Name" />
+            <ValidationMessage For="@(() => UserData.Name)" />
         </div>
         <button type="submit"> Update </button>
     </EditForm>

@@ -1,10 +1,8 @@
-﻿using BlazorBootstrap;
+using BlazorBootstrap;
 using ClientApp.Models;
 using ClientApp.Services;
-using ClientApp.Utils;
 using Microsoft.AspNetCore.Components;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Mail;
 
 namespace ClientApp.Components.Extra
 {
@@ -28,6 +26,9 @@ namespace ClientApp.Components.Extra
         [Inject]
         public LoginService LoginService { get; set; } = null!;
 
+        [Inject]
+        public NavStateService NavStateService { get; set; } = null!;
+
         public User UserData { get; set; } = new();
         
         protected override async Task OnInitializedAsync()
@@ -50,31 +51,36 @@ namespace ClientApp.Components.Extra
                 }
             }
 
-            var userInfo = UserInfoService.GetUserInfo();
-            if (userInfo!.Name.IsNullOrEmpty())
-            {
-                var mailAddress = new MailAddress(userInfo!.Email!);
-                UserData.Name = mailAddress.User;
-            }
-            else
-            {
-                UserData.Name = userInfo.Name;
-            }
+            UserData.Name = string.Empty;
         }
 
         public async Task HandleValidSubmit()
         {
-            var successfulUpdate = await UserService.UpdateUserInfo(UserData!.Name!);
+            var name = UserData.Name?.Trim();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ToastService.Notify(new ToastMessage(ToastType.Warning, "Please enter your name to continue."));
+                return;
+            }
+
+            var successfulUpdate = await UserService.UpdateUserInfo(name);
             if (successfulUpdate)
             {
                 var user = UserInfoService.GetUserInfo();
                 if (user != null)
                 {
-                    user.Name = UserData!.Name;
+                    user.Name = name;
                     UserInfoService.SetUserInfo(user);
-                    ToastService.Notify(new ToastMessage(ToastType.Success, "Changed name successfully!"));
-                    return;
                 }
+
+                if (NavStateService.CurrentState is { } navState)
+                {
+                    navState.GoBackUrl = "/homepage";
+                    NavStateService.UpdateNavState(navState);
+                }
+
+                ToastService.Notify(new ToastMessage(ToastType.Success, "Changed name successfully!"));
+                return;
             }
             ToastService.Notify(new ToastMessage(ToastType.Warning, "Failed to change name."));
         }

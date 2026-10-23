@@ -1,4 +1,4 @@
-﻿using Auth0.OidcClient;
+using Auth0.OidcClient;
 using ClientApp.Models;
 using ClientApp.Utils;
 using Duende.IdentityModel.OidcClient;
@@ -55,12 +55,13 @@ namespace ClientApp.Services
         /// <returns></returns>
         public async Task<User?> GetUserAsync(IEnumerable<Claim> auth0LoginResult)
         {
-
             try
             {
                 // gather inputs for uri parameters
                 var authId = auth0LoginResult.FirstOrDefault(claim => claim.Type == "sub");
-                var email = auth0LoginResult.FirstOrDefault(claim => claim.Type == "name");
+                var email = auth0LoginResult.FirstOrDefault(claim => claim.Type == "https://gift-all.com/user_email" && !string.IsNullOrWhiteSpace(claim.Value))
+                    ?? auth0LoginResult.FirstOrDefault(claim => claim.Type == "email" && !string.IsNullOrWhiteSpace(claim.Value))
+                    ?? auth0LoginResult.FirstOrDefault(claim => claim.Type == ClaimTypes.Email && !string.IsNullOrWhiteSpace(claim.Value));
                 var uri = BuildUri(authId?.Value, email?.Value);
 
                 HttpClient httpClient = _httpClientFactory.CreateClient("base-url");
@@ -80,24 +81,29 @@ namespace ClientApp.Services
             if (!_loginCoordinator.TryEnter())
             {
                 _logger.LogInformation("Login already in progress, skipping duplicate call.");
-                _loginCoordinator.Exit();
                 return false;
             }
-            var token = await _authTokenStorage.GetValidAuthTokenAsync();
-            if (token != null)
+
+            try
             {
-                var handler = new JwtSecurityTokenHandler();
-                var jwtToken = handler.ReadJwtToken(token);
-                var claims = jwtToken.Claims;
-                var userFromClaims = GetUserFromClaims(claims);
-                if (userFromClaims != null && !userFromClaims.Name.IsNullOrEmpty())
+                var token = await _authTokenStorage.GetValidAuthTokenAsync();
+                if (token != null)
                 {
-                    _loginCoordinator.Exit();
-                    return true;
+                    var handler = new JwtSecurityTokenHandler();
+                    var jwtToken = handler.ReadJwtToken(token);
+                    var userFromClaims = GetUserFromClaims(jwtToken.Claims);
+                    if (userFromClaims != null && !string.IsNullOrWhiteSpace(userFromClaims.Name))
+                    {
+                        return true;
+                    }
                 }
+
+                return false;
             }
-            _loginCoordinator.Exit();
-            return false;
+            finally
+            {
+                _loginCoordinator.Exit();
+            }
         }
 
         public async Task<bool> LoginAsync()
@@ -116,9 +122,22 @@ namespace ClientApp.Services
                 {
                     var handler = new JwtSecurityTokenHandler();
                     var jwtToken = handler.ReadJwtToken(token);
-                    var claims = jwtToken.Claims;
-                    var userFromClaims = GetUserFromClaims(claims);
-                    if (userFromClaims != null && !userFromClaims.Name.IsNullOrEmpty())
+                    var tokenClaims = jwtToken.Claims;
+                    var userFromClaims = GetUserFromClaims(tokenClaims);
+                    if (userFromClaims != null && !string.IsNullOrWhiteSpace(userFromClaims.Name))
+                    {
+                        _userInfoService.SetUserInfo(userFromClaims);
+                        return true;
+                    }
+
+                    var persistedUser = await GetUserAsync(tokenClaims);
+                    if (persistedUser != null)
+                    {
+                        _userInfoService.SetUserInfo(persistedUser);
+                        return true;
+                    }
+
+                    if (userFromClaims != null)
                     {
                         _userInfoService.SetUserInfo(userFromClaims);
                         return true;
@@ -149,18 +168,20 @@ namespace ClientApp.Services
                 stopwatch.Restart();
 #endif
 
-                var user  = GetUserFromClaims(loginResult.User.Claims);
-                if (user != null)
+                var claims = loginResult.User.Claims;
+                var user = GetUserFromClaims(claims);
+                if (user != null && !string.IsNullOrWhiteSpace(user.Name))
                 {
                     _userInfoService.SetUserInfo(user);
                     return true;
                 }
 
-                user = await GetUserAsync(loginResult.User.Claims);
+                var userFromApi = await GetUserAsync(claims);
 #if DEBUG
                 _logger.LogInformation("Creating user finished - it took {time} seconds", stopwatch.Elapsed.TotalSeconds);
                 stopwatch.Stop();
 #endif
+                user = userFromApi ?? user;
                 _userInfoService.SetUserInfo(user);
                 return user != null;
             }
@@ -177,16 +198,21 @@ namespace ClientApp.Services
 
         private User? GetUserFromClaims(IEnumerable<Claim> claims)
         {
-            var email = claims.FirstOrDefault(claim => claim.Type == "https://gift-all.com/user_email");
+            var email = claims.FirstOrDefault(claim => claim.Type == "https://gift-all.com/user_email" && !string.IsNullOrWhiteSpace(claim.Value));
             var userId = claims.FirstOrDefault(claim => claim.Type == "https://gift-all.com/user_id");
-            var name = claims.FirstOrDefault(claim => claim.Type == "https://gift-all.com/user_name");
+            var name = claims.FirstOrDefault(claim => claim.Type == "https://gift-all.com/user_name" && !string.IsNullOrWhiteSpace(claim.Value))
+                ?? claims.FirstOrDefault(claim => claim.Type == "name" && !string.IsNullOrWhiteSpace(claim.Value))
+                ?? claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name && !string.IsNullOrWhiteSpace(claim.Value))
+                ?? claims.FirstOrDefault(claim => claim.Type == "nickname" && !string.IsNullOrWhiteSpace(claim.Value));
 
-            if (userId != null)
+            if (userId != null && int.TryParse(userId.Value, out var parsedUserId))
             {
                 return new User
                 {
-                    Email = email?.Value,
-                    Id = int.Parse(userId.Value),
+                    Email = email?.Value
+                        ?? claims.FirstOrDefault(claim => claim.Type == "email" && !string.IsNullOrWhiteSpace(claim.Value))?.Value
+                        ?? claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email && !string.IsNullOrWhiteSpace(claim.Value))?.Value,
+                    Id = parsedUserId,
                     Name = name?.Value
                 };
             }
