@@ -102,7 +102,10 @@ namespace ClientApp.Components.Pages
                     Houses.RemoveAll( h  => h.Id == args.House.Id );
                     break;
                 case UpdateEventType.Add:
-                    Houses.Add(args.House);
+                    if (Houses.All(house => house.Id != args.House.Id))
+                    {
+                        Houses.Add(args.House);
+                    }
                     break;
             }
             StateHasChanged();
@@ -111,7 +114,7 @@ namespace ClientApp.Components.Pages
         private async Task RefreshHousesAsync()
         {
             var housesAsEnumerable = await HouseService.GetHousesAsync();
-            Houses = housesAsEnumerable.ToList();
+            Houses = housesAsEnumerable.DistinctBy(house => house.Id).ToList();
         }
         
         public void Dispose()

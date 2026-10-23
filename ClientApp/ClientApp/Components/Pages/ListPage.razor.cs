@@ -67,14 +67,15 @@ namespace ClientApp.Components.Pages
 
             Connection ??= HubService.Build();
             
-            Connection.On("NotifyItemCreated", (Item item) =>
+            Connection.On("NotifyItemCreated", (Item item) => InvokeAsync(() =>
             {
-                var inList = _itemsInList.Any(i => i.Id == item.Id);
-                if (!inList)
+                if (_itemsInList.All(existingItem => existingItem.Id != item.Id))
                 {
                     _itemsInList.Add(item);
                 }
-            });
+
+                StateHasChanged();
+            }));
 
             Connection.On("NotifyItemUpdated", (UpdateItemRequest item) =>
             {
@@ -120,8 +121,11 @@ namespace ClientApp.Components.Pages
             StateHasChanged();
         }
 
-        private async Task RefreshItemsInList() =>
-            _itemsInList = await ListService.GetItemsAsync(ListId);
+        private async Task RefreshItemsInList()
+        {
+            var items = await ListService.GetItemsAsync(ListId);
+            _itemsInList = items.DistinctBy(item => item.Id).ToList();
+        }
 
         public async ValueTask DisposeAsync()
         {
