@@ -43,7 +43,7 @@ namespace ClientApp.Services
         /// <param name="authId"></param>
         /// <param name="email"></param>
         /// <returns></returns>
-        private static string BuildUri(string? authId, string? email) => string.Format("/api/User/get/{0}/{1}", authId, email ?? "null");
+        private static string BuildUri(string? authId, string? email) => string.Format("/api/User/get/v2/{0}/{1}", authId, email ?? "null");
 
         /// <summary>
         /// Create a user with the database
@@ -129,19 +129,6 @@ namespace ClientApp.Services
                         _userInfoService.SetUserInfo(userFromClaims);
                         return true;
                     }
-
-                    var persistedUser = await GetUserAsync(tokenClaims);
-                    if (persistedUser != null)
-                    {
-                        _userInfoService.SetUserInfo(persistedUser);
-                        return true;
-                    }
-
-                    if (userFromClaims != null)
-                    {
-                        _userInfoService.SetUserInfo(userFromClaims);
-                        return true;
-                    }
                 }
 #if DEBUG
                 var stopwatch = Stopwatch.StartNew();
@@ -168,22 +155,14 @@ namespace ClientApp.Services
                 stopwatch.Restart();
 #endif
 
-                var claims = loginResult.User.Claims;
-                var user = GetUserFromClaims(claims);
-                if (user != null && !string.IsNullOrWhiteSpace(user.Name))
-                {
-                    _userInfoService.SetUserInfo(user);
-                    return true;
-                }
+                var userFromApi = await GetUserAsync(loginResult.User.Claims);
 
-                var userFromApi = await GetUserAsync(claims);
 #if DEBUG
                 _logger.LogInformation("Creating user finished - it took {time} seconds", stopwatch.Elapsed.TotalSeconds);
                 stopwatch.Stop();
 #endif
-                user = userFromApi ?? user;
-                _userInfoService.SetUserInfo(user);
-                return user != null;
+                _userInfoService.SetUserInfo(userFromApi);
+                return userFromApi != null;
             }
             catch (Exception ex)
             {
@@ -195,6 +174,8 @@ namespace ClientApp.Services
                 _loginCoordinator.Exit();
             }
         }
+
+        public Task LogOutAsync() => _authClient.LogoutAsync();
 
         private User? GetUserFromClaims(IEnumerable<Claim> claims)
         {
@@ -213,7 +194,7 @@ namespace ClientApp.Services
                         ?? claims.FirstOrDefault(claim => claim.Type == "email" && !string.IsNullOrWhiteSpace(claim.Value))?.Value
                         ?? claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email && !string.IsNullOrWhiteSpace(claim.Value))?.Value,
                     Id = parsedUserId,
-                    Name = name?.Value
+                    Name = name?.Value == "null" ? null : name?.Value
                 };
             }
 

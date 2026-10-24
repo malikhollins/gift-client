@@ -50,8 +50,6 @@ namespace ClientApp.Components.Extra
                     }
                 }
             }
-
-            UserData.Name = string.Empty;
         }
 
         public async Task HandleValidSubmit()
