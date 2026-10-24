@@ -5,9 +5,7 @@
     font-display: block;
 }
 
-/* Buttons that contain only an icon: remove borders/shadows to render them
-   as flat icon buttons. Apply to both standard .btn and BlazorBootstrap's
-   .bb-button when given the .icon-only helper class. */
+/* Keep icon-only buttons visually flat while preserving a comfortable touch target. */
 .icon-only,
 .icon-only:focus,
 .icon-only:active,
@@ -16,9 +14,14 @@ button.icon-only,
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
-    padding: 0.25rem; /* keep a small touch target */
-    width: auto;
-    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
 }
 
     /* If you want a subtle focus ring for accessibility, enable this and
