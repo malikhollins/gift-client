@@ -1,9 +1,14 @@
 ﻿namespace ClientApp.Models
 {
+    public enum NavPage
+    {
+        Other,
+        Home,
+        Profile
+    }
+
     public class NavState
     {
-        public string? GoBackUrl { get; set; }
-
         public CenterModalParameters? CenterModalParameters { get; set; }
 
         public int HouseId { get; set; }
@@ -12,6 +17,6 @@
 
         public int ListId { get; set; }
 
-        public bool RemoveProfileIcon { get; set; }
+        public NavPage CurrentPage { get; set; } = NavPage.Other;
     }
 }

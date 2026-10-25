@@ -7,11 +7,17 @@
     <Card Class="HomeCard" TextAlignment="Alignment.Start" Id="@Model.Name">
         <CardTitle Class="HomeHouseTitle" Size="HeadingSize.H3">
             <div class="HeaderContainer">
-                <span class="HomeHouseText">@Model.Name</span>
-                @if (_hasAssignment)
-                {
-                    <Icon CustomIconName="fa-solid fa-star" Title="You have a gift assignment" />
-                }
+                <button type="button"
+                        class="house-title-toggle"
+                        aria-label="@(Model.IsExpanded ? $"Collapse {Model.Name}" : $"Expand {Model.Name}")"
+                        aria-expanded="@Model.IsExpanded"
+                        @onclick="ToggleExpand">
+                    <span class="HomeHouseText">@Model.Name</span>
+                    @if (_hasAssignment)
+                    {
+                        <Icon CustomIconName="fa-solid fa-star" Title="You have a gift assignment" />
+                    }
+                </button>
                 <CascadingValue Value="@Model.Id" Name="HouseId">
                     <div class="header-actions">
                         <Button Size="ButtonSize.Small" @onclick="ToggleExpand" Class="expand-button icon-only" Title="Toggle lists">

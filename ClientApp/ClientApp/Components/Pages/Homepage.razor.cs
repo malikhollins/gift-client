@@ -35,7 +35,8 @@ namespace ClientApp.Components.Pages
 
             NavStateService.UpdateNavState(new NavState()
             {
-                CenterModalParameters = CenterModalParameters
+                CenterModalParameters = CenterModalParameters,
+                CurrentPage = NavPage.Home
             });
             
             IsLoading = false;

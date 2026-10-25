@@ -46,10 +46,10 @@ namespace ClientApp.Components.Pages
 
             NavStateService.UpdateNavState(new NavState
             {
-                GoBackUrl = $"/homepage",
                 CenterModalParameters = param,
                 HouseId = HouseId,
                 ListId = ListId,
+                CurrentPage = NavPage.Other
             });
 
             _isLoading = false;

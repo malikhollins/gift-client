@@ -9,12 +9,12 @@ namespace ClientApp.Components.Extra
         [Inject] NavStateService NavStateService { get; set; } = null!;
         [Inject] InviteService InviteService { get; set; } = null!;
         [Inject] UserInfoService UserInfoService { get; set; } = null!;
-        [Parameter] public string? GoBackUrl { get; set; }
-        [Parameter] public CenterModalParameters CenterModalParameters { get; set; } = default!;
+        [Inject] NavigationManager NavigationManager { get; set; } = null!;
+        [Parameter] public CenterModalParameters? CenterModalParameters { get; set; }
         private int HouseId { get; set; }
         private int ListId { get; set; }
         private bool HasInvites { get; set; }
-        private bool RemoveProfileIcon { get; set; }
+        private NavPage CurrentPage { get; set; }
 
         protected override Task OnInitializedAsync()
         {
@@ -37,23 +37,26 @@ namespace ClientApp.Components.Extra
             }
         }
 
-        private void NavStateService_OnNavStateChanged(object? sender, NavState naveState )
+        private void NavStateService_OnNavStateChanged(object? sender, NavState? naveState)
             => UpdateNavParameters( naveState );
 
-        private void UpdateNavParameters( NavState state )
+        private void UpdateNavParameters(NavState? state)
         {
             if (state == null)
             {
                 return;
             }
 
-            GoBackUrl = state.GoBackUrl;
-            CenterModalParameters = state!.CenterModalParameters!;
+            CenterModalParameters = state.CenterModalParameters;
             HouseId = state.HouseId;
             ListId = state.ListId;
-            RemoveProfileIcon = state.RemoveProfileIcon;
+            CurrentPage = state.CurrentPage;
             StateHasChanged();
         }
+
+        private void NavigateHome() => NavigationManager.NavigateTo("/homepage");
+
+        private void NavigateToProfile() => NavigationManager.NavigateTo("/profile");
 
         public void Dispose()
         {

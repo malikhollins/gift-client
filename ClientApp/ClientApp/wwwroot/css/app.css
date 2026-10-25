@@ -99,8 +99,8 @@ button.icon-only,
     --bottomnav-plus-color: var(--card-text-color);
     --bottomnav-profile-color: var(--card-text-color);
     /* User settings */
-    --usercard-title-color: var(--text);
-    --updateuser-button-bg: var(--nav-bar-color);
+    --usercard-title-color: var(--surface);
+    --updateuser-button-bg: var(--primary);
     --updateuser-button-text-color: white;
     /* Login */
     --login-button-bg: var(--primary);

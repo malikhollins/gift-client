@@ -24,3 +24,9 @@
 h1 {
     font-size: 50px;
 }
+
+.login-page-heading {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    margin: 0 0 1.5rem;
+}

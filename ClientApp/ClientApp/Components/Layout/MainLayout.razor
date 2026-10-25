@@ -35,7 +35,7 @@
         return Task.CompletedTask;
     }
 
-    public void OnNavStateChanged(object? _, NavState state)
+    public void OnNavStateChanged(object? _, NavState? state)
     {
         LastNavState = state;
         StateHasChanged();

@@ -11,8 +11,11 @@ namespace ClientApp.Components.Pages
         [Inject] NavigationManager NavigationManager { get; set; } = null!;
         [Inject] UserInfoService UserInfoService { get; set; } = null!;
         [Inject] ILogger<Login> Logger { get; set; } = null!;
+        [Inject] NavStateService NavStateService { get; set; } = null!;
 
         private BlazorBootstrap.Button _loginButton = null!;
+
+        protected override void OnInitialized() => NavStateService.UpdateNavState(null);
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -39,7 +42,7 @@ namespace ClientApp.Components.Pages
                 if (loggedIn)
                 {
                     var userInfo = UserInfoService.GetUserInfo();
-                    if (userInfo!.Name.IsNullOrEmpty())
+                    if (userInfo?.Name == null || userInfo.Name == "null")
                     {
                         NavigationManager.NavigateTo("/profile");
                     }
