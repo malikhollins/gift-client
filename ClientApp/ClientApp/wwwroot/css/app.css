@@ -40,6 +40,15 @@ button.icon-only,
     box-sizing: border-box;
 }
 
+.hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 /* custom variables */
 :root {
     --app-bg: #f8f9fa;

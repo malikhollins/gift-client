@@ -1,7 +1,7 @@
 ﻿@page "/house/{HouseId:int}/list/{ListId:int}/{ListName}/owner/{UserId:int}/{OwnerName}"
 
 <LoadingIndicator IsLoading="@_isLoading">
-    <div class="list-page">
+    <div class="list-page hide-scrollbar">
         <PageHeader Title="@ListName" Subtitle="@($"Owned by {OwnerName}")" />
         <div class="wrapper">
             @foreach (var item in _itemsInList)
