@@ -3,15 +3,66 @@
     background-color: var(--bottomnav-bg-color, var(--nav-bar-color));
     width: 100%;
     border-radius: 15px 15px 0 0;
-    display: flex inline !important;
-    flex-direction: row !important;
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-around;
 }
 
 .plusCreateHouse, .profileButton, .backToHomepage {
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin: auto;
+    align-items: center;
+    display: flex;
+    flex: 1;
+    height: 100%;
+    justify-content: center;
     color: var(--bottomnav-icon-color, var(--card-text-color));
+}
+
+.bottom-nav-button {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    height: 48px;
+    justify-content: center;
+    min-width: 48px;
+    padding: 0;
+    width: 48px;
+}
+
+.bottom-nav-button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.bottom-nav-button:disabled {
+    cursor: default;
+    opacity: 0.55;
+}
+
+.bottom-nav-button.active {
+    background-color: var(--active);
+    color: var(--primary);
+    opacity: 1;
+}
+
+.profile-icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+}
+
+.profile-invite-dot {
+    background-color: var(--error);
+    border: 2px solid var(--bottomnav-bg-color, var(--nav-bar-color));
+    border-radius: 50%;
+    height: 10px;
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    width: 10px;
 }

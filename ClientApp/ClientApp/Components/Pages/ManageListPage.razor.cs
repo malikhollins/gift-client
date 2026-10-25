@@ -18,9 +18,9 @@ public partial class ManageListPage : ComponentBase
         
         NavStateService.UpdateNavState(new NavState
         {
-            GoBackUrl = $"/homepage",
             CenterModalParameters = null,
-            HouseId = HouseId
+            HouseId = HouseId,
+            CurrentPage = NavPage.Other
         });
 
         await base.OnInitializedAsync();

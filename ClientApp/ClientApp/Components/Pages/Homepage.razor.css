@@ -2,6 +2,12 @@
     margin: 0 auto;
 }
 
+.homepage-page {
+    height: 100%;
+    overflow-y: auto;
+    padding: 1.5rem 1rem 2rem;
+}
+
 #HomepageGiftAll {
     display: flex;
 }

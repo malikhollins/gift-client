@@ -13,28 +13,31 @@
     </CompletedTemplate>
     <ChildContent>
         <LoadingIndicator IsLoading="@IsLoading">
-            <div id="HomepageGiftAll">
-                @if (HasNoHouses)
-                {
-                    <div class="textContainer">
-                        <p class="text-italic">You have not been addded to or created any households </p>
-                        <p class="text-italic">
-                            <UniversalModal ModalParameters="CenterModalParameters"> click here</UniversalModal>
-                            to create a household!
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <div class="HomeGroup" id="GiftAppHome">
-                        @foreach (var house in Houses)
-                        {
-                            <HouseCard Model="@house"/>
-                        }
-                    </div>
-                    <!-- end GiftAppHome-->
-                }
-            </div> <!-- end homepageGiftAll -->
+            <div class="homepage-page hide-scrollbar">
+                <PageHeader Title="Homes" />
+                <div id="HomepageGiftAll">
+                    @if (HasNoHouses)
+                    {
+                        <div class="textContainer">
+                            <p class="text-italic">You have not been addded to or created any households </p>
+                            <p class="text-italic">
+                                <UniversalModal ModalParameters="CenterModalParameters"> click here</UniversalModal>
+                                to create a household!
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="HomeGroup" id="GiftAppHome">
+                            @foreach (var house in Houses)
+                            {
+                                <HouseCard Model="@house"/>
+                            }
+                        </div>
+                        <!-- end GiftAppHome-->
+                    }
+                </div> <!-- end homepageGiftAll -->
+            </div>
         </LoadingIndicator>
     </ChildContent>
 </FluentPullToRefresh>

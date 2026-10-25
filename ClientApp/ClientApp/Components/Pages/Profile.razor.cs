@@ -22,8 +22,7 @@ public partial class Profile : ComponentBase
         var nav = new NavState
         {
             CenterModalParameters = null,
-            GoBackUrl = string.IsNullOrWhiteSpace(user?.Name) ? null : "/homepage",
-            RemoveProfileIcon = true
+            CurrentPage = NavPage.Profile
         };
         NavStateService.UpdateNavState(nav);
     }

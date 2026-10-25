@@ -73,7 +73,6 @@ namespace ClientApp.Components.Extra
 
                 if (NavStateService.CurrentState is { } navState)
                 {
-                    navState.GoBackUrl = "/homepage";
                     NavStateService.UpdateNavState(navState);
                 }
 

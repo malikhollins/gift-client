@@ -1,24 +1,14 @@
-﻿* {
-    margin: 0 auto;
+.list-page {
+    height: 100%;
+    overflow-y: auto;
+    padding: 1.25rem 1rem 2rem;
 }
 
-.name {
-    color: var(--listpage-name-color, black);
-    padding-top: 20px;
-}
-
-.owner {
-    font-size: 22px;
-}
-h2 {
-    border-bottom: 1px solid var(--card-text-color);
-}
 .wrapper {
     color: var(--card-text-color);
     display: flex;
     flex-flow: column;
     align-content: space-evenly;
-    width: 80%;
-    height: 100%;
+    width: 95%;
+    margin: 0 auto;
 }
-

@@ -1,34 +1,51 @@
 @using Microsoft.FluentUI.AspNetCore.Components
 <div class="bottomNav">
-
     <div class="backToHomepage">
-        @if (GoBackUrl != null && GoBackUrl.Any())
-        {
-            <a class="backbutton" href="@GoBackUrl">
-                <Icon CustomIconName="fa-solid fa-arrow-left" Size="BlazorBootstrap.IconSize.x5" />
-            </a>
-        }
+        <button type="button"
+                class="bottom-nav-button @(CurrentPage == NavPage.Home ? "active" : null)"
+                aria-label="Home"
+                aria-current="@(CurrentPage == NavPage.Home ? "page" : null)"
+                disabled="@(CurrentPage == NavPage.Home)"
+                @onclick="NavigateHome">
+            <Icon CustomIconName="fa-solid fa-house" Size="BlazorBootstrap.IconSize.x5" />
+        </button>
     </div> <!-- hide when not needed? -->
 
     <div class="plusCreateHouse">
-        <CascadingValue Value="@ListId" Name="ListId">
-            <CascadingValue Value="@HouseId" Name="HouseId">
-                <UniversalModal ModalParameters="CenterModalParameters">
-                    <Icon CustomIconName="fa-solid fa-plus" Size="BlazorBootstrap.IconSize.x5" />
-                </UniversalModal>
+        @if (CenterModalParameters is { } modalParameters)
+        {
+            <CascadingValue Value="@ListId" Name="ListId">
+                <CascadingValue Value="@HouseId" Name="HouseId">
+                    <UniversalModal ModalParameters="modalParameters">
+                        <button type="button" class="bottom-nav-button" aria-label="Create">
+                            <Icon CustomIconName="fa-solid fa-plus" Size="BlazorBootstrap.IconSize.x5" />
+                        </button>
+                    </UniversalModal>
+                </CascadingValue>
             </CascadingValue>
-        </CascadingValue>
+        }
+        else
+        {
+            <button type="button" class="bottom-nav-button" aria-label="Create" disabled>
+                <Icon CustomIconName="fa-solid fa-plus" Size="BlazorBootstrap.IconSize.x5" />
+            </button>
+        }
     </div> <!-- end plusCreateHouse -->
 
     <div class="profileButton">
-        @if (!RemoveProfileIcon)
-        {
-            <a href="/profile">
-                <FluentCounterBadge VerticalPosition="100" HorizontalPosition="100" BackgroundColor="@Color.Error" Color="Color.Fill" Dot="@HasInvites">
-                    <Icon CustomIconName="fa-regular fa-circle-user" Size="BlazorBootstrap.IconSize.x5" />
-                </FluentCounterBadge>
-            </a>
-        }
+        <button type="button"
+                class="bottom-nav-button @(CurrentPage == NavPage.Profile ? "active" : null)"
+                aria-label="@(HasInvites ? "Profile, pending invites" : "Profile")"
+                aria-current="@(CurrentPage == NavPage.Profile ? "page" : null)"
+                disabled="@(CurrentPage == NavPage.Profile)"
+                @onclick="NavigateToProfile">
+            <span class="profile-icon">
+                <Icon CustomIconName="fa-regular fa-circle-user" Size="BlazorBootstrap.IconSize.x5" />
+                @if (HasInvites)
+                {
+                    <span class="profile-invite-dot" aria-hidden="true"></span>
+                }
+            </span>
+        </button>
     </div> <!-- 1end profileButton -->
-
 </div> <!-- end bottom nav -->
