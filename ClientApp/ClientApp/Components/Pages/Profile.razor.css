@@ -20,22 +20,3 @@
     padding: 1rem;
     text-align: left;
 }
-
-.developer-sign-out {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--card-border-color);
-}
-
-.developer-sign-out h2 {
-    font-size: 1.1rem;
-}
-
-.developer-sign-out p {
-    margin: 0.5rem 0 0;
-    color: var(--text-secondary);
-}
-
-.developer-sign-out-button {
-    min-height: 44px;
-}

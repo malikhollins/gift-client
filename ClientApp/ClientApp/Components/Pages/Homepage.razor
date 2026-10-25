@@ -1,43 +1,29 @@
 @page "/homepage"
-@using Microsoft.FluentUI.AspNetCore.Components
 
-<FluentPullToRefresh OnRefreshAsync="ShouldRefreshHousesAsync" ShowStaticTip="false">
-    <PullingTemplate>
-        Pull to refresh
-    </PullingTemplate>
-    <ReleaseTemplate>
-        Release to update
-    </ReleaseTemplate>
-    <CompletedTemplate>
-        Update completed
-    </CompletedTemplate>
-    <ChildContent>
-        <LoadingIndicator IsLoading="@IsLoading">
-            <div class="homepage-page hide-scrollbar">
-                <PageHeader Title="Homes" />
-                <div id="HomepageGiftAll">
-                    @if (HasNoHouses)
+<LoadingIndicator IsLoading="@IsLoading">
+    <div class="homepage-page hide-scrollbar">
+        <PageHeader Title="Homes" />
+        <div id="HomepageGiftAll">
+            @if (HasNoHouses)
+            {
+                <div class="textContainer">
+                    <p class="text-italic">You have not been addded to or created any households </p>
+                    <p class="text-italic">
+                        <UniversalModal ModalParameters="CenterModalParameters"> click here</UniversalModal>
+                        to create a household!
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="HomeGroup" id="GiftAppHome">
+                    @foreach (var house in Houses)
                     {
-                        <div class="textContainer">
-                            <p class="text-italic">You have not been addded to or created any households </p>
-                            <p class="text-italic">
-                                <UniversalModal ModalParameters="CenterModalParameters"> click here</UniversalModal>
-                                to create a household!
-                            </p>
-                        </div>
+                        <HouseCard Model="@house" />
                     }
-                    else
-                    {
-                        <div class="HomeGroup" id="GiftAppHome">
-                            @foreach (var house in Houses)
-                            {
-                                <HouseCard Model="@house"/>
-                            }
-                        </div>
-                        <!-- end GiftAppHome-->
-                    }
-                </div> <!-- end homepageGiftAll -->
-            </div>
-        </LoadingIndicator>
-    </ChildContent>
-</FluentPullToRefresh>
+                </div>
+                <!-- end GiftAppHome-->
+            }
+        </div> <!-- end homepageGiftAll -->
+    </div>
+</LoadingIndicator>
