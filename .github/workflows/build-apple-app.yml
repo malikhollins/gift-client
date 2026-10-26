@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build iOS
-    runs-on: macos-latest
+    runs-on: xcode-27
     timeout-minutes: 45
     environment: secrets
 
