@@ -1,40 +1,37 @@
 ﻿
 <div class="invites">
     
-    <span> Invites </span>
+    <h4>invites</h4>
 
-    @if (PendingInvites.Any())
-    {
-        <SortableList AllowSorting="false" Context="item" Data="@PendingInvites" TItem="UserInvites">
-            <ItemTemplate>
-                <InviteCard Model="@item" />
-            </ItemTemplate>
-        </SortableList>
-    }
-
-    @if (AcceptedInvites.Any())
-    {
         <div class="house-memberships">
-            <h3>Houses you are in</h3>
-            <p class="membership-warning">Leaving a house deletes the lists and items you had in it.</p>
-            @foreach (var invite in AcceptedInvites)
-            {
-                <div class="house-membership">
-                    <span>@invite.House?.Name</span>
-                    <Button Class="leave-house-button" @onclick="() => ConfirmLeaveHouseAsync(invite)">
-                        Leave house
-                    </Button>
-                </div>
-            }
+            <h5>Pending invites</h5>
+            <SortableList AllowSorting="false" Context="item" Data="@PendingInvites" TItem="UserInvites">
+                <ItemTemplate>
+                    <InviteCard Model="@item" />
+                </ItemTemplate>
+               <EmptyDataTemplate>
+                    <p class="text-italic">No pending invites.</p>
+               </EmptyDataTemplate>
+            </SortableList>
         </div>
-    }
 
-    @if (!PendingInvites.Any() && !AcceptedInvites.Any())
-    {
-        <div class="no-invites">
-            <span class="text-italic"> No invites or house memberships yet </span>
+        <div class="house-memberships">
+            <h5>House memberships</h5>
+            <p class="membership-warning">Leaving a house deletes the lists and items you had in it.</p>
+                @foreach (var invite in AcceptedInvites)
+                {
+                    <div class="house-membership">
+                        <span>@invite.House?.Name</span>
+                        <Button Class="leave-house-button" @onclick="() => ConfirmLeaveHouseAsync(invite)">
+                            Leave house
+                        </Button>
+                    </div>
+                }
+                @if ( !AcceptedInvites.Any())
+                {
+                    <p class="text-italic">No house memberships.</p>
+                } 
         </div>
-    }
 
     <UniversalModal @ref="_leaveHouseModal" ModalParameters="_leaveHouseParameters" />
 </div>

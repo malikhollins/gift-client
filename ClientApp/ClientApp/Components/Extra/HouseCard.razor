@@ -122,19 +122,32 @@
     private List<UserList> _userOwnedList = new();
     private List<UserList> _otherLists = new();
 
+    protected override void OnInitialized()
+    {
+        ListPageObserver.OnUpdated += OnListCreated;
+
+        _manageUsersParameters = new CenterModalParameters(typeof(Invite), "Manage Users", EventCallback.Empty);
+        _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Empty);
+        _deleteModalParameters = new CenterModalParameters(typeof(BasicConfirm), "Delete this house?", EventCallback.Factory.Create(this, DeleteHouseAsync));
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
 
         var user = UserInfoService.GetUserInfo();
-        _ownsHouse = user?.Id == Model.Owner;
         _hasAssignment = user != null && (await PairService.GetUserPairingAsync(Model.Id)).Any();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        var user = UserInfoService.GetUserInfo();
+        _ownsHouse = user?.Id == Model.Owner;
 
         RefreshLists();
-        
-        _manageUsersParameters = new CenterModalParameters(typeof(Invite), "Manage Users", EventCallback.Empty);
-        _createListParameters = new CenterModalParameters(typeof(CreateList), "Create a list", EventCallback.Empty);
-        _deleteModalParameters = new CenterModalParameters(typeof(BasicConfirm), "Delete this house?", EventCallback.Factory.Create(this, DeleteHouseAsync));
+
         HouseExpandService.ApplyTo(Model!);
     }
 
@@ -145,11 +158,6 @@
         var user = UserInfoService.GetUserInfo();
         _userOwnedList = Model!.Lists.Where(list => list.Owner == user!.Id).ToList();
         _otherLists = Model!.Lists.Where(list => list.Owner != user!.Id).ToList();
-    }
-
-    protected override void OnInitialized()
-    {
-        ListPageObserver.OnUpdated += OnListCreated;
     }
 
     private void OnListCreated(object? sender, UpdateEventListArgs updateEventListArgs)

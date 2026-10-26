@@ -30,27 +30,8 @@ namespace ClientApp.Components.Extra
         public NavStateService NavStateService { get; set; } = null!;
 
         public User UserData { get; set; } = new();
-        
-        protected override async Task OnInitializedAsync()
-        {
-            var token = await AuthTokenStorage.GetValidAuthTokenAsync();
-            if (token != null)
-            {
-                var handler = new JwtSecurityTokenHandler();
-                var jwtToken = handler.ReadJwtToken(token);
-                var claims = jwtToken.Claims;
-                var authId = claims.FirstOrDefault(claim => claim.Type == "sub");
-                if (authId != null)
-                {
-                    var user = await LoginService.GetUserAsync(claims);
-                    if (user != null)
-                    {
-                        UserData = user;
-                        UserInfoService.SetUserInfo(user);
-                    }
-                }
-            }
-        }
+
+        protected override void OnInitialized() => UserData = UserInfoService.GetUserInfo();
 
         public async Task HandleValidSubmit()
         {
