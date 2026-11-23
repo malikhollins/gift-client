@@ -1,0 +1,133 @@
+:root[data-theme="dark"] {
+    --app-bg: #11151c;
+    --surface: #272727;
+    --primary: #8ab4f8;
+    --primary-hover: #a5c7ff;
+    --selection: #a4c0e7;
+    --text: #edf1f7;
+    --text-secondary: #b9c4d3;
+    --text-disabled: #8c9aab;
+    --border: #394657;
+    --hover: #55575f;
+    --active: #636672;
+    --success: #7bd59b;
+    --warning: #f8c66b;
+    --error: #ff8f87;
+    --invitecard-status-text-color: #ffffff;
+    --createhome-button-text-color: #101923;
+    --createitem-button-text-color: #101923;
+    --updateuser-button-text-color: #101923;
+    --usercard-title-color: var(--text);
+    --createitem-global-text-color: var(--text);
+    --random-gifting-heading-color: var(--text);
+    --random-gifting-muted-color: var(--text-secondary);
+    --random-gifting-subtle-text-color: var(--text-secondary);
+    --random-gifting-accent-color: #e7ad78;
+    --random-gifting-action-bg: #965958;
+    --random-gifting-action-text-color: #ffffff;
+    --random-gifting-panel-bg: var(--surface);
+    --random-gifting-soft-bg: #242b32;
+    --random-gifting-row-bg: #202933;
+    --random-gifting-status-bg: #2a3039;
+    --random-gifting-border-color: var(--border);
+    --random-gifting-divider-color: var(--border);
+    --random-gifting-input-border-color: #657185;
+    --random-gifting-error-color: #ff988f;
+    --random-gifting-success-color: #86dfa5;
+    --user-invites-warning-color: #ff9f9f;
+    --user-invites-leave-house-text-color: #ffffff;
+}
+
+:root[data-theme="dark"] body, :root[data-theme="dark"] #app { 
+    background: var(--app-bg); 
+    color: var(--text); 
+}
+
+:root[data-theme="dark"] .card, :root[data-theme="dark"] .modal-content, :root[data-theme="dark"] .dropdown-menu, :root[data-theme="dark"] .list-group-item, :root[data-theme="dark"] .offcanvas, :root[data-theme="dark"] .popover {
+    background-color: var(--surface);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+:root[data-theme="dark"] .text-muted, :root[data-theme="dark"] .init-icon, :root[data-theme="dark"] .card-subtitle, :root[data-theme="dark"] .form-text {
+    color: var(--text-secondary) !important;
+} 
+
+:root[data-theme="dark"] :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select, .form-control, .form-select) {
+    background-color: var(--surface);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+:root[data-theme="dark"] :is(input, textarea)::placeholder {
+    color: var(--text-disabled); opacity: 1;
+}
+
+:root[data-theme="dark"] :is(input, textarea, select):focus {
+    background-color: var(--surface);
+    color: var(--text);
+    border-color: var(--primary);
+}
+
+:root[data-theme="dark"] .btn-close {
+    filter: invert(1) grayscale(1);
+}
+:root[data-theme="dark"] .dropdown-item {
+    color: var(--text);
+}
+:root[data-theme="dark"] .dropdown-item:hover, :root[data-theme="dark"] .dropdown-item:focus {
+    background: var(--hover); color: var(--text);
+}
+:root[data-theme="dark"] .border,
+:root[data-theme="dark"] hr {
+    border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] .ListCreate *, :root[data-theme="dark"] .ItemCreate * {
+    color: var(--text);
+}
+
+:root[data-theme="dark"] .ListCreate :is(button, #submit), :root[data-theme="dark"] .ItemCreate :is(button, #submit) {
+    background-color: var(--primary);
+    color: #101923;
+}
+
+:root[data-theme="dark"] .CreateItemList, :root[data-theme="dark"] .GiftInvite input[type="email"]:is(:hover, :focus) {
+    background: var(--hover);
+    color: var(--text);
+}
+
+:root[data-theme="dark"] .manage-label {
+    border-bottom-color: var(--border);
+}
+
+:root[data-theme="dark"] .bottomNav {
+    background-color: var(--bottomnav-bg-color);
+}
+
+:root[data-theme="dark"] {
+    --neutral-layer-1: var(--surface);
+    --neutral-layer-2: var(--hover);
+    --neutral-foreground-rest: var(--text);
+    --neutral-stroke-rest: var(--border);
+}
+
+:root[data-theme="dark"] .card-wrapper .init-icon, :root[data-theme="dark"] .card-wrapper .init-icon .icon-only, :root[data-theme="dark"] .card-wrapper .init-icon i, :root[data-theme="dark"] .card-wrapper .dropdown .dropdown-toggle, :root[data-theme="dark"] .card-wrapper .dropdown .dropdown-toggle i, :root[data-theme="dark"] .card-wrapper .dropdown .fa-ellipsis-vertical {
+    color: var(--text) !important;
+}
+
+:root[data-theme="dark"] .card-wrapper .icon-only, :root[data-theme="dark"] .card-wrapper .dropdown-toggle {
+    background-color: transparent !important;
+}
+
+:root[data-theme="dark"] .modal-content .btn {
+    color: var(--text);
+}
+
+:root[data-theme="dark"] .btn-danger {
+    color: #ffffff;
+}
+
+:root[data-theme="dark"] .delete-container button {
+    color: var(--text) !important;
+}
