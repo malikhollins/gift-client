@@ -20,3 +20,68 @@
     padding: 1rem;
     text-align: left;
 }
+
+.appearance-card {
+    width: 100%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: left;
+}
+
+.appearance-card-header h4 {
+    margin: 0 0 .25rem; font-size: 1.25rem;
+}
+
+.appearance-card-header p {
+    margin: 0 0 1rem; color: var(--text-secondary);
+}
+
+.appearance-options {
+    display: grid; gap: .6rem; grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.appearance-option {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 84px;
+    padding: .75rem .4rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card-background-color-secondary);
+    color: var(--text);
+    font: inherit;
+    font-size: .9rem;
+    cursor: pointer;
+}
+
+.appearance-option > .bi:first-child {
+    font-size: 1.4rem; 
+}
+
+.appearance-option.selected {
+    border: 2px solid var(--primary); background: var(--active); color: var(--text);
+}
+.appearance-option:focus-visible {
+    outline: 3px solid var(--primary); outline-offset: 2px;
+}
+
+.appearance-selected-icon {
+    position: absolute; top: .4rem; right: .45rem; font-size: .8rem; color: var(--primary);
+}
+
+@media (max-width: 370px) {
+    .appearance-options {
+        grid-template-columns: 1fr;
+    } 
+    
+    .appearance-option {
+        min-height: 56px; flex-direction: row;
+    }
+}

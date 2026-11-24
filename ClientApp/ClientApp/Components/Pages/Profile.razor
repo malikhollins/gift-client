@@ -6,6 +6,31 @@
         <UpdateUser />
     </div>
 
+    <section class="appearance-card" aria-labelledby="appearance-heading">
+        <div class="appearance-card-header">
+            <h4 id="appearance-heading">Theme</h4>
+        </div>
+        <div class="appearance-options" role="group" aria-label="Theme preference">
+            @foreach (var option in new[] { 
+                (Value: "system", Label: "System default", Icon: "bi-display"),
+                (Value: "light", Label: "Light", Icon: "bi-sun"),
+                (Value: "dark", Label: "Dark", Icon: "bi-moon-stars") })
+              {
+                <button type="button"
+                        class="appearance-option @(AppearancePreference == option.Value ? "selected" : "")"
+                        aria-pressed="@(AppearancePreference == option.Value ? "true" : "false")"
+                        @onclick="() => SetAppearanceAsync(option.Value)">
+                    <i class="bi @option.Icon" aria-hidden="true"></i>
+                    <span>@option.Label</span>
+                    @if (AppearancePreference == option.Value)
+                    {
+                        <i class="bi bi-check-circle-fill appearance-selected-icon" aria-hidden="true"></i>
+                    }
+                </button>
+            }
+        </div>
+    </section>
+
     <div class="invites-card">
         <UserInviteList />
     </div>
